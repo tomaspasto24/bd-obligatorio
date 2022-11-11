@@ -4,6 +4,8 @@
  */
 package com.mycompany.dbconnection;
 
+import java.sql.Connection;
+
 /**
  *
  * @author TomasUcu
