@@ -12,11 +12,19 @@
         <exec.mainClass>com.mycompany.app2.App2</exec.mainClass>
     </properties>
     <dependencies>
+<<<<<<< HEAD
 
         <dependency>
             <groupId>com.microsoft.sqlserver</groupId>
             <artifactId>mssql-jdbc</artifactId>
             <version>11.2.1.jre18</version>
+=======
+        <!-- https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc -->
+        <dependency>
+            <groupId>com.microsoft.sqlserver</groupId>
+            <artifactId>mssql-jdbc</artifactId>
+            <version>12.1.0.jre11-preview</version>
+>>>>>>> 8ed60482e47e59fc03bfa4c5c0f3c420e1c1ac4a
         </dependency>
 
     </dependencies>
