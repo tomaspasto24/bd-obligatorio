@@ -5,6 +5,8 @@
 
 package db_connection;
 
+import Interfaz_gráfica.ApplicationHome;
+
 /**
  *
  * @author juan-
@@ -12,9 +14,8 @@ package db_connection;
 public class Autoregistro_Usuarios {
 
     public static void main(String[] args) {
-        DBConnection connection = new DBConnection();
-        
-        connection.establecerConexion();
-        
+        DBConnection.getInstance().establecerConexion();
+        ApplicationHome app = new ApplicationHome();
+        app.setVisible(true);
     }
 }

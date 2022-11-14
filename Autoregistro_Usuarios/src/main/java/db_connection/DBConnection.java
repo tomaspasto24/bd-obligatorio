@@ -13,7 +13,17 @@ import javax.swing.JOptionPane;
  * @author TomasUcu
  */
 public class DBConnection {
-    Connection conectar = null;
+    
+    static private DBConnection connection = null;
+    
+    public Connection dbConnection = null;
+    
+    static public DBConnection getInstance(){
+        if (connection == null){
+            connection = new DBConnection();
+        }
+        return connection;
+    }
     
     String usuario = "usersql";
     String contrasena = "obligatorioDB";
@@ -23,11 +33,11 @@ public class DBConnection {
     public Connection establecerConexion(){
         try{
             String cadena = "jdbc:sqlserver://localhost:" + puerto + ";" + "DatabaseName=" + bd + ";encrypt=true;trustServerCertificate=true;";
-            conectar = DriverManager.getConnection(cadena, usuario, contrasena);
+            dbConnection = DriverManager.getConnection(cadena, usuario, contrasena);
             JOptionPane.showMessageDialog(null, "Se conecto a la base de datos");
         } catch(Exception e){
             JOptionPane.showMessageDialog(null, "Erro al conectar a la base de datos, error: " + e.toString());
         }
-        return conectar;
+        return dbConnection;
     }
 }
