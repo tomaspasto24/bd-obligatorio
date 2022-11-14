@@ -8,7 +8,7 @@ package Interfaz_gráfica;
  *
  * @author TomasUcu
  */
-public class ApplicationLogin extends javax.swing.JPanel {
+public class ApplicationLogin extends javax.swing.JFrame {
 
     /**
      * Creates new form ApplicationLogin

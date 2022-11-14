@@ -1,9 +1,8 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Interfaz_gráfica;
-
 import db_connection.DBConnection;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -12,29 +11,19 @@ import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-
 /**
  *
  * @author TomasUcu
  */
-public class ApplicationRegister extends javax.swing.JPanel {
+public class AppRegister extends javax.swing.JFrame {
 
     /**
-     * Creates new form ApplicationRegister
+     * Creates new form AppRegister
      */
-    public ApplicationRegister() {
+    public AppRegister() {
         initComponents();
     }
-    
-    public static ApplicationRegister instance;
-    
-    public static ApplicationRegister getInstance(){
-        if (instance == null){
-            instance = new ApplicationRegister();
-        }
-        return instance;
-    }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -44,28 +33,26 @@ public class ApplicationRegister extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        registrarse = new javax.swing.JButton();
-        nombres = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        apellidos = new javax.swing.JTextField();
+        nombres = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        direccion = new javax.swing.JTextField();
+        apellidos = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        direccion = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
         ciudad = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
         departamento = new javax.swing.JTextField();
         contraseña = new javax.swing.JTextField();
-        confirmContraseña = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        confirmContraseña = new javax.swing.JTextField();
+        registrarse = new javax.swing.JButton();
 
-        registrarse.setText("Registrarse");
-        registrarse.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                registrarseActionPerformed(evt);
-            }
-        });
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel1.setText("Nombres");
 
         nombres.setText("Nombres");
         nombres.addActionListener(new java.awt.event.ActionListener() {
@@ -74,8 +61,8 @@ public class ApplicationRegister extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel1.setText("Nombres");
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel2.setText("Apellidos");
 
         apellidos.setText("Apellidos");
         apellidos.addActionListener(new java.awt.event.ActionListener() {
@@ -84,8 +71,8 @@ public class ApplicationRegister extends javax.swing.JPanel {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel2.setText("Apellidos");
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel3.setText("Dirección");
 
         direccion.setText("Dirección");
         direccion.addActionListener(new java.awt.event.ActionListener() {
@@ -94,8 +81,8 @@ public class ApplicationRegister extends javax.swing.JPanel {
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel3.setText("Dirección");
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel4.setText("Ciudad");
 
         ciudad.setText("Ciudad");
         ciudad.addActionListener(new java.awt.event.ActionListener() {
@@ -103,6 +90,9 @@ public class ApplicationRegister extends javax.swing.JPanel {
                 ciudadActionPerformed(evt);
             }
         });
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel5.setText("Departamento");
 
         departamento.setText("Departamento");
         departamento.addActionListener(new java.awt.event.ActionListener() {
@@ -118,6 +108,12 @@ public class ApplicationRegister extends javax.swing.JPanel {
             }
         });
 
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel6.setText("Contraseña");
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel7.setText("Confirmar Contraseña");
+
         confirmContraseña.setText("Confirmar Contraseña");
         confirmContraseña.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,20 +121,15 @@ public class ApplicationRegister extends javax.swing.JPanel {
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel4.setText("Ciudad");
+        registrarse.setText("Registrarse");
+        registrarse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registrarseActionPerformed(evt);
+            }
+        });
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel5.setText("Departamento");
-
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel6.setText("Contraseña");
-
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel7.setText("Confirmar Contraseña");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -165,7 +156,7 @@ public class ApplicationRegister extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(198, 198, 198)
                         .addComponent(registrarse, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,11 +189,41 @@ public class ApplicationRegister extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(confirmContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addComponent(registrarse, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
         );
+
+        pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void nombresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombresActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nombresActionPerformed
+
+    private void apellidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apellidosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_apellidosActionPerformed
+
+    private void direccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_direccionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_direccionActionPerformed
+
+    private void ciudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ciudadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ciudadActionPerformed
+
+    private void departamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_departamentoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_departamentoActionPerformed
+
+    private void contraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contraseñaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_contraseñaActionPerformed
+
+    private void confirmContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmContraseñaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_confirmContraseñaActionPerformed
 
     private void registrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarseActionPerformed
         String inputNombres = nombres.getText();
@@ -229,43 +250,48 @@ public class ApplicationRegister extends javax.swing.JPanel {
         if (statement != null) {
             try {
                 statement.executeUpdate("INSERT INTO PERSONAS " + "VALUES ("+userID+", "+inputNombres+", "+inputApellidos+", "
-                        +inputDireccion+", "+inputCiudad+", "+inputDepartamento+", "+inputContraseña+")");
+                    +inputDireccion+", "+inputCiudad+", "+inputDepartamento+", "+inputContraseña+")");
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Erro al agregar user, error: " + e.toString());
             }
         }
 
-
     }//GEN-LAST:event_registrarseActionPerformed
 
-    private void apellidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apellidosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_apellidosActionPerformed
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(AppRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(AppRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(AppRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(AppRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
 
-    private void direccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_direccionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_direccionActionPerformed
-
-    private void ciudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ciudadActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ciudadActionPerformed
-
-    private void departamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_departamentoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_departamentoActionPerformed
-
-    private void contraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contraseñaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_contraseñaActionPerformed
-
-    private void confirmContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmContraseñaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_confirmContraseñaActionPerformed
-
-    private void nombresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombresActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nombresActionPerformed
-
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new AppRegister().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField apellidos;

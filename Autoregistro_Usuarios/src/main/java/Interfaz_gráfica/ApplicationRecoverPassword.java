@@ -8,7 +8,7 @@ package Interfaz_gráfica;
  *
  * @author TomasUcu
  */
-public class ApplicationRecoverPassword extends javax.swing.JPanel {
+public class ApplicationRecoverPassword extends javax.swing.JFrame {
 
     /**
      * Creates new form ApplicationRecoverPassword
