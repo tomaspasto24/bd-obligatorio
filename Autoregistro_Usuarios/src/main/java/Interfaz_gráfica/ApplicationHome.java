@@ -60,8 +60,7 @@ public class ApplicationHome extends javax.swing.JFrame {
     private void registerAppActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerAppActionPerformed
         // TODO add your handling code here:
 //        this.setVisible(false);
-        AppRegister app = new AppRegister();
-        app.setVisible(true);
+        ApplicationRegister.getInstance().setVisible(true);
     }//GEN-LAST:event_registerAppActionPerformed
 
     /**

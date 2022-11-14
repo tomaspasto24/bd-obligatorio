@@ -15,15 +15,24 @@ import javax.swing.JOptionPane;
  *
  * @author TomasUcu
  */
-public class AppRegister extends javax.swing.JFrame {
+public class ApplicationRegister extends javax.swing.JFrame {
 
     /**
      * Creates new form AppRegister
      */
-    public AppRegister() {
+    public ApplicationRegister() {
         initComponents();
     }
 
+    public static ApplicationRegister instance;
+    
+    public static ApplicationRegister getInstance(){
+        if (instance == null){
+            instance = new ApplicationRegister();
+        }
+        return instance;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
