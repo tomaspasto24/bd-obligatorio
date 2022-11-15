@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Interfaz_gráfica;
+
 import db_connection.DBConnection;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -11,6 +12,7 @@ import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+
 /**
  *
  * @author TomasUcu
@@ -25,14 +27,14 @@ public class ApplicationRegister extends javax.swing.JFrame {
     }
 
     public static ApplicationRegister instance;
-    
-    public static ApplicationRegister getInstance(){
-        if (instance == null){
+
+    public static ApplicationRegister getInstance() {
+        if (instance == null) {
             instance = new ApplicationRegister();
         }
         return instance;
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -258,8 +260,11 @@ public class ApplicationRegister extends javax.swing.JFrame {
 
         if (statement != null) {
             try {
-                statement.executeUpdate("INSERT INTO PERSONAS " + "VALUES ("+userID+", "+inputNombres+", "+inputApellidos+", "
-                    +inputDireccion+", "+inputCiudad+", "+inputDepartamento+", "+inputContraseña+")");
+                String sqlString = "INSERT INTO PERSONAS (user_id, nombres, apellidos, direccion, ciudad, departamento, hashpwd) "
+                        + "VALUES (" + userID + ", '" + inputNombres.toString() + "', '" + inputApellidos.toString() + "', '"
+                        + inputDireccion.toString() + "', '" + inputCiudad.toString() + "', '" + inputDepartamento.toString() + "', '"
+                        + inputContraseña.toString() + "')";
+                statement.executeQuery(sqlString);
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Erro al agregar user, error: " + e.toString());
             }
@@ -297,7 +302,7 @@ public class ApplicationRegister extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AppRegister().setVisible(true);
+                new ApplicationRegister().setVisible(true);
             }
         });
     }

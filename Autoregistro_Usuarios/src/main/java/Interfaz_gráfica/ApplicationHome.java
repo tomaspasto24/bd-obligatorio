@@ -27,6 +27,7 @@ public class ApplicationHome extends javax.swing.JFrame {
     private void initComponents() {
 
         registerApp = new javax.swing.JButton();
+        registerApp1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -37,21 +38,32 @@ public class ApplicationHome extends javax.swing.JFrame {
             }
         });
 
+        registerApp1.setText("Login");
+        registerApp1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registerApp1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(158, 158, 158)
-                .addComponent(registerApp)
-                .addContainerGap(170, Short.MAX_VALUE))
+                .addGap(100, 100, 100)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(registerApp1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(registerApp, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(129, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(237, Short.MAX_VALUE)
-                .addComponent(registerApp)
-                .addGap(40, 40, 40))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addComponent(registerApp, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41)
+                .addComponent(registerApp1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
         pack();
@@ -59,9 +71,15 @@ public class ApplicationHome extends javax.swing.JFrame {
 
     private void registerAppActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerAppActionPerformed
         // TODO add your handling code here:
-//        this.setVisible(false);
+        this.setVisible(false);
         ApplicationRegister.getInstance().setVisible(true);
     }//GEN-LAST:event_registerAppActionPerformed
+
+    private void registerApp1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerApp1ActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        ApplicationLogin.getInstance().setVisible(true);
+    }//GEN-LAST:event_registerApp1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -101,5 +119,6 @@ public class ApplicationHome extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton registerApp;
+    private javax.swing.JButton registerApp1;
     // End of variables declaration//GEN-END:variables
 }
