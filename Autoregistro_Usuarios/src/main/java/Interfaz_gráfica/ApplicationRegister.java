@@ -274,7 +274,8 @@ public class ApplicationRegister extends javax.swing.JFrame {
                         int rs = statement.executeUpdate(sqlString);
                         if (rs == 1) {
                             UserAccount.getInstance().setUserId(userID);
-                            JOptionPane.showMessageDialog(null, "Usuario agregado con éxito");
+                            this.setVisible(false);
+                            ApplicationRegisterQuestions.getInstance().setVisible(true);
                         } else {
                             JOptionPane.showMessageDialog(null, "Problema al agregar el usuario. Prueba otra vez.");
                         }

@@ -1,20 +1,83 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package Interfaz_gráfica;
 
+import UserAccount.UserAccount;
+import db_connection.DBConnection;
+import java.sql.Connection;
+import java.sql.Statement;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.Set;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import Interfaz_gráfica.ChangePassword;
+
+
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
 /**
  *
  * @author TomasUcu
  */
 public class ApplicationRecoverPassword extends javax.swing.JFrame {
 
+    private Map<String, Integer> preguntasId;
+    private Map<Integer, String> respuestasId;
+
+    public static ApplicationRecoverPassword instance;
+
+    public static ApplicationRecoverPassword getInstance() {
+        if (instance == null) {
+            instance = new ApplicationRecoverPassword();
+        }
+        return instance;
+    }
+
     /**
      * Creates new form ApplicationRecoverPassword
      */
     public ApplicationRecoverPassword() {
         initComponents();
+        Connection connection = DBConnection.getInstance().dbConnection;
+        Statement statement = null;
+
+        try {
+            statement = connection.createStatement();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al crear statement, error: " + e.toString());
+        }
+
+        preguntasId = new HashMap<String, Integer>();
+        respuestasId = new HashMap<Integer, String>();
+
+        if (statement != null) {
+            try {
+                String sqlString
+                        = "SELECT * "
+                        + "FROM (SELECT * "
+                        + "FROM PERSONAS_PREGUNTAS "
+                        + "WHERE user_id=" + UserAccount.getInstance().userId + ") p "
+                        + "JOIN PREGUNTAS "
+                        + "ON p.preg_id = PREGUNTAS.preg_id ";
+                var res = statement.executeQuery(sqlString);
+                while (res.next()) {
+                    String pregunta = res.getString("pregunta");
+                    String respuesta = res.getString("respuesta");
+                    Integer id = res.getInt("preg_id");
+                    preguntasId.put(pregunta, id);
+                    respuestasId.put(id, respuesta);
+                }
+                Object[] set = preguntasId.keySet().toArray();
+                Pregunta1.setText(set[0].toString());
+                Pregunta2.setText(set[1].toString());
+                Pregunta3.setText(set[2].toString());
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Erro al obtener user, error: " + e.toString());
+            }
+        }
     }
 
     /**
@@ -26,19 +89,159 @@ public class ApplicationRecoverPassword extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        jLabel1 = new javax.swing.JLabel();
+        Pregunta1 = new java.awt.Label();
+        Pregunta2 = new java.awt.Label();
+        Pregunta3 = new java.awt.Label();
+        Respuesta1 = new javax.swing.JTextField();
+        Respuesta2 = new javax.swing.JTextField();
+        Respuesta3 = new javax.swing.JTextField();
+        Continue = new javax.swing.JButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setText("Nombre");
+
+        Pregunta1.setText("label1");
+
+        Pregunta2.setText("label1");
+
+        Pregunta3.setText("label1");
+
+        Respuesta1.setText("Respuesta");
+
+        Respuesta2.setText("Respuesta");
+        Respuesta2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Respuesta2ActionPerformed(evt);
+            }
+        });
+
+        Respuesta3.setText("Respuesta");
+
+        Continue.setText("Cambiar Contraseña");
+        Continue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ContinueActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(62, 62, 62)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Pregunta2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Pregunta3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Pregunta1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Respuesta1, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Respuesta2, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Respuesta3, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(129, 129, 129)
+                                .addComponent(jLabel1))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(157, 157, 157)
+                        .addComponent(Continue, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(46, 46, 46)
+                .addComponent(jLabel1)
+                .addGap(37, 37, 37)
+                .addComponent(Pregunta1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Respuesta1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23)
+                .addComponent(Pregunta3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Respuesta2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24)
+                .addComponent(Pregunta2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Respuesta3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addComponent(Continue, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25))
         );
+
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void ContinueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ContinueActionPerformed
+        // TODO add your handling code here:
+        String respuesta1 = Respuesta1.getText();
+        String respuesta2 = Respuesta2.getText();
+        String respuesta3 = Respuesta3.getText();
+
+        String pregunta1 = Pregunta1.getText();
+        String pregunta2 = Pregunta2.getText();
+        String pregunta3 = Pregunta3.getText();
+        
+        if (respuestasId.get(preguntasId.get(pregunta1)).equalsIgnoreCase(respuesta1)
+                && respuestasId.get(preguntasId.get(pregunta3)).equalsIgnoreCase(respuesta2)
+                && respuestasId.get(preguntasId.get(pregunta2)).equalsIgnoreCase(respuesta3)) {
+            this.setVisible(false);
+            ChangePassword.getInstance().setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Respuestas incorrectas.");
+        }
+    }//GEN-LAST:event_ContinueActionPerformed
+
+    private void Respuesta2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Respuesta2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Respuesta2ActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(ApplicationRecoverPassword.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(ApplicationRecoverPassword.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(ApplicationRecoverPassword.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(ApplicationRecoverPassword.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new ApplicationRecoverPassword().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Continue;
+    private java.awt.Label Pregunta1;
+    private java.awt.Label Pregunta2;
+    private java.awt.Label Pregunta3;
+    private javax.swing.JTextField Respuesta1;
+    private javax.swing.JTextField Respuesta2;
+    private javax.swing.JTextField Respuesta3;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

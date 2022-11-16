@@ -4,8 +4,7 @@
  */
 package Interfaz_gráfica;
 
-import de.mkammerer.argon2.Argon2;
-import de.mkammerer.argon2.Argon2Factory;
+import Interfaz_gráfica.GetUserIdToRecoverPassword;
 
 /**
  *
@@ -97,7 +96,8 @@ public class ApplicationHome extends javax.swing.JFrame {
 
     private void recoverPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recoverPasswordActionPerformed
         // TODO add your handling code here:
-        
+        this.setVisible(false);
+        GetUserIdToRecoverPassword.getInstance().setVisible(true);
     }//GEN-LAST:event_recoverPasswordActionPerformed
 
     /**
