@@ -17,5 +17,10 @@
             <artifactId>mssql-jdbc</artifactId>
             <version>12.1.0.jre11-preview</version>
         </dependency>
+        <dependency>
+            <groupId>de.mkammerer</groupId>
+            <artifactId>argon2-jvm</artifactId>
+            <version>2.11</version>
+        </dependency>
     </dependencies>
 </project>

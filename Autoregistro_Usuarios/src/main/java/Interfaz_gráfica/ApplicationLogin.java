@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Random;
 import javax.swing.JOptionPane;
+import de.mkammerer.argon2.Argon2;
+import de.mkammerer.argon2.Argon2Factory;
 
 /**
  *
@@ -127,16 +129,21 @@ public class ApplicationLogin extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Erro al crear statement, error: " + e.toString());
         }
 
+//VERIFICAR PASS
+        Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id, 32, 64);
+
         if (statement != null) {
             try {
                 String sqlString = "SELECT * FROM PERSONAS WHERE NOMBRES='" + inputNombre + "';";
                 var res = statement.executeQuery(sqlString);
                 boolean logged = false;
                 while (res.next()) {
-                    if (res.getString("hashpwd").equalsIgnoreCase(inputPassword)) {
+                    boolean validPassword = argon2.verify(res.getString("hashpwd"), inputPassword.toCharArray());
+                    if (validPassword) {
                         logged = true;
                         this.setVisible(false);
-                        ApplicationAccount.getInstance().setVisible(true);
+                        ChangePassword.getInstance().setVisible(true);
+                        UserAccount.UserAccount.getInstance().setUserId(res.getInt("user_id"));
                     }
                 }
                 if (!logged) {

@@ -5,13 +5,18 @@
 package Interfaz_gráfica;
 
 import db_connection.DBConnection;
+import de.mkammerer.argon2.Argon2;
+import de.mkammerer.argon2.Argon2Factory;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+
+import UserAccount.UserAccount;
 
 /**
  *
@@ -242,29 +247,41 @@ public class ApplicationRegister extends javax.swing.JFrame {
         String inputDireccion = direccion.getText();
         String inputCiudad = ciudad.getText();
         String inputDepartamento = departamento.getText();
-        String inputContraseña = contraseña.getText();
-        String inputConfirmContraseña = confirmContraseña.getText();
+        String inputContrasena = contraseña.getText();
+        String inputConfirmContrasena = confirmContraseña.getText();
+        if (inputApellidos.length() < 5 | inputNombres.length() < 5 | inputCiudad.length() < 5 | inputContrasena.length() < 5 | inputDepartamento.length() < 5 | inputDireccion.length() < 5) {
+            JOptionPane.showMessageDialog(null, "Todos los formularios deben contener al menos 5 caracteres.");
+        } else {
 
-        Random rand = new Random();
-        int userID = rand.nextInt(Integer.MAX_VALUE);
+            Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id, 32, 64);
 
-        Connection connection = DBConnection.getInstance().dbConnection;
+            Random rand = new Random();
+            int userID = rand.nextInt(Integer.MAX_VALUE);
 
-        Statement statement = null;
+            Connection connection = DBConnection.getInstance().dbConnection;
 
-        try {
-            statement = connection.createStatement();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro al crear statement, error: " + e.toString());
-        }
-
-        if (statement != null) {
+            Statement statement = null;
             try {
-                String sqlString = "INSERT INTO PERSONAS (user_id, nombres, apellidos, direccion, ciudad, departamento, hashpwd) "
-                        + "VALUES (" + userID + ", '" + inputNombres.toString() + "', '" + inputApellidos.toString() + "', '"
-                        + inputDireccion.toString() + "', '" + inputCiudad.toString() + "', '" + inputDepartamento.toString() + "', '"
-                        + inputContraseña.toString() + "')";
-                statement.executeQuery(sqlString);
+                if (inputContrasena.equals(inputConfirmContrasena)) {
+                    var hashPass = argon2.hash(2, 15 * 1024, 1, inputContrasena.toCharArray());
+
+                    statement = connection.createStatement();
+                    if (statement != null) {
+                        String sqlString = "INSERT INTO PERSONAS (user_id, nombres, apellidos, direccion, ciudad, departamento, hashpwd) "
+                                + "VALUES (" + userID + ", '" + inputNombres.toString() + "', '" + inputApellidos.toString() + "', '"
+                                + inputDireccion.toString() + "', '" + inputCiudad.toString() + "', '" + inputDepartamento.toString() + "', '"
+                                + hashPass.toString() + "')";
+                        int rs = statement.executeUpdate(sqlString);
+                        if (rs == 1) {
+                            UserAccount.getInstance().setUserId(userID);
+                            JOptionPane.showMessageDialog(null, "Usuario agregado con éxito");
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Problema al agregar el usuario. Prueba otra vez.");
+                        }
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Contraseñas ingresadas no coinciden");
+                }
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Erro al agregar user, error: " + e.toString());
             }
@@ -272,40 +289,6 @@ public class ApplicationRegister extends javax.swing.JFrame {
 
     }//GEN-LAST:event_registrarseActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AppRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AppRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AppRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AppRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ApplicationRegister().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField apellidos;

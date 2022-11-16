@@ -34,7 +34,6 @@ public class DBConnection {
         try{
             String cadena = "jdbc:sqlserver://localhost:" + puerto + ";" + "DatabaseName=" + bd + ";encrypt=true;trustServerCertificate=true;";
             dbConnection = DriverManager.getConnection(cadena, usuario, contrasena);
-            JOptionPane.showMessageDialog(null, "Se conecto a la base de datos");
         } catch(Exception e){
             JOptionPane.showMessageDialog(null, "Erro al conectar a la base de datos, error: " + e.toString());
         }
