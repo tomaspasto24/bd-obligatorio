@@ -67,7 +67,7 @@ public class ApplicationRegister extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         lastNameInput = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
-        addresInput = new javax.swing.JTextField();
+        addressInput = new javax.swing.JTextField();
         jSeparator3 = new javax.swing.JSeparator();
         cityInput = new javax.swing.JTextField();
         jSeparator4 = new javax.swing.JSeparator();
@@ -77,11 +77,11 @@ public class ApplicationRegister extends javax.swing.JFrame {
         jSeparator7 = new javax.swing.JSeparator();
         confirmPasswordInput = new javax.swing.JPasswordField();
         passwordInput = new javax.swing.JPasswordField();
-        registerBtn = new javax.swing.JPanel();
-        registerText = new javax.swing.JLabel();
         exitBtn = new javax.swing.JPanel();
         exitTxt = new javax.swing.JLabel();
         header = new javax.swing.JPanel();
+        continueBtn = new javax.swing.JPanel();
+        continueTxt = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
@@ -185,6 +185,11 @@ public class ApplicationRegister extends javax.swing.JFrame {
         nameInput.setForeground(new java.awt.Color(153, 153, 153));
         nameInput.setText("Ingrese su nombre/s");
         nameInput.setBorder(null);
+        nameInput.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                nameInputMousePressed(evt);
+            }
+        });
         nameInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nameInputActionPerformed(evt);
@@ -198,6 +203,11 @@ public class ApplicationRegister extends javax.swing.JFrame {
         lastNameInput.setForeground(new java.awt.Color(153, 153, 153));
         lastNameInput.setText("Ingrese sus apellidos");
         lastNameInput.setBorder(null);
+        lastNameInput.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lastNameInputMousePressed(evt);
+            }
+        });
         lastNameInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 lastNameInputActionPerformed(evt);
@@ -206,17 +216,22 @@ public class ApplicationRegister extends javax.swing.JFrame {
         jPanel1.add(lastNameInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 130, 290, 20));
         jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 150, 260, 10));
 
-        addresInput.setBackground(new java.awt.Color(255, 255, 255));
-        addresInput.setFont(new java.awt.Font("Calisto MT", 0, 14)); // NOI18N
-        addresInput.setForeground(new java.awt.Color(153, 153, 153));
-        addresInput.setText("Ingrese su dirección");
-        addresInput.setBorder(null);
-        addresInput.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addresInputActionPerformed(evt);
+        addressInput.setBackground(new java.awt.Color(255, 255, 255));
+        addressInput.setFont(new java.awt.Font("Calisto MT", 0, 14)); // NOI18N
+        addressInput.setForeground(new java.awt.Color(153, 153, 153));
+        addressInput.setText("Ingrese su dirección");
+        addressInput.setBorder(null);
+        addressInput.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addressInputMouseClicked(evt);
             }
         });
-        jPanel1.add(addresInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 170, 290, 20));
+        addressInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addressInputActionPerformed(evt);
+            }
+        });
+        jPanel1.add(addressInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 170, 290, 20));
         jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 190, 260, 10));
 
         cityInput.setBackground(new java.awt.Color(255, 255, 255));
@@ -224,6 +239,11 @@ public class ApplicationRegister extends javax.swing.JFrame {
         cityInput.setForeground(new java.awt.Color(153, 153, 153));
         cityInput.setText("Ingrese su ciudad");
         cityInput.setBorder(null);
+        cityInput.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                cityInputMousePressed(evt);
+            }
+        });
         cityInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cityInputActionPerformed(evt);
@@ -237,6 +257,11 @@ public class ApplicationRegister extends javax.swing.JFrame {
         departamentoInput.setForeground(new java.awt.Color(153, 153, 153));
         departamentoInput.setText("Ingrese su departamento");
         departamentoInput.setBorder(null);
+        departamentoInput.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                departamentoInputMousePressed(evt);
+            }
+        });
         departamentoInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 departamentoInputActionPerformed(evt);
@@ -248,42 +273,26 @@ public class ApplicationRegister extends javax.swing.JFrame {
         jPanel1.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 350, 260, 10));
 
         confirmPasswordInput.setBackground(new java.awt.Color(255, 255, 255));
-        confirmPasswordInput.setText("jPasswordField1");
+        confirmPasswordInput.setForeground(new java.awt.Color(153, 153, 153));
+        confirmPasswordInput.setText("**********");
         confirmPasswordInput.setBorder(null);
+        confirmPasswordInput.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                confirmPasswordInputMousePressed(evt);
+            }
+        });
         jPanel1.add(confirmPasswordInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 330, 260, 20));
 
         passwordInput.setBackground(new java.awt.Color(255, 255, 255));
-        passwordInput.setText("jPasswordField1");
+        passwordInput.setForeground(new java.awt.Color(153, 153, 153));
+        passwordInput.setText("**********");
         passwordInput.setBorder(null);
-        jPanel1.add(passwordInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 290, 260, 20));
-
-        registerBtn.setBackground(new java.awt.Color(89, 191, 255));
-        registerBtn.setForeground(new java.awt.Color(89, 191, 255));
-        registerBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        registerBtn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                registerBtnMouseClicked(evt);
+        passwordInput.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                passwordInputMousePressed(evt);
             }
         });
-
-        registerText.setFont(new java.awt.Font("Calisto MT", 0, 24)); // NOI18N
-        registerText.setForeground(new java.awt.Color(255, 255, 255));
-        registerText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        registerText.setText("Registrarse");
-        registerText.setToolTipText("");
-
-        javax.swing.GroupLayout registerBtnLayout = new javax.swing.GroupLayout(registerBtn);
-        registerBtn.setLayout(registerBtnLayout);
-        registerBtnLayout.setHorizontalGroup(
-            registerBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(registerText, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
-        );
-        registerBtnLayout.setVerticalGroup(
-            registerBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(registerText, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
-        );
-
-        jPanel1.add(registerBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 450, 170, 60));
+        jPanel1.add(passwordInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 290, 260, 20));
 
         exitBtn.setBackground(new java.awt.Color(255, 255, 255));
         exitBtn.setForeground(new java.awt.Color(255, 255, 255));
@@ -345,6 +354,33 @@ public class ApplicationRegister extends javax.swing.JFrame {
 
         jPanel1.add(header, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 770, 30));
 
+        continueBtn.setBackground(new java.awt.Color(89, 191, 255));
+        continueBtn.setForeground(new java.awt.Color(89, 191, 255));
+        continueBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        continueBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                continueBtnMouseClicked(evt);
+            }
+        });
+
+        continueTxt.setFont(new java.awt.Font("Calisto MT", 0, 24)); // NOI18N
+        continueTxt.setForeground(new java.awt.Color(255, 255, 255));
+        continueTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        continueTxt.setText("Continuar");
+
+        javax.swing.GroupLayout continueBtnLayout = new javax.swing.GroupLayout(continueBtn);
+        continueBtn.setLayout(continueBtnLayout);
+        continueBtnLayout.setHorizontalGroup(
+            continueBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(continueTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+        );
+        continueBtnLayout.setVerticalGroup(
+            continueBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(continueTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+        );
+
+        jPanel1.add(continueBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 450, 170, 60));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -367,9 +403,9 @@ public class ApplicationRegister extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_lastNameInputActionPerformed
 
-    private void addresInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addresInputActionPerformed
+    private void addressInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addressInputActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_addresInputActionPerformed
+    }//GEN-LAST:event_addressInputActionPerformed
 
     private void cityInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cityInputActionPerformed
         // TODO add your handling code here:
@@ -379,16 +415,286 @@ public class ApplicationRegister extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_departamentoInputActionPerformed
 
-    private void registerBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerBtnMouseClicked
+    int xMouse, yMouse;
+
+    private void headerMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_headerMousePressed
+        xMouse = evt.getX();
+        yMouse = evt.getY();
+    }//GEN-LAST:event_headerMousePressed
+
+    private void headerMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_headerMouseDragged
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+        this.setLocation(x - xMouse, y - yMouse);
+    }//GEN-LAST:event_headerMouseDragged
+
+    private void exitBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitBtnMouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_exitBtnMouseClicked
+
+    private void exitBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitBtnMouseEntered
+        exitBtn.setBackground(Color.red);
+    }//GEN-LAST:event_exitBtnMouseEntered
+
+    private void exitBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitBtnMouseExited
+        exitBtn.setBackground(Color.white);
+    }//GEN-LAST:event_exitBtnMouseExited
+
+    private void goBackBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goBackBtnMouseClicked
+        this.setVisible(false);
+        ApplicationLogin.getInstance().setVisible(true);
+    }//GEN-LAST:event_goBackBtnMouseClicked
+
+    private void goBackBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goBackBtnMouseEntered
+        goBackBtn.setBackground(Color.red);
+    }//GEN-LAST:event_goBackBtnMouseEntered
+
+    private void goBackBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goBackBtnMouseExited
+        goBackBtn.setBackground(new Color(75, 181, 255));
+    }//GEN-LAST:event_goBackBtnMouseExited
+
+    private void nameInputMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nameInputMousePressed
+        if (nameInput.getText().equals("Ingrese su nombre/s")) {
+            nameInput.setText("");
+            nameInput.setForeground(Color.black);
+        }
+        if (String.valueOf(lastNameInput.getText()).isEmpty()) {
+            lastNameInput.setText("Ingrese sus apellidos");
+            lastNameInput.setForeground(Color.gray);
+        }
+        if (String.valueOf(addressInput.getText()).isEmpty()) {
+            addressInput.setText("Ingrese su dirección");
+            addressInput.setForeground(Color.gray);
+        }
+        if (String.valueOf(cityInput.getText()).isEmpty()) {
+            cityInput.setText("Ingrese sus ciudad");
+            cityInput.setForeground(Color.gray);
+        }
+        if (String.valueOf(departamentoInput.getText()).isEmpty()) {
+            departamentoInput.setText("Ingrese su departamento");
+            departamentoInput.setForeground(Color.gray);
+        }
+        if (String.valueOf(passwordInput.getText()).isEmpty()) {
+            passwordInput.setText("**********");
+            passwordInput.setForeground(Color.gray);
+        }
+        if (String.valueOf(confirmPasswordInput.getText()).isEmpty()) {
+            confirmPasswordInput.setText("**********");
+            confirmPasswordInput.setForeground(Color.gray);
+        }
+    }//GEN-LAST:event_nameInputMousePressed
+
+    private void lastNameInputMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lastNameInputMousePressed
+        if (lastNameInput.getText().equals("Ingrese sus apellidos")) {
+            lastNameInput.setText("");
+            lastNameInput.setForeground(Color.black);
+        }
+        if (String.valueOf(nameInput.getText()).isEmpty()) {
+            nameInput.setText("Ingrese su nombre/s");
+            nameInput.setForeground(Color.gray);
+        }
+        if (String.valueOf(addressInput.getText()).isEmpty()) {
+            addressInput.setText("Ingrese su dirección");
+            addressInput.setForeground(Color.gray);
+        }
+        if (String.valueOf(cityInput.getText()).isEmpty()) {
+            cityInput.setText("Ingrese sus ciudad");
+            cityInput.setForeground(Color.gray);
+        }
+        if (String.valueOf(departamentoInput.getText()).isEmpty()) {
+            departamentoInput.setText("Ingrese su departamento");
+            departamentoInput.setForeground(Color.gray);
+        }
+        if (String.valueOf(passwordInput.getText()).isEmpty()) {
+            passwordInput.setText("**********");
+            passwordInput.setForeground(Color.gray);
+        }
+        if (String.valueOf(confirmPasswordInput.getText()).isEmpty()) {
+            confirmPasswordInput.setText("**********");
+            confirmPasswordInput.setForeground(Color.gray);
+        }
+    }//GEN-LAST:event_lastNameInputMousePressed
+
+    private void addressInputMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addressInputMouseClicked
+        if (addressInput.getText().equals("Ingrese su dirección")) {
+            addressInput.setText("");
+            addressInput.setForeground(Color.black);
+        }
+        if (String.valueOf(nameInput.getText()).isEmpty()) {
+            nameInput.setText("Ingrese su nombre/s");
+            nameInput.setForeground(Color.gray);
+        }
+        if (String.valueOf(lastNameInput.getText()).isEmpty()) {
+            lastNameInput.setText("Ingrese sus apellidos");
+            lastNameInput.setForeground(Color.gray);
+        }
+        if (String.valueOf(cityInput.getText()).isEmpty()) {
+            cityInput.setText("Ingrese su ciudad");
+            cityInput.setForeground(Color.gray);
+        }
+        if (String.valueOf(departamentoInput.getText()).isEmpty()) {
+            departamentoInput.setText("Ingrese su departamento");
+            departamentoInput.setForeground(Color.gray);
+        }
+        if (String.valueOf(passwordInput.getText()).isEmpty()) {
+            passwordInput.setText("**********");
+            passwordInput.setForeground(Color.gray);
+        }
+        if (String.valueOf(confirmPasswordInput.getText()).isEmpty()) {
+            confirmPasswordInput.setText("**********");
+            confirmPasswordInput.setForeground(Color.gray);
+        }
+    }//GEN-LAST:event_addressInputMouseClicked
+
+    private void cityInputMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cityInputMousePressed
+        if (cityInput.getText().equals("Ingrese su ciudad")) {
+            cityInput.setText("");
+            cityInput.setForeground(Color.black);
+        }
+        if (String.valueOf(nameInput.getText()).isEmpty()) {
+            nameInput.setText("Ingrese su nombre/s");
+            nameInput.setForeground(Color.gray);
+        }
+        if (String.valueOf(lastNameInput.getText()).isEmpty()) {
+            lastNameInput.setText("Ingrese sus apellidos");
+            lastNameInput.setForeground(Color.gray);
+        }
+        if (String.valueOf(addressInput.getText()).isEmpty()) {
+            addressInput.setText("Ingrese su dirección");
+            addressInput.setForeground(Color.gray);
+        }
+        if (String.valueOf(departamentoInput.getText()).isEmpty()) {
+            departamentoInput.setText("Ingrese su departamento");
+            departamentoInput.setForeground(Color.gray);
+        }
+        if (String.valueOf(passwordInput.getText()).isEmpty()) {
+            passwordInput.setText("**********");
+            passwordInput.setForeground(Color.gray);
+        }
+        if (String.valueOf(confirmPasswordInput.getText()).isEmpty()) {
+            confirmPasswordInput.setText("**********");
+            confirmPasswordInput.setForeground(Color.gray);
+        }
+    }//GEN-LAST:event_cityInputMousePressed
+
+    private void departamentoInputMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_departamentoInputMousePressed
+        if (departamentoInput.getText().equals("Ingrese su departamento")) {
+            departamentoInput.setText("");
+            departamentoInput.setForeground(Color.black);
+        }
+        if (String.valueOf(nameInput.getText()).isEmpty()) {
+            nameInput.setText("Ingrese su nombre/s");
+            nameInput.setForeground(Color.gray);
+        }
+        if (String.valueOf(lastNameInput.getText()).isEmpty()) {
+            lastNameInput.setText("Ingrese sus apellidos");
+            lastNameInput.setForeground(Color.gray);
+        }
+        if (String.valueOf(addressInput.getText()).isEmpty()) {
+            addressInput.setText("Ingrese su dirección");
+            addressInput.setForeground(Color.gray);
+        }
+        if (String.valueOf(cityInput.getText()).isEmpty()) {
+            cityInput.setText("Ingrese su ciudad");
+            cityInput.setForeground(Color.gray);
+        }
+        if (String.valueOf(passwordInput.getText()).isEmpty()) {
+            passwordInput.setText("**********");
+            passwordInput.setForeground(Color.gray);
+        }
+        if (String.valueOf(confirmPasswordInput.getText()).isEmpty()) {
+            confirmPasswordInput.setText("**********");
+            confirmPasswordInput.setForeground(Color.gray);
+        }
+    }//GEN-LAST:event_departamentoInputMousePressed
+
+    private void passwordInputMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passwordInputMousePressed
+        if (passwordInput.getText().equals("**********")) {
+            passwordInput.setText("");
+            passwordInput.setForeground(Color.black);
+        }
+        if (String.valueOf(nameInput.getText()).isEmpty()) {
+            nameInput.setText("Ingrese su nombre/s");
+            nameInput.setForeground(Color.gray);
+        }
+        if (String.valueOf(lastNameInput.getText()).isEmpty()) {
+            lastNameInput.setText("Ingrese sus apellidos");
+            lastNameInput.setForeground(Color.gray);
+        }
+        if (String.valueOf(addressInput.getText()).isEmpty()) {
+            addressInput.setText("Ingrese su dirección");
+            addressInput.setForeground(Color.gray);
+        }
+        if (String.valueOf(cityInput.getText()).isEmpty()) {
+            cityInput.setText("Ingrese su ciudad");
+            cityInput.setForeground(Color.gray);
+        }
+        if (String.valueOf(departamentoInput.getText()).isEmpty()) {
+            departamentoInput.setText("Ingrese su departamento");
+            departamentoInput.setForeground(Color.gray);
+        }
+        if (String.valueOf(confirmPasswordInput.getText()).isEmpty()) {
+            confirmPasswordInput.setText("**********");
+            confirmPasswordInput.setForeground(Color.gray);
+        }
+    }//GEN-LAST:event_passwordInputMousePressed
+
+    private void confirmPasswordInputMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmPasswordInputMousePressed
+        if (confirmPasswordInput.getText().equals("**********")) {
+            confirmPasswordInput.setText("");
+            confirmPasswordInput.setForeground(Color.black);
+        }
+        if (String.valueOf(nameInput.getText()).isEmpty()) {
+            nameInput.setText("Ingrese su nombre/s");
+            nameInput.setForeground(Color.gray);
+        }
+        if (String.valueOf(lastNameInput.getText()).isEmpty()) {
+            lastNameInput.setText("Ingrese sus apellidos");
+            lastNameInput.setForeground(Color.gray);
+        }
+        if (String.valueOf(addressInput.getText()).isEmpty()) {
+            addressInput.setText("Ingrese su dirección");
+            addressInput.setForeground(Color.gray);
+        }
+        if (String.valueOf(cityInput.getText()).isEmpty()) {
+            cityInput.setText("Ingrese su ciudad");
+            cityInput.setForeground(Color.gray);
+        }
+        if (String.valueOf(departamentoInput.getText()).isEmpty()) {
+            departamentoInput.setText("Ingrese su departamento");
+            departamentoInput.setForeground(Color.gray);
+        }
+        if (String.valueOf(passwordInput.getText()).isEmpty()) {
+            passwordInput.setText("**********");
+            passwordInput.setForeground(Color.gray);
+        }
+    }//GEN-LAST:event_confirmPasswordInputMousePressed
+
+    private void continueBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_continueBtnMouseClicked
         String inputNombres = nameInput.getText();
         String inputApellidos = lastNameInput.getText();
-        String inputDireccion = addresInput.getText();
+        String inputDireccion = addressInput.getText();
         String inputCiudad = cityInput.getText();
         String inputDepartamento = departamentoInput.getText();
         String inputContrasena = passwordInput.getText();
         String inputConfirmContrasena = confirmPasswordInput.getText();
-        if (inputApellidos.length() < 5 | inputNombres.length() < 5 | inputCiudad.length() < 5 | inputContrasena.length() < 5 | inputDepartamento.length() < 5 | inputDireccion.length() < 5) {
-            JOptionPane.showMessageDialog(null, "Todos los formularios deben contener al menos 5 caracteres.");
+        
+        if (inputNombres.equals("Ingrese su nombre/s") || inputApellidos.equals("Ingrese sus apellidos")
+                || inputDireccion.equals("Ingrese su dirección") || inputDepartamento.equals("Ingrese su departamento")
+                || inputCiudad.equals("Ingrese su ciudad") || inputContrasena.equals("**********") || inputConfirmContrasena.equals("**********")) {
+            inputNombres = "";
+            inputApellidos = "";
+            inputDireccion = "";
+            inputCiudad = "";
+            inputDepartamento = "";
+            inputContrasena = "";
+            inputConfirmContrasena = "";
+        }
+
+        if (inputApellidos.isEmpty() | inputNombres.isEmpty() | inputCiudad.isEmpty() | inputContrasena.isEmpty() | inputDepartamento.isEmpty() | inputDireccion.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Todos los formularios deben ser completados.");
+        } else if (inputContrasena.length() < 6) {
+            JOptionPane.showMessageDialog(null, "La contraseña debe tener al menos 6 carácteres.");
         } else {
 
             Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id, 32, 64);
@@ -425,56 +731,18 @@ public class ApplicationRegister extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Error al agregar usuario, error: " + e.toString());
             }
         }
-
-    }//GEN-LAST:event_registerBtnMouseClicked
-
-    int xMouse, yMouse;
-
-    private void headerMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_headerMousePressed
-        xMouse = evt.getX();
-        yMouse = evt.getY();
-    }//GEN-LAST:event_headerMousePressed
-
-    private void headerMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_headerMouseDragged
-        int x = evt.getXOnScreen();
-        int y = evt.getYOnScreen();
-        this.setLocation(x - xMouse, y - yMouse);
-    }//GEN-LAST:event_headerMouseDragged
-
-    private void exitBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitBtnMouseClicked
-        System.exit(0);
-    }//GEN-LAST:event_exitBtnMouseClicked
-
-    private void exitBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitBtnMouseEntered
-        exitBtn.setBackground(Color.red);
-    }//GEN-LAST:event_exitBtnMouseEntered
-
-    private void exitBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitBtnMouseExited
-        exitBtn.setBackground(Color.white);
-    }//GEN-LAST:event_exitBtnMouseExited
-
-    private void goBackBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goBackBtnMouseClicked
-        this.setVisible(false);
-        ApplicationHome.getInstance().setVisible(true);
-    }//GEN-LAST:event_goBackBtnMouseClicked
-
-    private void goBackBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goBackBtnMouseEntered
-        goBackBtn.setBackground(Color.red);
-    }//GEN-LAST:event_goBackBtnMouseEntered
-
-    private void goBackBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goBackBtnMouseExited
-        goBackBtn.setBackground(new Color(75, 181, 255));
-    }//GEN-LAST:event_goBackBtnMouseExited
-
+    }//GEN-LAST:event_continueBtnMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField addresInput;
+    private javax.swing.JTextField addressInput;
     private javax.swing.JLabel apellidosText;
     private javax.swing.JLabel bgImage;
     private javax.swing.JTextField cityInput;
     private javax.swing.JLabel ciudadText;
     private javax.swing.JPasswordField confirmPasswordInput;
     private javax.swing.JLabel confirmPasswordText;
+    private javax.swing.JPanel continueBtn;
+    private javax.swing.JLabel continueTxt;
     private javax.swing.JLabel contraseñaText;
     private javax.swing.JTextField departamentoInput;
     private javax.swing.JLabel departamentoText;
@@ -496,8 +764,6 @@ public class ApplicationRegister extends javax.swing.JFrame {
     private javax.swing.JTextField nameInput;
     private javax.swing.JLabel nombresText;
     private javax.swing.JPasswordField passwordInput;
-    private javax.swing.JPanel registerBtn;
-    private javax.swing.JLabel registerText;
     private javax.swing.JLabel title1;
     private javax.swing.JLabel title2;
     // End of variables declaration//GEN-END:variables
