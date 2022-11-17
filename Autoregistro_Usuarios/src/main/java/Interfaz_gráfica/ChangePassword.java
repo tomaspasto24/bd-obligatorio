@@ -12,6 +12,7 @@ import java.sql.Statement;
 import java.util.Random;
 import javax.swing.JOptionPane;
 import UserAccount.UserAccount;
+import java.awt.Color;
 
 /**
  *
@@ -47,10 +48,19 @@ public class ChangePassword extends javax.swing.JFrame {
         nombres = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jFileChooser1 = new javax.swing.JFileChooser();
-        jLabel1 = new javax.swing.JLabel();
+        bg = new javax.swing.JPanel();
+        title = new javax.swing.JLabel();
         passwordToChange = new javax.swing.JTextField();
         passwordToChangeConfirm = new javax.swing.JTextField();
-        cambiarHandler = new javax.swing.JButton();
+        exitBtn = new javax.swing.JPanel();
+        exitTxt = new javax.swing.JLabel();
+        bgImage = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        cambiarBtn = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        header = new javax.swing.JPanel();
+        goBackBtn = new javax.swing.JPanel();
+        goBackTxt = new javax.swing.JLabel();
 
         nombres.setText("Nombres");
         nombres.addActionListener(new java.awt.event.ActionListener() {
@@ -67,18 +77,40 @@ public class ChangePassword extends javax.swing.JFrame {
         });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocationByPlatform(true);
+        setUndecorated(true);
+        setResizable(false);
+        setSize(getPreferredSize());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setText("Cambiar Contraseña");
+        bg.setBackground(new java.awt.Color(255, 255, 255));
+        bg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        title.setFont(new java.awt.Font("Calisto MT", 1, 36)); // NOI18N
+        title.setForeground(new java.awt.Color(0, 0, 0));
+        title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        title.setText("Cambiar Contraseña");
+        bg.add(title, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 50, 340, 50));
+
+        passwordToChange.setBackground(new java.awt.Color(255, 255, 255));
+        passwordToChange.setFont(new java.awt.Font("Calisto MT", 0, 14)); // NOI18N
+        passwordToChange.setForeground(new java.awt.Color(153, 153, 153));
         passwordToChange.setText("Nueva Contraseña");
         passwordToChange.setToolTipText("");
+        passwordToChange.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                passwordToChangeMouseClicked(evt);
+            }
+        });
         passwordToChange.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 passwordToChangeActionPerformed(evt);
             }
         });
+        bg.add(passwordToChange, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, 320, 31));
 
+        passwordToChangeConfirm.setBackground(new java.awt.Color(255, 255, 255));
+        passwordToChangeConfirm.setFont(new java.awt.Font("Calisto MT", 0, 14)); // NOI18N
+        passwordToChangeConfirm.setForeground(new java.awt.Color(153, 153, 153));
         passwordToChangeConfirm.setText("Confirmar Contraseña");
         passwordToChangeConfirm.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -90,49 +122,142 @@ public class ChangePassword extends javax.swing.JFrame {
                 passwordToChangeConfirmActionPerformed(evt);
             }
         });
+        bg.add(passwordToChangeConfirm, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, 320, 30));
+        passwordToChangeConfirm.getAccessibleContext().setAccessibleName("");
+        passwordToChangeConfirm.getAccessibleContext().setAccessibleDescription("");
 
-        cambiarHandler.setText("Cambiar");
-        cambiarHandler.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cambiarHandlerActionPerformed(evt);
+        exitBtn.setBackground(new java.awt.Color(255, 255, 255));
+        exitBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                exitBtnMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                exitBtnMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                exitBtnMouseExited(evt);
             }
         });
+
+        exitTxt.setFont(new java.awt.Font("Calisto MT", 0, 18)); // NOI18N
+        exitTxt.setForeground(new java.awt.Color(0, 0, 0));
+        exitTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        exitTxt.setText("X");
+
+        javax.swing.GroupLayout exitBtnLayout = new javax.swing.GroupLayout(exitBtn);
+        exitBtn.setLayout(exitBtnLayout);
+        exitBtnLayout.setHorizontalGroup(
+            exitBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(exitBtnLayout.createSequentialGroup()
+                .addComponent(exitTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        exitBtnLayout.setVerticalGroup(
+            exitBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, exitBtnLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(exitTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        bg.add(exitBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 0, 30, 30));
+
+        bgImage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        bgImage.setIcon(new javax.swing.ImageIcon("C:\\Users\\juan-\\OneDrive - Universidad Católica del Uruguay\\UCU\\2do\\2do semestre\\BD I\\bd-obligatorio\\Autoregistro_Usuarios\\src\\main\\java\\com\\images\\fondoChangePassword.jpg")); // NOI18N
+        bg.add(bgImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 0, 330, 570));
+        bg.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 320, -1));
+
+        cambiarBtn.setBackground(new java.awt.Color(0, 173, 229));
+        cambiarBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cambiarBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cambiarBtnMouseClicked(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Calisto MT", 0, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Cambiar");
+
+        javax.swing.GroupLayout cambiarBtnLayout = new javax.swing.GroupLayout(cambiarBtn);
+        cambiarBtn.setLayout(cambiarBtnLayout);
+        cambiarBtnLayout.setHorizontalGroup(
+            cambiarBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+        );
+        cambiarBtnLayout.setVerticalGroup(
+            cambiarBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+        );
+
+        bg.add(cambiarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 360, 170, 60));
+
+        header.setBackground(new java.awt.Color(255, 255, 255));
+        header.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                headerMouseDragged(evt);
+            }
+        });
+        header.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                headerMousePressed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout headerLayout = new javax.swing.GroupLayout(header);
+        header.setLayout(headerLayout);
+        headerLayout.setHorizontalGroup(
+            headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 740, Short.MAX_VALUE)
+        );
+        headerLayout.setVerticalGroup(
+            headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+
+        bg.add(header, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 740, 30));
+
+        goBackBtn.setBackground(new java.awt.Color(255, 255, 255));
+        goBackBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                goBackBtnMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                goBackBtnMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                goBackBtnMouseExited(evt);
+            }
+        });
+
+        goBackTxt.setFont(new java.awt.Font("Calisto MT", 0, 18)); // NOI18N
+        goBackTxt.setForeground(new java.awt.Color(0, 0, 0));
+        goBackTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        goBackTxt.setText("<");
+
+        javax.swing.GroupLayout goBackBtnLayout = new javax.swing.GroupLayout(goBackBtn);
+        goBackBtn.setLayout(goBackBtnLayout);
+        goBackBtnLayout.setHorizontalGroup(
+            goBackBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(goBackTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+        );
+        goBackBtnLayout.setVerticalGroup(
+            goBackBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(goBackTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+        );
+
+        bg.add(goBackBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 30, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(49, 49, 49)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(passwordToChangeConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(passwordToChange, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(59, 59, 59)
-                        .addComponent(cambiarHandler, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(54, Short.MAX_VALUE))
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jLabel1)
-                .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(passwordToChange, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(passwordToChangeConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(cambiarHandler, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(19, 19, 19)))
-                .addContainerGap(37, Short.MAX_VALUE))
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-
-        passwordToChangeConfirm.getAccessibleContext().setAccessibleName("");
-        passwordToChangeConfirm.getAccessibleContext().setAccessibleDescription("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -153,43 +278,106 @@ public class ChangePassword extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void cambiarHandlerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambiarHandlerActionPerformed
+    private void passwordToChangeConfirmMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passwordToChangeConfirmMouseClicked
+        if (passwordToChangeConfirm.getText().equals("Confirmar Contraseña")) {
+            passwordToChangeConfirm.setText("");
+            passwordToChangeConfirm.setForeground(Color.black);
+        }
+        if (String.valueOf(passwordToChange.getText()).isEmpty()) {
+            passwordToChange.setText("Nueva Contraseña");
+            passwordToChange.setForeground(Color.gray);
+        }
+    }//GEN-LAST:event_passwordToChangeConfirmMouseClicked
+
+    private void cambiarBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cambiarBtnMouseClicked
         String password = passwordToChange.getText();
         String passwordConfirm = passwordToChangeConfirm.getText();
 
-        Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id, 32, 64);
-        Connection connection = DBConnection.getInstance().dbConnection;
-        Statement statement = null;
-        try {
-            if (password.equals(passwordConfirm)) {
-                var hashPass = argon2.hash(2, 15 * 1024, 1, password.toCharArray());
+        if (password.equals("Nueva Contraseña") || password.length() < 6) {
+            JOptionPane.showMessageDialog(null, "La nueva contraseña debe contener mas de 6 caracteres");
+        } else {
+            Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id, 32, 64);
+            Connection connection = DBConnection.getInstance().dbConnection;
+            Statement statement = null;
+            try {
+                if (password.equals(passwordConfirm)) {
+                    var hashPass = argon2.hash(2, 15 * 1024, 1, password.toCharArray());
 
-                statement = connection.createStatement();
-                if (statement != null) {
-                    String sqlString
-                            = "UPDATE PERSONAS "
-                            + "SET hashpwd='" + hashPass + "' "
-                            + "WHERE user_id=" + UserAccount.getInstance().userId;
-                    System.out.println(sqlString);
-                    int rs = statement.executeUpdate(sqlString);
-                    if (rs == 1) {
-                        JOptionPane.showMessageDialog(null, "Cambio contraseña con éxito");
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Problema al cambiar la contraseña. Prueba otra vez.");
+                    statement = connection.createStatement();
+                    if (statement != null) {
+                        String sqlString
+                                = "UPDATE PERSONAS "
+                                + "SET hashpwd='" + hashPass + "' "
+                                + "WHERE user_id=" + UserAccount.getInstance().userId;
+                        System.out.println(sqlString);
+                        int rs = statement.executeUpdate(sqlString);
+                        if (rs == 1) {
+                            JOptionPane.showMessageDialog(null, "Cambio contraseña con éxito");
+                            this.setVisible(false);
+                            ApplicationHome.getInstance().setVisible(true);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Problema al cambiar la contraseña. Prueba otra vez.");
+                        }
                     }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Contraseñas no coinciden.");
                 }
-            } else {
-                JOptionPane.showMessageDialog(null, "Contraseñas no coinciden.");
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error al cambiar la contraseña, error: " + e.toString());
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro al cambiar la contraseña, error: " + e.toString());
+
         }
 
-    }//GEN-LAST:event_cambiarHandlerActionPerformed
 
-    private void passwordToChangeConfirmMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passwordToChangeConfirmMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_passwordToChangeConfirmMouseClicked
+    }//GEN-LAST:event_cambiarBtnMouseClicked
+
+    private void exitBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitBtnMouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_exitBtnMouseClicked
+
+    private void exitBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitBtnMouseEntered
+        exitBtn.setBackground(Color.red);
+    }//GEN-LAST:event_exitBtnMouseEntered
+
+    private void exitBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitBtnMouseExited
+        exitBtn.setBackground(Color.white);
+    }//GEN-LAST:event_exitBtnMouseExited
+
+    int xMouse, yMouse;
+    private void headerMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_headerMousePressed
+        xMouse = evt.getX();
+        yMouse = evt.getY();
+    }//GEN-LAST:event_headerMousePressed
+
+    private void headerMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_headerMouseDragged
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+        this.setLocation(x - xMouse, y - yMouse);
+    }//GEN-LAST:event_headerMouseDragged
+
+    private void goBackBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goBackBtnMouseClicked
+        this.setVisible(false);
+        ApplicationHome.getInstance().setVisible(true);
+    }//GEN-LAST:event_goBackBtnMouseClicked
+
+    private void goBackBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goBackBtnMouseEntered
+        goBackBtn.setBackground(Color.red);
+    }//GEN-LAST:event_goBackBtnMouseEntered
+
+    private void goBackBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goBackBtnMouseExited
+        goBackBtn.setBackground(Color.white);
+    }//GEN-LAST:event_goBackBtnMouseExited
+
+    private void passwordToChangeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passwordToChangeMouseClicked
+        if (passwordToChange.getText().equals("Nueva Contraseña")) {
+            passwordToChange.setText("");
+            passwordToChange.setForeground(Color.black);
+        }
+        if (String.valueOf(passwordToChangeConfirm.getText()).isEmpty()) {
+            passwordToChangeConfirm.setText("Confirmar Contraseña");
+            passwordToChangeConfirm.setForeground(Color.gray);
+        }
+    }//GEN-LAST:event_passwordToChangeMouseClicked
 
     /**
      * @param args the command line arguments
@@ -228,12 +416,21 @@ public class ChangePassword extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton cambiarHandler;
+    private javax.swing.JPanel bg;
+    private javax.swing.JLabel bgImage;
+    private javax.swing.JPanel cambiarBtn;
+    private javax.swing.JPanel exitBtn;
+    private javax.swing.JLabel exitTxt;
+    private javax.swing.JPanel goBackBtn;
+    private javax.swing.JLabel goBackTxt;
+    private javax.swing.JPanel header;
     private javax.swing.JButton jButton1;
     private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField nombres;
     private javax.swing.JTextField passwordToChange;
     private javax.swing.JTextField passwordToChangeConfirm;
+    private javax.swing.JLabel title;
     // End of variables declaration//GEN-END:variables
 }
