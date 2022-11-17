@@ -11,11 +11,4 @@
         <maven.compiler.target>17</maven.compiler.target>
         <exec.mainClass>com.mycompany.dummy.Dummy</exec.mainClass>
     </properties>
-    <dependencies>
-        <dependency>
-            <groupId>com.microsoft.sqlserver</groupId>
-            <artifactId>mssql-jdbc</artifactId>
-            <version>12.1.0.jre11-preview</version>
-        </dependency>
-    </dependencies>
 </project>
