@@ -4,8 +4,7 @@
  */
 package Interfaz_gráfica;
 
-import de.mkammerer.argon2.Argon2;
-import de.mkammerer.argon2.Argon2Factory;
+import Interfaz_gráfica.GetUserIdToRecoverPassword;
 
 /**
  *
@@ -182,7 +181,9 @@ public class ApplicationHome extends javax.swing.JFrame {
 
     private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
         // TODO add your handling code here:
+
     }//GEN-LAST:event_jPasswordField1ActionPerformed
+
 
     /**
      * @param args the command line arguments

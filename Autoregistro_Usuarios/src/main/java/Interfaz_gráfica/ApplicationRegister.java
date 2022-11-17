@@ -380,7 +380,7 @@ public class ApplicationRegister extends javax.swing.JFrame {
     }//GEN-LAST:event_departamentoInputActionPerformed
 
     private void registerBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerBtnMouseClicked
-       String inputNombres = nameInput.getText();
+        String inputNombres = nameInput.getText();
         String inputApellidos = lastNameInput.getText();
         String inputDireccion = addresInput.getText();
         String inputCiudad = cityInput.getText();
@@ -412,7 +412,8 @@ public class ApplicationRegister extends javax.swing.JFrame {
                         int rs = statement.executeUpdate(sqlString);
                         if (rs == 1) {
                             UserAccount.getInstance().setUserId(userID);
-                            JOptionPane.showMessageDialog(null, "Usuario agregado con éxito");
+                            this.setVisible(false);
+                            ApplicationRegisterQuestions.getInstance().setVisible(true);
                         } else {
                             JOptionPane.showMessageDialog(null, "Problema al agregar el usuario. Prueba otra vez.");
                         }
@@ -428,7 +429,7 @@ public class ApplicationRegister extends javax.swing.JFrame {
     }//GEN-LAST:event_registerBtnMouseClicked
 
     int xMouse, yMouse;
-    
+
     private void headerMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_headerMousePressed
         xMouse = evt.getX();
         yMouse = evt.getY();
@@ -462,7 +463,7 @@ public class ApplicationRegister extends javax.swing.JFrame {
     }//GEN-LAST:event_goBackBtnMouseEntered
 
     private void goBackBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goBackBtnMouseExited
-        goBackBtn.setBackground(new Color(75,181,255));
+        goBackBtn.setBackground(new Color(75, 181, 255));
     }//GEN-LAST:event_goBackBtnMouseExited
 
 
