@@ -16,6 +16,15 @@ public class ApplicationRecoverPassword extends javax.swing.JFrame {
     public ApplicationRecoverPassword() {
         initComponents();
     }
+    
+    public static ApplicationRecoverPassword instance;
+
+    public static ApplicationRecoverPassword getInstance() {
+        if (instance == null) {
+            instance = new ApplicationRecoverPassword();
+        }
+        return instance;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
