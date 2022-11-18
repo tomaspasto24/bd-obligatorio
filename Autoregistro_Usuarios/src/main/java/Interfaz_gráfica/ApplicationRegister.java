@@ -17,7 +17,6 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 import UserAccount.UserAccount;
-import java.awt.Color;
 
 /**
  *
@@ -50,343 +49,206 @@ public class ApplicationRegister extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        goBackBtn = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        confirmPasswordText = new javax.swing.JLabel();
-        title1 = new javax.swing.JLabel();
-        title2 = new javax.swing.JLabel();
-        bgImage = new javax.swing.JLabel();
-        nombresText = new javax.swing.JLabel();
-        apellidosText = new javax.swing.JLabel();
-        direccionText = new javax.swing.JLabel();
-        ciudadText = new javax.swing.JLabel();
-        departamentoText = new javax.swing.JLabel();
-        contraseñaText = new javax.swing.JLabel();
-        nameInput = new javax.swing.JTextField();
-        jSeparator1 = new javax.swing.JSeparator();
-        lastNameInput = new javax.swing.JTextField();
-        jSeparator2 = new javax.swing.JSeparator();
-        addresInput = new javax.swing.JTextField();
-        jSeparator3 = new javax.swing.JSeparator();
-        cityInput = new javax.swing.JTextField();
-        jSeparator4 = new javax.swing.JSeparator();
-        departamentoInput = new javax.swing.JTextField();
-        jSeparator5 = new javax.swing.JSeparator();
-        jSeparator6 = new javax.swing.JSeparator();
-        jSeparator7 = new javax.swing.JSeparator();
-        confirmPasswordInput = new javax.swing.JPasswordField();
-        passwordInput = new javax.swing.JPasswordField();
-        registerBtn = new javax.swing.JPanel();
-        registerText = new javax.swing.JLabel();
-        exitBtn = new javax.swing.JPanel();
-        exitTxt = new javax.swing.JLabel();
-        header = new javax.swing.JPanel();
+        nombres = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        apellidos = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        direccion = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        ciudad = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        departamento = new javax.swing.JTextField();
+        contraseña = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        confirmContraseña = new javax.swing.JTextField();
+        registrarse = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setLocationByPlatform(true);
-        setUndecorated(true);
-        setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel1.setText("Nombres");
 
-        goBackBtn.setBackground(new java.awt.Color(75, 181, 255));
-        goBackBtn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                goBackBtnMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                goBackBtnMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                goBackBtnMouseExited(evt);
-            }
-        });
-
-        jLabel1.setFont(new java.awt.Font("Calisto MT", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("<");
-
-        javax.swing.GroupLayout goBackBtnLayout = new javax.swing.GroupLayout(goBackBtn);
-        goBackBtn.setLayout(goBackBtnLayout);
-        goBackBtnLayout.setHorizontalGroup(
-            goBackBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-        );
-        goBackBtnLayout.setVerticalGroup(
-            goBackBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-        );
-
-        jPanel1.add(goBackBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 30, 30));
-
-        confirmPasswordText.setFont(new java.awt.Font("Calisto MT", 1, 14)); // NOI18N
-        confirmPasswordText.setForeground(new java.awt.Color(0, 0, 0));
-        confirmPasswordText.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        confirmPasswordText.setText("Confirmar contraseña");
-        jPanel1.add(confirmPasswordText, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 330, -1, -1));
-
-        title1.setFont(new java.awt.Font("Calisto MT", 3, 40)); // NOI18N
-        title1.setForeground(new java.awt.Color(0, 0, 0));
-        title1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        title1.setText("Registrese");
-        jPanel1.add(title1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 240, 130));
-
-        title2.setFont(new java.awt.Font("Calisto MT", 3, 40)); // NOI18N
-        title2.setForeground(new java.awt.Color(0, 0, 0));
-        title2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        title2.setText("Aquí");
-        jPanel1.add(title2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 240, 130));
-
-        bgImage.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        bgImage.setIcon(new javax.swing.ImageIcon("C:\\Users\\juan-\\OneDrive - Universidad Católica del Uruguay\\UCU\\2do\\2do semestre\\BD I\\bd-obligatorio\\Images\\Auto-Registro\\fondoRegister.jpg")); // NOI18N
-        jPanel1.add(bgImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 570));
-
-        nombresText.setFont(new java.awt.Font("Calisto MT", 1, 14)); // NOI18N
-        nombresText.setForeground(new java.awt.Color(0, 0, 0));
-        nombresText.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        nombresText.setText("Nombres");
-        jPanel1.add(nombresText, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 90, 60, -1));
-
-        apellidosText.setFont(new java.awt.Font("Calisto MT", 1, 14)); // NOI18N
-        apellidosText.setForeground(new java.awt.Color(0, 0, 0));
-        apellidosText.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        apellidosText.setText("Apellidos");
-        jPanel1.add(apellidosText, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 130, -1, -1));
-
-        direccionText.setFont(new java.awt.Font("Calisto MT", 1, 14)); // NOI18N
-        direccionText.setForeground(new java.awt.Color(0, 0, 0));
-        direccionText.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        direccionText.setText("Dirección");
-        jPanel1.add(direccionText, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 170, -1, -1));
-
-        ciudadText.setFont(new java.awt.Font("Calisto MT", 1, 14)); // NOI18N
-        ciudadText.setForeground(new java.awt.Color(0, 0, 0));
-        ciudadText.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        ciudadText.setText("Ciudad");
-        jPanel1.add(ciudadText, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 210, 50, -1));
-
-        departamentoText.setFont(new java.awt.Font("Calisto MT", 1, 14)); // NOI18N
-        departamentoText.setForeground(new java.awt.Color(0, 0, 0));
-        departamentoText.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        departamentoText.setText("Departamento");
-        jPanel1.add(departamentoText, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 250, -1, -1));
-
-        contraseñaText.setFont(new java.awt.Font("Calisto MT", 1, 14)); // NOI18N
-        contraseñaText.setForeground(new java.awt.Color(0, 0, 0));
-        contraseñaText.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        contraseñaText.setText("Contraseña");
-        jPanel1.add(contraseñaText, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 290, 80, -1));
-
-        nameInput.setBackground(new java.awt.Color(255, 255, 255));
-        nameInput.setFont(new java.awt.Font("Calisto MT", 0, 14)); // NOI18N
-        nameInput.setForeground(new java.awt.Color(153, 153, 153));
-        nameInput.setText("Ingrese su nombre/s");
-        nameInput.setBorder(null);
-        nameInput.addActionListener(new java.awt.event.ActionListener() {
+        nombres.setText("Nombres");
+        nombres.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nameInputActionPerformed(evt);
+                nombresActionPerformed(evt);
             }
         });
-        jPanel1.add(nameInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 90, 290, 20));
-        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 110, 260, 10));
 
-        lastNameInput.setBackground(new java.awt.Color(255, 255, 255));
-        lastNameInput.setFont(new java.awt.Font("Calisto MT", 0, 14)); // NOI18N
-        lastNameInput.setForeground(new java.awt.Color(153, 153, 153));
-        lastNameInput.setText("Ingrese sus apellidos");
-        lastNameInput.setBorder(null);
-        lastNameInput.addActionListener(new java.awt.event.ActionListener() {
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel2.setText("Apellidos");
+
+        apellidos.setText("Apellidos");
+        apellidos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                lastNameInputActionPerformed(evt);
+                apellidosActionPerformed(evt);
             }
         });
-        jPanel1.add(lastNameInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 130, 290, 20));
-        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 150, 260, 10));
 
-        addresInput.setBackground(new java.awt.Color(255, 255, 255));
-        addresInput.setFont(new java.awt.Font("Calisto MT", 0, 14)); // NOI18N
-        addresInput.setForeground(new java.awt.Color(153, 153, 153));
-        addresInput.setText("Ingrese su dirección");
-        addresInput.setBorder(null);
-        addresInput.addActionListener(new java.awt.event.ActionListener() {
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel3.setText("Dirección");
+
+        direccion.setText("Dirección");
+        direccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addresInputActionPerformed(evt);
+                direccionActionPerformed(evt);
             }
         });
-        jPanel1.add(addresInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 170, 290, 20));
-        jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 190, 260, 10));
 
-        cityInput.setBackground(new java.awt.Color(255, 255, 255));
-        cityInput.setFont(new java.awt.Font("Calisto MT", 0, 14)); // NOI18N
-        cityInput.setForeground(new java.awt.Color(153, 153, 153));
-        cityInput.setText("Ingrese su ciudad");
-        cityInput.setBorder(null);
-        cityInput.addActionListener(new java.awt.event.ActionListener() {
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel4.setText("Ciudad");
+
+        ciudad.setText("Ciudad");
+        ciudad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cityInputActionPerformed(evt);
+                ciudadActionPerformed(evt);
             }
         });
-        jPanel1.add(cityInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 210, 290, 20));
-        jPanel1.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 230, 260, 10));
 
-        departamentoInput.setBackground(new java.awt.Color(255, 255, 255));
-        departamentoInput.setFont(new java.awt.Font("Calisto MT", 0, 14)); // NOI18N
-        departamentoInput.setForeground(new java.awt.Color(153, 153, 153));
-        departamentoInput.setText("Ingrese su departamento");
-        departamentoInput.setBorder(null);
-        departamentoInput.addActionListener(new java.awt.event.ActionListener() {
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel5.setText("Departamento");
+
+        departamento.setText("Departamento");
+        departamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                departamentoInputActionPerformed(evt);
-            }
-        });
-        jPanel1.add(departamentoInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 250, 290, 20));
-        jPanel1.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 270, 260, 10));
-        jPanel1.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 310, 260, 10));
-        jPanel1.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 350, 260, 10));
-
-        confirmPasswordInput.setBackground(new java.awt.Color(255, 255, 255));
-        confirmPasswordInput.setText("jPasswordField1");
-        confirmPasswordInput.setBorder(null);
-        jPanel1.add(confirmPasswordInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 330, 260, 20));
-
-        passwordInput.setBackground(new java.awt.Color(255, 255, 255));
-        passwordInput.setText("jPasswordField1");
-        passwordInput.setBorder(null);
-        jPanel1.add(passwordInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 290, 260, 20));
-
-        registerBtn.setBackground(new java.awt.Color(89, 191, 255));
-        registerBtn.setForeground(new java.awt.Color(89, 191, 255));
-        registerBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        registerBtn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                registerBtnMouseClicked(evt);
+                departamentoActionPerformed(evt);
             }
         });
 
-        registerText.setFont(new java.awt.Font("Calisto MT", 0, 24)); // NOI18N
-        registerText.setForeground(new java.awt.Color(255, 255, 255));
-        registerText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        registerText.setText("Registrarse");
-        registerText.setToolTipText("");
-
-        javax.swing.GroupLayout registerBtnLayout = new javax.swing.GroupLayout(registerBtn);
-        registerBtn.setLayout(registerBtnLayout);
-        registerBtnLayout.setHorizontalGroup(
-            registerBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(registerText, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
-        );
-        registerBtnLayout.setVerticalGroup(
-            registerBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(registerText, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
-        );
-
-        jPanel1.add(registerBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 450, 170, 60));
-
-        exitBtn.setBackground(new java.awt.Color(255, 255, 255));
-        exitBtn.setForeground(new java.awt.Color(255, 255, 255));
-        exitBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        exitBtn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                exitBtnMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                exitBtnMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                exitBtnMouseExited(evt);
+        contraseña.setText("Contraseña");
+        contraseña.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                contraseñaActionPerformed(evt);
             }
         });
 
-        exitTxt.setFont(new java.awt.Font("Calisto MT", 0, 18)); // NOI18N
-        exitTxt.setForeground(new java.awt.Color(0, 0, 0));
-        exitTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        exitTxt.setText("X");
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel6.setText("Contraseña");
 
-        javax.swing.GroupLayout exitBtnLayout = new javax.swing.GroupLayout(exitBtn);
-        exitBtn.setLayout(exitBtnLayout);
-        exitBtnLayout.setHorizontalGroup(
-            exitBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(exitTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-        );
-        exitBtnLayout.setVerticalGroup(
-            exitBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, exitBtnLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(exitTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel7.setText("Confirmar Contraseña");
 
-        jPanel1.add(exitBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 0, 30, 30));
-
-        header.setBackground(new java.awt.Color(255, 255, 255));
-        header.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                headerMouseDragged(evt);
-            }
-        });
-        header.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                headerMousePressed(evt);
+        confirmContraseña.setText("Confirmar Contraseña");
+        confirmContraseña.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmContraseñaActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout headerLayout = new javax.swing.GroupLayout(header);
-        header.setLayout(headerLayout);
-        headerLayout.setHorizontalGroup(
-            headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 770, Short.MAX_VALUE)
-        );
-        headerLayout.setVerticalGroup(
-            headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 30, Short.MAX_VALUE)
-        );
-
-        jPanel1.add(header, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 770, 30));
+        registrarse.setText("Registrarse");
+        registrarse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registrarseActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7))
+                        .addGap(38, 38, 38)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nombres, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(apellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(direccion, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ciudad, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(departamento, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(confirmContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(198, 198, 198)
+                        .addComponent(registrarse, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(nombres, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(apellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(direccion, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ciudad, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(departamento, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(confirmContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addComponent(registrarse, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void nameInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameInputActionPerformed
+    private void nombresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombresActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_nameInputActionPerformed
+    }//GEN-LAST:event_nombresActionPerformed
 
-    private void lastNameInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lastNameInputActionPerformed
+    private void apellidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apellidosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_lastNameInputActionPerformed
+    }//GEN-LAST:event_apellidosActionPerformed
 
-    private void addresInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addresInputActionPerformed
+    private void direccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_direccionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_addresInputActionPerformed
+    }//GEN-LAST:event_direccionActionPerformed
 
-    private void cityInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cityInputActionPerformed
+    private void ciudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ciudadActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cityInputActionPerformed
+    }//GEN-LAST:event_ciudadActionPerformed
 
-    private void departamentoInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_departamentoInputActionPerformed
+    private void departamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_departamentoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_departamentoInputActionPerformed
+    }//GEN-LAST:event_departamentoActionPerformed
 
-    private void registerBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerBtnMouseClicked
-        String inputNombres = nameInput.getText();
-        String inputApellidos = lastNameInput.getText();
-        String inputDireccion = addresInput.getText();
-        String inputCiudad = cityInput.getText();
-        String inputDepartamento = departamentoInput.getText();
-        String inputContrasena = passwordInput.getText();
-        String inputConfirmContrasena = confirmPasswordInput.getText();
+    private void contraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contraseñaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_contraseñaActionPerformed
+
+    private void confirmContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmContraseñaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_confirmContraseñaActionPerformed
+
+    private void registrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarseActionPerformed
+        String inputNombres = nombres.getText();
+        String inputApellidos = apellidos.getText();
+        String inputDireccion = direccion.getText();
+        String inputCiudad = ciudad.getText();
+        String inputDepartamento = departamento.getText();
+        String inputContrasena = contraseña.getText();
+        String inputConfirmContrasena = confirmContraseña.getText();
         if (inputApellidos.length() < 5 | inputNombres.length() < 5 | inputCiudad.length() < 5 | inputContrasena.length() < 5 | inputDepartamento.length() < 5 | inputDireccion.length() < 5) {
             JOptionPane.showMessageDialog(null, "Todos los formularios deben contener al menos 5 caracteres.");
         } else {
@@ -422,83 +284,28 @@ public class ApplicationRegister extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Contraseñas ingresadas no coinciden");
                 }
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Error al agregar usuario, error: " + e.toString());
+                JOptionPane.showMessageDialog(null, "Erro al agregar user, error: " + e.toString());
             }
         }
 
-    }//GEN-LAST:event_registerBtnMouseClicked
-
-    int xMouse, yMouse;
-
-    private void headerMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_headerMousePressed
-        xMouse = evt.getX();
-        yMouse = evt.getY();
-    }//GEN-LAST:event_headerMousePressed
-
-    private void headerMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_headerMouseDragged
-        int x = evt.getXOnScreen();
-        int y = evt.getYOnScreen();
-        this.setLocation(x - xMouse, y - yMouse);
-    }//GEN-LAST:event_headerMouseDragged
-
-    private void exitBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitBtnMouseClicked
-        System.exit(0);
-    }//GEN-LAST:event_exitBtnMouseClicked
-
-    private void exitBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitBtnMouseEntered
-        exitBtn.setBackground(Color.red);
-    }//GEN-LAST:event_exitBtnMouseEntered
-
-    private void exitBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitBtnMouseExited
-        exitBtn.setBackground(Color.white);
-    }//GEN-LAST:event_exitBtnMouseExited
-
-    private void goBackBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goBackBtnMouseClicked
-        this.setVisible(false);
-        ApplicationHome.getInstance().setVisible(true);
-    }//GEN-LAST:event_goBackBtnMouseClicked
-
-    private void goBackBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goBackBtnMouseEntered
-        goBackBtn.setBackground(Color.red);
-    }//GEN-LAST:event_goBackBtnMouseEntered
-
-    private void goBackBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goBackBtnMouseExited
-        goBackBtn.setBackground(new Color(75, 181, 255));
-    }//GEN-LAST:event_goBackBtnMouseExited
+    }//GEN-LAST:event_registrarseActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField addresInput;
-    private javax.swing.JLabel apellidosText;
-    private javax.swing.JLabel bgImage;
-    private javax.swing.JTextField cityInput;
-    private javax.swing.JLabel ciudadText;
-    private javax.swing.JPasswordField confirmPasswordInput;
-    private javax.swing.JLabel confirmPasswordText;
-    private javax.swing.JLabel contraseñaText;
-    private javax.swing.JTextField departamentoInput;
-    private javax.swing.JLabel departamentoText;
-    private javax.swing.JLabel direccionText;
-    private javax.swing.JPanel exitBtn;
-    private javax.swing.JLabel exitTxt;
-    private javax.swing.JPanel goBackBtn;
-    private javax.swing.JPanel header;
+    private javax.swing.JTextField apellidos;
+    private javax.swing.JTextField ciudad;
+    private javax.swing.JTextField confirmContraseña;
+    private javax.swing.JTextField contraseña;
+    private javax.swing.JTextField departamento;
+    private javax.swing.JTextField direccion;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JSeparator jSeparator5;
-    private javax.swing.JSeparator jSeparator6;
-    private javax.swing.JSeparator jSeparator7;
-    private javax.swing.JTextField lastNameInput;
-    private javax.swing.JTextField nameInput;
-    private javax.swing.JLabel nombresText;
-    private javax.swing.JPasswordField passwordInput;
-    private javax.swing.JPanel registerBtn;
-    private javax.swing.JLabel registerText;
-    private javax.swing.JLabel title1;
-    private javax.swing.JLabel title2;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JTextField nombres;
+    private javax.swing.JButton registrarse;
     // End of variables declaration//GEN-END:variables
 }
