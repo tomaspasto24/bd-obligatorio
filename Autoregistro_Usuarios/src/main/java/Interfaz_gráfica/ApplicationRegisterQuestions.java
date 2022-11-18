@@ -294,13 +294,13 @@ public class ApplicationRegisterQuestions extends javax.swing.JFrame {
             statement = connection.createStatement();
             if (statement != null) {
                 String sqlStringPreg1 = "INSERT INTO PERSONAS_PREGUNTAS (user_id, preg_id, respuesta) "
-                        + "VALUES (" + UserAccount.getInstance().userId + ", " + preguntasId.get(pregunta1.toString()) + ", '" + respuesta1.toString() + "')";
+                        + "VALUES (" + UserAccount.getInstance().getUserId() + ", " + preguntasId.get(pregunta1.toString()) + ", '" + respuesta1.toString() + "')";
                 
                 String sqlStringPreg2 = "INSERT INTO PERSONAS_PREGUNTAS (user_id, preg_id, respuesta) "
-                        + "VALUES (" + UserAccount.getInstance().userId + ", " + preguntasId.get(pregunta2.toString()) + ", '" + respuesta2.toString() + "')";
+                        + "VALUES (" + UserAccount.getInstance().getUserId() + ", " + preguntasId.get(pregunta2.toString()) + ", '" + respuesta2.toString() + "')";
                 
                 String sqlStringPreg3 = "INSERT INTO PERSONAS_PREGUNTAS (user_id, preg_id, respuesta) "
-                        + "VALUES (" + UserAccount.getInstance().userId + ", " + preguntasId.get(pregunta3.toString()) + ", '" + respuesta3.toString() + "')";
+                        + "VALUES (" + UserAccount.getInstance().getUserId() + ", " + preguntasId.get(pregunta3.toString()) + ", '" + respuesta3.toString() + "')";
                 
                 statement.executeUpdate(sqlStringPreg1);
                 statement.executeUpdate(sqlStringPreg2);

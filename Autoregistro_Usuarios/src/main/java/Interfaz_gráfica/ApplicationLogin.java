@@ -273,7 +273,7 @@ public class ApplicationLogin extends javax.swing.JFrame {
         nameInput.setText("");
         passwordInput.setText("");
         this.setVisible(false);
-        ApplicationRecoverPassword.getInstance().setVisible(true);
+        GetUserIdToRecoverPassword.getInstance().setVisible(true);
     }//GEN-LAST:event_recoverPasswordTxtMouseClicked
 
     /**
