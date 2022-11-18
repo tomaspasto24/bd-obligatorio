@@ -308,7 +308,7 @@ public class ChangePassword extends javax.swing.JFrame {
                         String sqlString
                                 = "UPDATE PERSONAS "
                                 + "SET hashpwd='" + hashPass + "' "
-                                + "WHERE user_id=" + UserAccount.getInstance().userId;
+                                + "WHERE user_id=" + UserAccount.getInstance().getUserId();
                         System.out.println(sqlString);
                         int rs = statement.executeUpdate(sqlString);
                         if (rs == 1) {

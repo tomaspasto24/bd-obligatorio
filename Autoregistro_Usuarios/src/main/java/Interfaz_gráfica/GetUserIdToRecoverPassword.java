@@ -1,6 +1,6 @@
 package Interfaz_gráfica;
 
-import Interfaz_gráfica.ApplicationRecoverPassword;
+import Interfaz_gráfica.RecoverPassword;
 import Interfaz_gráfica.ApplicationRegisterQuestions;
 import db_connection.DBConnection;
 import java.sql.Connection;
@@ -9,6 +9,7 @@ import java.util.HashMap;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import UserAccount.UserAccount;
+import java.awt.Color;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -44,56 +45,165 @@ public class GetUserIdToRecoverPassword extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        bg = new javax.swing.JPanel();
+        title = new javax.swing.JLabel();
         nombreUsuario = new javax.swing.JTextField();
         Enviar = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        exitBtn = new javax.swing.JPanel();
+        exitTxt = new javax.swing.JLabel();
+        goBackBtn = new javax.swing.JPanel();
+        goBackTxt = new javax.swing.JLabel();
+        header = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocationByPlatform(true);
+        setMinimumSize(new java.awt.Dimension(500, 365));
+        setUndecorated(true);
+        setResizable(false);
+        setSize(new java.awt.Dimension(500, 365));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setText("Ingresar nombre de usuario");
+        bg.setBackground(new java.awt.Color(255, 255, 255));
+        bg.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bgMouseClicked(evt);
+            }
+        });
+        bg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        title.setFont(new java.awt.Font("Calisto MT", 1, 24)); // NOI18N
+        title.setForeground(new java.awt.Color(0, 0, 0));
+        title.setText("Ingresar nombre de usuario");
+        bg.add(title, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 50, 300, 40));
+
+        nombreUsuario.setBackground(new java.awt.Color(255, 255, 255));
+        nombreUsuario.setFont(new java.awt.Font("Calisto MT", 0, 14)); // NOI18N
+        nombreUsuario.setForeground(new java.awt.Color(153, 153, 153));
         nombreUsuario.setText("Nombre de usuario");
+        nombreUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                nombreUsuarioMouseClicked(evt);
+            }
+        });
         nombreUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nombreUsuarioActionPerformed(evt);
             }
         });
+        bg.add(nombreUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, 302, 34));
 
+        Enviar.setBackground(new java.awt.Color(102, 102, 102));
+        Enviar.setFont(new java.awt.Font("Calisto MT", 0, 14)); // NOI18N
+        Enviar.setForeground(new java.awt.Color(255, 255, 255));
         Enviar.setText("Recuperar contraseña");
+        Enviar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         Enviar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 EnviarActionPerformed(evt);
             }
         });
+        bg.add(Enviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, 170, 40));
+        bg.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 80, 290, 20));
+
+        exitBtn.setBackground(new java.awt.Color(255, 255, 255));
+        exitBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        exitBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                exitBtnMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                exitBtnMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                exitBtnMouseExited(evt);
+            }
+        });
+
+        exitTxt.setFont(new java.awt.Font("Calisto MT", 0, 18)); // NOI18N
+        exitTxt.setForeground(new java.awt.Color(0, 0, 0));
+        exitTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        exitTxt.setText("X");
+
+        javax.swing.GroupLayout exitBtnLayout = new javax.swing.GroupLayout(exitBtn);
+        exitBtn.setLayout(exitBtnLayout);
+        exitBtnLayout.setHorizontalGroup(
+            exitBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(exitTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+        );
+        exitBtnLayout.setVerticalGroup(
+            exitBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(exitTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+        );
+
+        bg.add(exitBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 0, 40, 40));
+
+        goBackBtn.setBackground(new java.awt.Color(255, 255, 255));
+        goBackBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        goBackBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                goBackBtnMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                goBackBtnMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                goBackBtnMouseExited(evt);
+            }
+        });
+
+        goBackTxt.setBackground(new java.awt.Color(0, 0, 0));
+        goBackTxt.setFont(new java.awt.Font("Calisto MT", 0, 18)); // NOI18N
+        goBackTxt.setForeground(new java.awt.Color(0, 0, 0));
+        goBackTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        goBackTxt.setText("<");
+
+        javax.swing.GroupLayout goBackBtnLayout = new javax.swing.GroupLayout(goBackBtn);
+        goBackBtn.setLayout(goBackBtnLayout);
+        goBackBtnLayout.setHorizontalGroup(
+            goBackBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(goBackTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+        );
+        goBackBtnLayout.setVerticalGroup(
+            goBackBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(goBackTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+        );
+
+        bg.add(goBackBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 40, 40));
+
+        header.setBackground(new java.awt.Color(255, 255, 255));
+        header.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                headerMouseDragged(evt);
+            }
+        });
+        header.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                headerMousePressed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout headerLayout = new javax.swing.GroupLayout(header);
+        header.setLayout(headerLayout);
+        headerLayout.setHorizontalGroup(
+            headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 420, Short.MAX_VALUE)
+        );
+        headerLayout.setVerticalGroup(
+            headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+
+        bg.add(header, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, 420, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(80, 80, 80)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
-                        .addComponent(nombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(121, 121, 121)
-                        .addComponent(Enviar)))
-                .addContainerGap(44, Short.MAX_VALUE))
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addComponent(jLabel1)
-                .addGap(30, 30, 30)
-                .addComponent(nombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
-                .addComponent(Enviar)
-                .addContainerGap(117, Short.MAX_VALUE))
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -121,7 +231,7 @@ public class GetUserIdToRecoverPassword extends javax.swing.JFrame {
                     this.setVisible(false);
                     int userId = res.getInt("user_id");
                     UserAccount.getInstance().setUserId(userId);
-                    ApplicationRecoverPassword.getInstance().setVisible(true);
+                    RecoverPassword.getInstance().setVisible(true);
                 } else {
                     JOptionPane.showMessageDialog(null, "Usuario no encontrado");
                 }
@@ -134,6 +244,58 @@ public class GetUserIdToRecoverPassword extends javax.swing.JFrame {
     private void nombreUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreUsuarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nombreUsuarioActionPerformed
+
+    private void nombreUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nombreUsuarioMouseClicked
+        if (nombreUsuario.getText().equals("Nombre de usuario")) {
+            nombreUsuario.setText("");
+            nombreUsuario.setForeground(Color.black);
+        }
+    }//GEN-LAST:event_nombreUsuarioMouseClicked
+
+    private void bgMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bgMouseClicked
+        if (String.valueOf(nombreUsuario.getText()).isEmpty()) {
+            nombreUsuario.setText("Nombre de usuario");
+            nombreUsuario.setForeground(Color.gray);
+        }
+    }//GEN-LAST:event_bgMouseClicked
+
+    private void exitBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitBtnMouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_exitBtnMouseClicked
+
+    private void exitBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitBtnMouseEntered
+        exitBtn.setBackground(Color.red);
+    }//GEN-LAST:event_exitBtnMouseEntered
+
+    private void exitBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitBtnMouseExited
+        exitBtn.setBackground(Color.white);
+    }//GEN-LAST:event_exitBtnMouseExited
+
+    private void goBackBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goBackBtnMouseClicked
+        nombreUsuario.setText("");
+        this.setVisible(false);
+        ApplicationLogin.getInstance().setVisible(true);
+    }//GEN-LAST:event_goBackBtnMouseClicked
+
+    private void goBackBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goBackBtnMouseEntered
+        goBackBtn.setBackground(Color.red);
+    }//GEN-LAST:event_goBackBtnMouseEntered
+
+    private void goBackBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goBackBtnMouseExited
+        goBackBtn.setBackground(Color.white);
+    }//GEN-LAST:event_goBackBtnMouseExited
+
+    int xMouse, yMouse;
+    private void headerMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_headerMousePressed
+        xMouse = evt.getX();
+        yMouse = evt.getY();
+    }//GEN-LAST:event_headerMousePressed
+
+    private void headerMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_headerMouseDragged
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+        this.setLocation(x - xMouse, y - yMouse);
+    }//GEN-LAST:event_headerMouseDragged
 
     /**
      * @param args the command line arguments
@@ -172,7 +334,14 @@ public class GetUserIdToRecoverPassword extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Enviar;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel bg;
+    private javax.swing.JPanel exitBtn;
+    private javax.swing.JLabel exitTxt;
+    private javax.swing.JPanel goBackBtn;
+    private javax.swing.JLabel goBackTxt;
+    private javax.swing.JPanel header;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField nombreUsuario;
+    private javax.swing.JLabel title;
     // End of variables declaration//GEN-END:variables
 }

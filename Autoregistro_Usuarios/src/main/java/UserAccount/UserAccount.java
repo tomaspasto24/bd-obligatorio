@@ -19,9 +19,13 @@ public class UserAccount {
         return instance;
     }
 
-    public int userId;
+    private int userId;
 
     public void setUserId(int id) {
         this.userId = id;
+    }
+    
+    public int getUserId(){
+        return userId;
     }
 }
