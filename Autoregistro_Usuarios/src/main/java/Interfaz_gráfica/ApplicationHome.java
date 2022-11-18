@@ -49,15 +49,16 @@ public class ApplicationHome extends javax.swing.JFrame {
         bg = new javax.swing.JPanel();
         topBg = new javax.swing.JPanel();
         title = new javax.swing.JLabel();
+        title2 = new javax.swing.JLabel();
+        changePasswordBtn = new javax.swing.JPanel();
+        changePasswordTxt = new javax.swing.JLabel();
+        viewRolesBtn = new javax.swing.JPanel();
+        viewRolesTxt = new javax.swing.JLabel();
+        logOutBtn = new javax.swing.JPanel();
+        logOutTxt = new javax.swing.JLabel();
+        header = new javax.swing.JPanel();
         exitBtn = new javax.swing.JPanel();
         exitTxt = new javax.swing.JLabel();
-        changePasswordBtn = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        viewRolesBtn = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        logOutBtn = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        header = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
@@ -70,66 +71,39 @@ public class ApplicationHome extends javax.swing.JFrame {
         bg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         topBg.setBackground(new java.awt.Color(51, 153, 255));
-        topBg.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 153), 5, true));
 
         title.setFont(new java.awt.Font("Calisto MT", 0, 36)); // NOI18N
         title.setForeground(new java.awt.Color(255, 255, 255));
         title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        title.setText("Bienvenido al panel de usuario");
+        title.setText("Bienvenido al");
 
-        exitBtn.setBackground(new java.awt.Color(51, 153, 255));
-        exitBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        exitBtn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                exitBtnMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                exitBtnMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                exitBtnMouseExited(evt);
-            }
-        });
-
-        exitTxt.setBackground(new java.awt.Color(0, 0, 0));
-        exitTxt.setFont(new java.awt.Font("Calisto MT", 0, 14)); // NOI18N
-        exitTxt.setForeground(new java.awt.Color(0, 0, 0));
-        exitTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        exitTxt.setText("X");
-
-        javax.swing.GroupLayout exitBtnLayout = new javax.swing.GroupLayout(exitBtn);
-        exitBtn.setLayout(exitBtnLayout);
-        exitBtnLayout.setHorizontalGroup(
-            exitBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(exitTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-        );
-        exitBtnLayout.setVerticalGroup(
-            exitBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(exitTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-        );
+        title2.setFont(new java.awt.Font("Calisto MT", 0, 36)); // NOI18N
+        title2.setForeground(new java.awt.Color(255, 255, 255));
+        title2.setText(" panel de usuario");
 
         javax.swing.GroupLayout topBgLayout = new javax.swing.GroupLayout(topBg);
         topBg.setLayout(topBgLayout);
         topBgLayout.setHorizontalGroup(
             topBgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(topBgLayout.createSequentialGroup()
-                .addGap(165, 165, 165)
-                .addComponent(title)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(title2)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(topBgLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(exitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(13, Short.MAX_VALUE))
         );
         topBgLayout.setVerticalGroup(
             topBgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(topBgLayout.createSequentialGroup()
-                .addComponent(exitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45))
+                .addGap(162, 162, 162)
+                .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41)
+                .addComponent(title2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(208, Short.MAX_VALUE))
         );
 
-        bg.add(topBg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 170));
+        bg.add(topBg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 280, 570));
 
         changePasswordBtn.setBackground(new java.awt.Color(0, 153, 204));
         changePasswordBtn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -140,45 +114,45 @@ public class ApplicationHome extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Calisto MT", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Cambiar contraseña");
+        changePasswordTxt.setFont(new java.awt.Font("Calisto MT", 0, 18)); // NOI18N
+        changePasswordTxt.setForeground(new java.awt.Color(255, 255, 255));
+        changePasswordTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        changePasswordTxt.setText("Cambiar contraseña");
 
         javax.swing.GroupLayout changePasswordBtnLayout = new javax.swing.GroupLayout(changePasswordBtn);
         changePasswordBtn.setLayout(changePasswordBtnLayout);
         changePasswordBtnLayout.setHorizontalGroup(
             changePasswordBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+            .addComponent(changePasswordTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
         );
         changePasswordBtnLayout.setVerticalGroup(
             changePasswordBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
+            .addComponent(changePasswordTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
         );
 
-        bg.add(changePasswordBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 350, 170, 80));
+        bg.add(changePasswordBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 90, 170, 80));
 
         viewRolesBtn.setBackground(new java.awt.Color(0, 153, 204));
         viewRolesBtn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         viewRolesBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        jLabel3.setFont(new java.awt.Font("Calisto MT", 0, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Ver roles");
+        viewRolesTxt.setFont(new java.awt.Font("Calisto MT", 0, 18)); // NOI18N
+        viewRolesTxt.setForeground(new java.awt.Color(255, 255, 255));
+        viewRolesTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        viewRolesTxt.setText("Ver roles");
 
         javax.swing.GroupLayout viewRolesBtnLayout = new javax.swing.GroupLayout(viewRolesBtn);
         viewRolesBtn.setLayout(viewRolesBtnLayout);
         viewRolesBtnLayout.setHorizontalGroup(
             viewRolesBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+            .addComponent(viewRolesTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
         );
         viewRolesBtnLayout.setVerticalGroup(
             viewRolesBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
+            .addComponent(viewRolesTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
         );
 
-        bg.add(viewRolesBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 350, 170, 80));
+        bg.add(viewRolesBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 250, 170, 80));
 
         logOutBtn.setBackground(new java.awt.Color(0, 153, 204));
         logOutBtn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -189,24 +163,25 @@ public class ApplicationHome extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Calisto MT", 0, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Cerrar sesión");
+        logOutTxt.setFont(new java.awt.Font("Calisto MT", 0, 18)); // NOI18N
+        logOutTxt.setForeground(new java.awt.Color(255, 255, 255));
+        logOutTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        logOutTxt.setText("Cerrar sesión");
 
         javax.swing.GroupLayout logOutBtnLayout = new javax.swing.GroupLayout(logOutBtn);
         logOutBtn.setLayout(logOutBtnLayout);
         logOutBtnLayout.setHorizontalGroup(
             logOutBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+            .addComponent(logOutTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
         );
         logOutBtnLayout.setVerticalGroup(
             logOutBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
+            .addComponent(logOutTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
         );
 
-        bg.add(logOutBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 350, 170, 80));
+        bg.add(logOutBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 410, 170, 80));
 
+        header.setBackground(new java.awt.Color(255, 255, 255));
         header.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 headerMouseDragged(evt);
@@ -231,6 +206,39 @@ public class ApplicationHome extends javax.swing.JFrame {
 
         bg.add(header, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 30));
 
+        exitBtn.setBackground(new java.awt.Color(255, 255, 255));
+        exitBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        exitBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                exitBtnMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                exitBtnMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                exitBtnMouseExited(evt);
+            }
+        });
+
+        exitTxt.setBackground(new java.awt.Color(0, 0, 0));
+        exitTxt.setFont(new java.awt.Font("Calisto MT", 0, 14)); // NOI18N
+        exitTxt.setForeground(new java.awt.Color(0, 0, 0));
+        exitTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        exitTxt.setText("X");
+
+        javax.swing.GroupLayout exitBtnLayout = new javax.swing.GroupLayout(exitBtn);
+        exitBtn.setLayout(exitBtnLayout);
+        exitBtnLayout.setHorizontalGroup(
+            exitBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(exitTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+        );
+        exitBtnLayout.setVerticalGroup(
+            exitBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(exitTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+        );
+
+        bg.add(exitBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 0, 40, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -254,7 +262,7 @@ public class ApplicationHome extends javax.swing.JFrame {
     }//GEN-LAST:event_exitBtnMouseEntered
 
     private void exitBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitBtnMouseExited
-        exitBtn.setBackground(new Color(51,153,255));
+        exitBtn.setBackground(Color.white);
     }//GEN-LAST:event_exitBtnMouseExited
 
     private void changePasswordBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_changePasswordBtnMouseClicked
@@ -318,15 +326,16 @@ public class ApplicationHome extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
     private javax.swing.JPanel changePasswordBtn;
+    private javax.swing.JLabel changePasswordTxt;
     private javax.swing.JPanel exitBtn;
     private javax.swing.JLabel exitTxt;
     private javax.swing.JPanel header;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel logOutBtn;
+    private javax.swing.JLabel logOutTxt;
     private javax.swing.JLabel title;
+    private javax.swing.JLabel title2;
     private javax.swing.JPanel topBg;
     private javax.swing.JPanel viewRolesBtn;
+    private javax.swing.JLabel viewRolesTxt;
     // End of variables declaration//GEN-END:variables
 }
