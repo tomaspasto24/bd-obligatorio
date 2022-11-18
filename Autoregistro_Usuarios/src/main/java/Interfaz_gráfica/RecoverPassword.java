@@ -24,7 +24,7 @@ public class RecoverPassword extends javax.swing.JFrame {
      * Creates new form RecoverPassword
      */
     private Map<Integer, String> respuestasId;
-    private Map<Integer, String> preguntasId;
+    private Map<String,Integer> preguntasId;
 
     public RecoverPassword() {
         initComponents();
@@ -38,43 +38,33 @@ public class RecoverPassword extends javax.swing.JFrame {
         }
 
         respuestasId = new HashMap<Integer, String>();
-        preguntasId = new HashMap<Integer, String>();
+        preguntasId = new HashMap<String,Integer>();
 
         if (statement != null) {
             try {
-                //Obtengo las id y las respuestas de las preguntas relacionadas al user
-                String sqlString = "SELECT * FROM PERSONAS_PREGUNTAS WHERE user_id='"
-                        + UserAccount.UserAccount.getInstance().getUserId() + "';";
+                String sqlString
+                        = "SELECT * "
+                        + "FROM (SELECT * "
+                        + "FROM PERSONAS_PREGUNTAS "
+                        + "WHERE user_id=" + UserAccount.UserAccount.getInstance().getUserId() + ") p "
+                        + "JOIN PREGUNTAS "
+                        + "ON p.preg_id = PREGUNTAS.preg_id ";
                 var res = statement.executeQuery(sqlString);
                 while (res.next()) {
+                    String pregunta = res.getString("pregunta");
                     String respuesta = res.getString("respuesta");
-                    Integer pregId = res.getInt("preg_id");
-                    respuestasId.put(pregId, respuesta);
+                    Integer id = res.getInt("preg_id");
+                    preguntasId.put(pregunta,id);
+                    respuestasId.put(id, respuesta);
                 }
+                Object[] set = preguntasId.keySet().toArray();
+                question1.setText(set[0].toString());
+                question2.setText(set[1].toString());
+                question3.setText(set[2].toString());
+
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Error al obtener user, error: " + e.toString());
+                JOptionPane.showMessageDialog(null, "Error al obtener usuario, error: " + e.toString());
             }
-            //Obtengo las preguntas relacionadas al user dadas las id de las preguntas
-            for (Integer preg_id : respuestasId.keySet()) {
-                try {
-                    String sqlString = "SELECT * FROM PREGUNTAS WHERE preg_id='"
-                            + preg_id + "';";
-                    var res = statement.executeQuery(sqlString);
-                    while (res.next()) {
-                        String pregunta = res.getString("pregunta");
-                        Integer pregId = res.getInt("preg_id");
-                        preguntasId.put(pregId, pregunta);
-                    }
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, "Error al obtener la pregunta, error: " + e.toString());
-                }
-            }
-            
-            //Tengo las preguntas, las muestro en la interfaz
-            Object[] preguntas = preguntasId.values().toArray();
-            question1.setText(String.valueOf(preguntas[0]));
-            question2.setText(String.valueOf(preguntas[1]));
-            question3.setText(String.valueOf(preguntas[2]));
         }
     }
 
@@ -334,7 +324,7 @@ public class RecoverPassword extends javax.swing.JFrame {
 
     private void goBackBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goBackBtnMouseClicked
         this.setVisible(false);
-        ApplicationLogin.getInstance().setVisible(true);
+        GetUserIdToRecoverPassword.getInstance().setVisible(true);
     }//GEN-LAST:event_goBackBtnMouseClicked
 
     private void goBackBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goBackBtnMouseEntered
@@ -406,12 +396,24 @@ public class RecoverPassword extends javax.swing.JFrame {
         String respuesta1 = answer1.getText();
         String respuesta2 = answer2.getText();
         String respuesta3 = answer3.getText();
-        
+
         if (respuesta1.equals("Ingrese la respuesta...") || respuesta2.equals("Ingrese la respuesta...")
-                || respuesta3.equals("Ingrese la respuesta...")){
+                || respuesta3.equals("Ingrese la respuesta...")) {
             JOptionPane.showMessageDialog(null, "Debe contestar todas las preguntas");
-        }else{
+        } else {
             //Comparar si las respuestas ingresadas coinciden con las respuestas en la bd
+            String pregunta1 = question1.getText();
+            String pregunta2 = question2.getText();
+            String pregunta3 = question3.getText();
+
+            if (respuestasId.get(preguntasId.get(pregunta1)).equalsIgnoreCase(respuesta1)
+                    && respuestasId.get(preguntasId.get(pregunta2)).equalsIgnoreCase(respuesta2)
+                    && respuestasId.get(preguntasId.get(pregunta3)).equalsIgnoreCase(respuesta3)) {
+                this.setVisible(false);
+                ChangePassword.getInstance().setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "Respuestas incorrectas.");
+            }
         }
     }//GEN-LAST:event_recoverBtnMouseClicked
 

@@ -5,7 +5,7 @@
 
 package db_connection;
 
-import Interfaz_gráfica.ApplicationLogin;
+import Interfaz_gráfica.Login;
 
 /**
  *
@@ -15,6 +15,6 @@ public class Autoregistro_Usuarios {
 
     public static void main(String[] args) {
         DBConnection.getInstance().establecerConexion();
-        ApplicationLogin.getInstance().setVisible(true);
+        Login.getInstance().setVisible(true);
     }
 }
