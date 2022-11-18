@@ -1,7 +1,7 @@
 package Interfaz_gráfica;
 
 import Interfaz_gráfica.RecoverPassword;
-import Interfaz_gráfica.ApplicationRegisterQuestions;
+import Interfaz_gráfica.RegisterQuestions;
 import db_connection.DBConnection;
 import java.sql.Connection;
 import java.sql.Statement;
@@ -20,6 +20,7 @@ import java.awt.Color;
  * @author TomasUcu
  */
 public class GetUserIdToRecoverPassword extends javax.swing.JFrame {
+
     public static GetUserIdToRecoverPassword instance;
 
     public static GetUserIdToRecoverPassword getInstance() {
@@ -221,24 +222,29 @@ public class GetUserIdToRecoverPassword extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error al crear statement, error: " + e.toString());
         }
 
-        if (statement != null) {
-            try {
-                String sqlString = "SELECT * "
-                        + "FROM PERSONAS "
-                        + "WHERE nombres='" + nombreUsuario.getText() + "'";
-                var res = statement.executeQuery(sqlString);
-                if (res.next()) {
-                    this.setVisible(false);
-                    int userId = res.getInt("user_id");
-                    UserAccount.getInstance().setUserId(userId);
-                    RecoverPassword.getInstance().setVisible(true);
-                } else {
-                    JOptionPane.showMessageDialog(null, "Usuario no encontrado");
+        if (nombreUsuario.getText().equals("Nombre de usuario") || nombreUsuario.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Debe completar el campo");
+        } else {
+            if (statement != null) {
+                try {
+                    String sqlString = "SELECT * "
+                            + "FROM PERSONAS "
+                            + "WHERE nombres='" + nombreUsuario.getText() + "'";
+                    var res = statement.executeQuery(sqlString);
+                    if (res.next()) {
+                        this.setVisible(false);
+                        int userId = res.getInt("user_id");
+                        UserAccount.getInstance().setUserId(userId);
+                        RecoverPassword.getInstance().setVisible(true);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Usuario no encontrado");
+                    }
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Erro al obtener user, error: " + e.toString());
                 }
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Erro al obtener user, error: " + e.toString());
             }
         }
+
     }//GEN-LAST:event_EnviarActionPerformed
 
     private void nombreUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreUsuarioActionPerformed
@@ -274,7 +280,7 @@ public class GetUserIdToRecoverPassword extends javax.swing.JFrame {
     private void goBackBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goBackBtnMouseClicked
         nombreUsuario.setText("");
         this.setVisible(false);
-        ApplicationLogin.getInstance().setVisible(true);
+        Login.getInstance().setVisible(true);
     }//GEN-LAST:event_goBackBtnMouseClicked
 
     private void goBackBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goBackBtnMouseEntered

@@ -19,20 +19,20 @@ import java.awt.Color;
  *
  * @author TomasUcu
  */
-public class ApplicationHome extends javax.swing.JFrame {
+public class Home extends javax.swing.JFrame {
 
     /**
-     * Creates new form ApplicationLogin
+     * Creates new form Login
      */
-    public ApplicationHome() {
+    public Home() {
         initComponents();
     }
 
-    public static ApplicationHome instance;
+    public static Home instance;
 
-    public static ApplicationHome getInstance() {
+    public static Home getInstance() {
         if (instance == null) {
-            instance = new ApplicationHome();
+            instance = new Home();
         }
         return instance;
     }
@@ -63,7 +63,6 @@ public class ApplicationHome extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(800, 570));
         setResizable(false);
         setSize(getPreferredSize());
 
@@ -105,7 +104,7 @@ public class ApplicationHome extends javax.swing.JFrame {
 
         bg.add(topBg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 280, 570));
 
-        changePasswordBtn.setBackground(new java.awt.Color(0, 153, 204));
+        changePasswordBtn.setBackground(new java.awt.Color(0, 153, 153));
         changePasswordBtn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         changePasswordBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         changePasswordBtn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -132,14 +131,19 @@ public class ApplicationHome extends javax.swing.JFrame {
 
         bg.add(changePasswordBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 90, 170, 80));
 
-        viewRolesBtn.setBackground(new java.awt.Color(0, 153, 204));
+        viewRolesBtn.setBackground(new java.awt.Color(0, 153, 153));
         viewRolesBtn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         viewRolesBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        viewRolesBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                viewRolesBtnMouseClicked(evt);
+            }
+        });
 
         viewRolesTxt.setFont(new java.awt.Font("Calisto MT", 0, 18)); // NOI18N
         viewRolesTxt.setForeground(new java.awt.Color(255, 255, 255));
         viewRolesTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        viewRolesTxt.setText("Ver roles");
+        viewRolesTxt.setText("Administrar roles");
 
         javax.swing.GroupLayout viewRolesBtnLayout = new javax.swing.GroupLayout(viewRolesBtn);
         viewRolesBtn.setLayout(viewRolesBtnLayout);
@@ -154,7 +158,7 @@ public class ApplicationHome extends javax.swing.JFrame {
 
         bg.add(viewRolesBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 250, 170, 80));
 
-        logOutBtn.setBackground(new java.awt.Color(0, 153, 204));
+        logOutBtn.setBackground(new java.awt.Color(0, 153, 153));
         logOutBtn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         logOutBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         logOutBtn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -273,7 +277,7 @@ public class ApplicationHome extends javax.swing.JFrame {
     private void logOutBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logOutBtnMouseClicked
         this.setVisible(false);
         UserAccount.getInstance().setUserId(0);
-        ApplicationLogin.getInstance().setVisible(true);
+        Login.getInstance().setVisible(true);
     }//GEN-LAST:event_logOutBtnMouseClicked
 
     int xMouse, yMouse; 
@@ -287,6 +291,11 @@ public class ApplicationHome extends javax.swing.JFrame {
         int y = evt.getYOnScreen();
         this.setLocation(x - xMouse, y - yMouse);
     }//GEN-LAST:event_headerMouseDragged
+
+    private void viewRolesBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewRolesBtnMouseClicked
+        this.setVisible(false);
+        RolesView.getInstance().setVisible(true);
+    }//GEN-LAST:event_viewRolesBtnMouseClicked
 
     /**
      * @param args the command line arguments
@@ -305,20 +314,21 @@ public class ApplicationHome extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ApplicationLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ApplicationLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ApplicationLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ApplicationLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ApplicationLogin().setVisible(true);
+                new Login().setVisible(true);
             }
         });
     }

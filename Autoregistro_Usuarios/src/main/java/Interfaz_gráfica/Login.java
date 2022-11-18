@@ -17,20 +17,20 @@ import javax.swing.JOptionPane;
  *
  * @author TomasUcu
  */
-public class ApplicationLogin extends javax.swing.JFrame {
+public class Login extends javax.swing.JFrame {
 
     /**
-     * Creates new form ApplicationHome
+     * Creates new form Home
      */
-    public ApplicationLogin() {
+    public Login() {
         initComponents();
     }
 
-    public static ApplicationLogin instance;
+    public static Login instance;
 
-    public static ApplicationLogin getInstance() {
+    public static Login getInstance() {
         if (instance == null) {
-            instance = new ApplicationLogin();
+            instance = new Login();
         }
         return instance;
     }
@@ -217,7 +217,7 @@ public class ApplicationLogin extends javax.swing.JFrame {
                         passwordInput.setText("");
                         UserAccount.UserAccount.getInstance().setUserId(res.getInt("user_id"));
                         this.setVisible(false);
-                        ApplicationHome.getInstance().setVisible(true);
+                        Home.getInstance().setVisible(true);
                     }
                 }
                 if (!logged) {
@@ -235,7 +235,7 @@ public class ApplicationLogin extends javax.swing.JFrame {
         nameInput.setText("");
         passwordInput.setText("");
         this.setVisible(false);
-        ApplicationRegister.getInstance().setVisible(true);
+        Register.getInstance().setVisible(true);
     }//GEN-LAST:event_registerTextMouseClicked
 
     private void nameInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameInputActionPerformed
@@ -293,21 +293,23 @@ public class ApplicationLogin extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ApplicationLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ApplicationLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ApplicationLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ApplicationLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ApplicationLogin().setVisible(true);
+                new Login().setVisible(true);
             }
         });
     }

@@ -314,7 +314,7 @@ public class ChangePassword extends javax.swing.JFrame {
                         if (rs == 1) {
                             JOptionPane.showMessageDialog(null, "Cambio contraseña con éxito");
                             this.setVisible(false);
-                            ApplicationHome.getInstance().setVisible(true);
+                            Home.getInstance().setVisible(true);
                         } else {
                             JOptionPane.showMessageDialog(null, "Problema al cambiar la contraseña. Prueba otra vez.");
                         }
@@ -357,7 +357,7 @@ public class ChangePassword extends javax.swing.JFrame {
 
     private void goBackBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goBackBtnMouseClicked
         this.setVisible(false);
-        ApplicationHome.getInstance().setVisible(true);
+        Home.getInstance().setVisible(true);
     }//GEN-LAST:event_goBackBtnMouseClicked
 
     private void goBackBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goBackBtnMouseEntered

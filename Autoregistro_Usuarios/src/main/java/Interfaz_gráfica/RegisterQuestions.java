@@ -22,19 +22,19 @@ import javax.swing.JOptionPane;
  *
  * @author TomasUcu
  */
-public class ApplicationRegisterQuestions extends javax.swing.JFrame {
+public class RegisterQuestions extends javax.swing.JFrame {
 
-    public static ApplicationRegisterQuestions instance;
+    public static RegisterQuestions instance;
     private Map<String, Integer> preguntasId;
 
-    public static ApplicationRegisterQuestions getInstance() {
+    public static RegisterQuestions getInstance() {
         if (instance == null) {
-            instance = new ApplicationRegisterQuestions();
+            instance = new RegisterQuestions();
         }
         return instance;
     }
 
-    public ApplicationRegisterQuestions() {
+    public RegisterQuestions() {
         initComponents();
         Connection connection = DBConnection.getInstance().dbConnection;
         Statement statement = null;
@@ -333,7 +333,7 @@ public class ApplicationRegisterQuestions extends javax.swing.JFrame {
                 statement.executeUpdate(sqlStringPreg3);
                 
                 this.setVisible(false);
-                ApplicationLogin.getInstance().setVisible(true);
+                Login.getInstance().setVisible(true);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al agregar usuario, error: " + e.toString());

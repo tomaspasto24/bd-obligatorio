@@ -23,20 +23,20 @@ import java.awt.Color;
  *
  * @author TomasUcu
  */
-public class ApplicationRegister extends javax.swing.JFrame {
+public class Register extends javax.swing.JFrame {
 
     /**
      * Creates new form AppRegister
      */
-    public ApplicationRegister() {
+    public Register() {
         initComponents();
     }
 
-    public static ApplicationRegister instance;
+    public static Register instance;
 
-    public static ApplicationRegister getInstance() {
+    public static Register getInstance() {
         if (instance == null) {
-            instance = new ApplicationRegister();
+            instance = new Register();
         }
         return instance;
     }
@@ -442,7 +442,7 @@ public class ApplicationRegister extends javax.swing.JFrame {
 
     private void goBackBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goBackBtnMouseClicked
         this.setVisible(false);
-        ApplicationLogin.getInstance().setVisible(true);
+        Login.getInstance().setVisible(true);
     }//GEN-LAST:event_goBackBtnMouseClicked
 
     private void goBackBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goBackBtnMouseEntered
@@ -719,7 +719,7 @@ public class ApplicationRegister extends javax.swing.JFrame {
                         if (rs == 1) {
                             UserAccount.getInstance().setUserId(userID);
                             this.setVisible(false);
-                            ApplicationRegisterQuestions.getInstance().setVisible(true);
+                            RegisterQuestions.getInstance().setVisible(true);
                         } else {
                             JOptionPane.showMessageDialog(null, "Problema al agregar el usuario. Prueba otra vez.");
                         }
