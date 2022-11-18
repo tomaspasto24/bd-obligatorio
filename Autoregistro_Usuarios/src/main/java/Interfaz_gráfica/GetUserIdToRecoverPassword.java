@@ -58,10 +58,10 @@ public class GetUserIdToRecoverPassword extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
-        setMinimumSize(new java.awt.Dimension(500, 365));
+        setMinimumSize(new java.awt.Dimension(500, 340));
         setUndecorated(true);
         setResizable(false);
-        setSize(new java.awt.Dimension(500, 365));
+        setSize(new java.awt.Dimension(500, 340));
 
         bg.setBackground(new java.awt.Color(255, 255, 255));
         bg.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -203,7 +203,7 @@ public class GetUserIdToRecoverPassword extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
         );
 
         pack();
