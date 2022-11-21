@@ -1,6 +1,6 @@
 USE [master]
 GO
-/****** Object:  Database [ObligatorioDB]    Script Date: 11/21/2022 4:41:42 PM ******/
+/****** Object:  Database [ObligatorioDB]    Script Date: 11/21/2022 4:52:01 PM ******/
 CREATE DATABASE [ObligatorioDB]
  CONTAINMENT = NONE
  ON  PRIMARY 
@@ -82,10 +82,10 @@ ALTER DATABASE [ObligatorioDB] SET QUERY_STORE = OFF
 GO
 USE [ObligatorioDB]
 GO
-/****** Object:  User [usersql]    Script Date: 11/21/2022 4:41:42 PM ******/
+/****** Object:  User [usersql]    Script Date: 11/21/2022 4:52:01 PM ******/
 CREATE USER [usersql] FOR LOGIN [usersql] WITH DEFAULT_SCHEMA=[dbo]
 GO
-/****** Object:  Table [dbo].[APLICATIVOS]    Script Date: 11/21/2022 4:41:42 PM ******/
+/****** Object:  Table [dbo].[APLICATIVOS]    Script Date: 11/21/2022 4:52:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -99,7 +99,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[APLICATIVOS_MENU]    Script Date: 11/21/2022 4:41:42 PM ******/
+/****** Object:  Table [dbo].[APLICATIVOS_MENU]    Script Date: 11/21/2022 4:52:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -114,7 +114,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[PERMISOS]    Script Date: 11/21/2022 4:41:42 PM ******/
+/****** Object:  Table [dbo].[PERMISOS]    Script Date: 11/21/2022 4:52:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -128,7 +128,7 @@ CREATE TABLE [dbo].[PERMISOS](
 	[estado] [varchar](255) NOT NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[PERSONAS]    Script Date: 11/21/2022 4:41:42 PM ******/
+/****** Object:  Table [dbo].[PERSONAS]    Script Date: 11/21/2022 4:52:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -147,7 +147,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[PERSONAS_PREGUNTAS]    Script Date: 11/21/2022 4:41:42 PM ******/
+/****** Object:  Table [dbo].[PERSONAS_PREGUNTAS]    Script Date: 11/21/2022 4:52:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -158,7 +158,7 @@ CREATE TABLE [dbo].[PERSONAS_PREGUNTAS](
 	[respuesta] [varchar](255) NOT NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[PREGUNTAS]    Script Date: 11/21/2022 4:41:42 PM ******/
+/****** Object:  Table [dbo].[PREGUNTAS]    Script Date: 11/21/2022 4:52:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -172,7 +172,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ROLES_APLICATIVOS]    Script Date: 11/21/2022 4:41:42 PM ******/
+/****** Object:  Table [dbo].[ROLES_APLICATIVOS]    Script Date: 11/21/2022 4:52:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -187,7 +187,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ROLES_APLICATIVOS_MENU]    Script Date: 11/21/2022 4:41:42 PM ******/
+/****** Object:  Table [dbo].[ROLES_APLICATIVOS_MENU]    Script Date: 11/21/2022 4:52:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -198,7 +198,7 @@ CREATE TABLE [dbo].[ROLES_APLICATIVOS_MENU](
 	[menu_id] [int] NOT NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ROLES_NEGOCIO]    Script Date: 11/21/2022 4:41:42 PM ******/
+/****** Object:  Table [dbo].[ROLES_NEGOCIO]    Script Date: 11/21/2022 4:52:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -212,7 +212,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ROLES_NEGOCIO_APLICATIVOS]    Script Date: 11/21/2022 4:41:42 PM ******/
+/****** Object:  Table [dbo].[ROLES_NEGOCIO_APLICATIVOS]    Script Date: 11/21/2022 4:52:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -222,6 +222,104 @@ CREATE TABLE [dbo].[ROLES_NEGOCIO_APLICATIVOS](
 	[app_id] [int] NOT NULL,
 	[rol_id] [int] NOT NULL
 ) ON [PRIMARY]
+GO
+INSERT [dbo].[APLICATIVOS] ([app_id], [nombre_app]) VALUES (1, N'Gestión de Identidades y Permisos')
+GO
+INSERT [dbo].[APLICATIVOS] ([app_id], [nombre_app]) VALUES (2, N'Autoregistro de Usuarios')
+GO
+INSERT [dbo].[APLICATIVOS] ([app_id], [nombre_app]) VALUES (3, N'Dummy')
+GO
+INSERT [dbo].[APLICATIVOS_MENU] ([app_id], [menu_id], [descripcion_menu]) VALUES (1, 1, N'Menu 1')
+GO
+INSERT [dbo].[APLICATIVOS_MENU] ([app_id], [menu_id], [descripcion_menu]) VALUES (1, 2, N'Menu 2')
+GO
+INSERT [dbo].[APLICATIVOS_MENU] ([app_id], [menu_id], [descripcion_menu]) VALUES (2, 3, N'Menu 1')
+GO
+INSERT [dbo].[APLICATIVOS_MENU] ([app_id], [menu_id], [descripcion_menu]) VALUES (2, 4, N'Menu 2')
+GO
+INSERT [dbo].[APLICATIVOS_MENU] ([app_id], [menu_id], [descripcion_menu]) VALUES (3, 5, N'Menu 1')
+GO
+INSERT [dbo].[APLICATIVOS_MENU] ([app_id], [menu_id], [descripcion_menu]) VALUES (3, 6, N'Menu 2')
+GO
+INSERT [dbo].[PERMISOS] ([user_id], [app_id], [rol_neg_id], [fecha_solicitud], [fecha_autorizacion], [estado]) VALUES (1607446758, 2, 1, N'18/11/2022', N'null', N'PENDIENTE')
+GO
+INSERT [dbo].[PERMISOS] ([user_id], [app_id], [rol_neg_id], [fecha_solicitud], [fecha_autorizacion], [estado]) VALUES (1607446758, 3, 4, N'18/11/2022', N'null', N'PENDIENTE')
+GO
+INSERT [dbo].[PERSONAS] ([user_id], [nombres], [apellidos], [direccion], [ciudad], [departamento], [hashpwd]) VALUES (1607446758, N'juan', N'lupi cantera', N'canelones 1198', N'montevideo', N'montevideo', N'$argon2id$v=19$m=15360,t=2,p=1$Qs30QyQYK7i7N4CwAet4i5iW8pLSzDUI1YTJHOQw6ME$IaxXu3c6SNX+qGj6ef+zLGgXqZsIU4CwRsgAoTj4iNdl0sriL3nWXKGHYdE0fkh91wqdImumkbEZJ9OSOSIyng')
+GO
+INSERT [dbo].[PERSONAS_PREGUNTAS] ([user_id], [preg_id], [respuesta]) VALUES (1607446758, 1, N'Patricia')
+GO
+INSERT [dbo].[PERSONAS_PREGUNTAS] ([user_id], [preg_id], [respuesta]) VALUES (1607446758, 3, N'Luna')
+GO
+INSERT [dbo].[PERSONAS_PREGUNTAS] ([user_id], [preg_id], [respuesta]) VALUES (1607446758, 2, N'2002')
+GO
+INSERT [dbo].[PREGUNTAS] ([preg_id], [pregunta]) VALUES (1, N'¿Cómo se llama tu madre?')
+GO
+INSERT [dbo].[PREGUNTAS] ([preg_id], [pregunta]) VALUES (2, N'¿En que año naciste?')
+GO
+INSERT [dbo].[PREGUNTAS] ([preg_id], [pregunta]) VALUES (3, N'¿Como se llama tu primer mascota?')
+GO
+INSERT [dbo].[PREGUNTAS] ([preg_id], [pregunta]) VALUES (4, N'¿Cual es tu club de fútbol favorito?')
+GO
+INSERT [dbo].[ROLES_APLICATIVOS] ([app_id], [rol_id], [descripcion_rol]) VALUES (1, 1, N'Admin')
+GO
+INSERT [dbo].[ROLES_APLICATIVOS] ([app_id], [rol_id], [descripcion_rol]) VALUES (1, 2, N'Supervisor')
+GO
+INSERT [dbo].[ROLES_APLICATIVOS] ([app_id], [rol_id], [descripcion_rol]) VALUES (2, 3, N'Admin')
+GO
+INSERT [dbo].[ROLES_APLICATIVOS] ([app_id], [rol_id], [descripcion_rol]) VALUES (2, 4, N'Seguridad')
+GO
+INSERT [dbo].[ROLES_APLICATIVOS] ([app_id], [rol_id], [descripcion_rol]) VALUES (3, 5, N'Admin')
+GO
+INSERT [dbo].[ROLES_APLICATIVOS] ([app_id], [rol_id], [descripcion_rol]) VALUES (3, 6, N'Seguridad')
+GO
+INSERT [dbo].[ROLES_APLICATIVOS_MENU] ([app_id], [rol_id], [menu_id]) VALUES (1, 1, 1)
+GO
+INSERT [dbo].[ROLES_APLICATIVOS_MENU] ([app_id], [rol_id], [menu_id]) VALUES (1, 1, 2)
+GO
+INSERT [dbo].[ROLES_APLICATIVOS_MENU] ([app_id], [rol_id], [menu_id]) VALUES (1, 2, 1)
+GO
+INSERT [dbo].[ROLES_APLICATIVOS_MENU] ([app_id], [rol_id], [menu_id]) VALUES (1, 2, 2)
+GO
+INSERT [dbo].[ROLES_APLICATIVOS_MENU] ([app_id], [rol_id], [menu_id]) VALUES (2, 3, 3)
+GO
+INSERT [dbo].[ROLES_APLICATIVOS_MENU] ([app_id], [rol_id], [menu_id]) VALUES (2, 4, 4)
+GO
+INSERT [dbo].[ROLES_APLICATIVOS_MENU] ([app_id], [rol_id], [menu_id]) VALUES (2, 3, 4)
+GO
+INSERT [dbo].[ROLES_APLICATIVOS_MENU] ([app_id], [rol_id], [menu_id]) VALUES (2, 4, 3)
+GO
+INSERT [dbo].[ROLES_APLICATIVOS_MENU] ([app_id], [rol_id], [menu_id]) VALUES (3, 5, 5)
+GO
+INSERT [dbo].[ROLES_APLICATIVOS_MENU] ([app_id], [rol_id], [menu_id]) VALUES (3, 5, 6)
+GO
+INSERT [dbo].[ROLES_APLICATIVOS_MENU] ([app_id], [rol_id], [menu_id]) VALUES (3, 6, 5)
+GO
+INSERT [dbo].[ROLES_APLICATIVOS_MENU] ([app_id], [rol_id], [menu_id]) VALUES (3, 6, 6)
+GO
+INSERT [dbo].[ROLES_NEGOCIO] ([rol_neg_id], [descripcion_rol_neg]) VALUES (1, N'Administrador de Seguridad')
+GO
+INSERT [dbo].[ROLES_NEGOCIO] ([rol_neg_id], [descripcion_rol_neg]) VALUES (2, N'Contador')
+GO
+INSERT [dbo].[ROLES_NEGOCIO] ([rol_neg_id], [descripcion_rol_neg]) VALUES (3, N'Operario')
+GO
+INSERT [dbo].[ROLES_NEGOCIO] ([rol_neg_id], [descripcion_rol_neg]) VALUES (4, N'Seguridad')
+GO
+INSERT [dbo].[ROLES_NEGOCIO] ([rol_neg_id], [descripcion_rol_neg]) VALUES (5, N'Supervisor')
+GO
+INSERT [dbo].[ROLES_NEGOCIO_APLICATIVOS] ([rol_neg_id], [app_id], [rol_id]) VALUES (1, 2, 1)
+GO
+INSERT [dbo].[ROLES_NEGOCIO_APLICATIVOS] ([rol_neg_id], [app_id], [rol_id]) VALUES (4, 2, 2)
+GO
+INSERT [dbo].[ROLES_NEGOCIO_APLICATIVOS] ([rol_neg_id], [app_id], [rol_id]) VALUES (5, 2, 2)
+GO
+INSERT [dbo].[ROLES_NEGOCIO_APLICATIVOS] ([rol_neg_id], [app_id], [rol_id]) VALUES (1, 1, 1)
+GO
+INSERT [dbo].[ROLES_NEGOCIO_APLICATIVOS] ([rol_neg_id], [app_id], [rol_id]) VALUES (5, 1, 2)
+GO
+INSERT [dbo].[ROLES_NEGOCIO_APLICATIVOS] ([rol_neg_id], [app_id], [rol_id]) VALUES (1, 3, 1)
+GO
+INSERT [dbo].[ROLES_NEGOCIO_APLICATIVOS] ([rol_neg_id], [app_id], [rol_id]) VALUES (4, 3, 6)
 GO
 ALTER TABLE [dbo].[APLICATIVOS_MENU]  WITH CHECK ADD FOREIGN KEY([app_id])
 REFERENCES [dbo].[APLICATIVOS] ([app_id])
