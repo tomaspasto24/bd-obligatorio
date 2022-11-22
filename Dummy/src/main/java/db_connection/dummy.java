@@ -3,15 +3,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Project/Maven2/JavaApp/src/main/java/${packagePath}/${mainClassName}.java to edit this template
  */
 
-package com.mycompany.dummy;
+package db_connection;
+
+import Interfaz_gráfica.ApplicationLogin;
 
 /**
  *
  * @author juan-
  */
-public class Dummy {
+public class dummy {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        DBConnection.getInstance().establecerConexion();
+        ApplicationLogin app = new ApplicationLogin();
+        app.setVisible(true);
     }
 }
