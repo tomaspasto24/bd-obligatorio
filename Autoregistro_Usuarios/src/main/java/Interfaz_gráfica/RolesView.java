@@ -51,8 +51,7 @@ public class RolesView extends javax.swing.JFrame {
 
         if (statement != null) {
             try {
-                String sqlString = "SELECT * "
-                        + "FROM APLICATIVOS";
+                String sqlString = "SELECT * FROM [GETAPLICATIVOS]";
                 var res = statement.executeQuery(sqlString);
                 while (res.next()) {
                     String nombre_app = res.getString("nombre_app");

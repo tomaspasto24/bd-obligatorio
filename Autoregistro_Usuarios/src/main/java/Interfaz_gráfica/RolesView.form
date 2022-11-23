@@ -56,9 +56,6 @@
         <Component class="javax.swing.JLabel" name="image">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\juan-\OneDrive - Universidad Cat&#xf3;lica del Uruguay\UCU\2do\2do semestre\BD I\bd-obligatorio\Autoregistro_Usuarios\src\main\java\com\images\fondoViewRoles.jpg"/>
-            </Property>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">

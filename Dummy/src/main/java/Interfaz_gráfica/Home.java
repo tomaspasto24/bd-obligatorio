@@ -41,17 +41,14 @@ public class Home extends javax.swing.JFrame {
 
         if (statement != null) {
             try {
-                String sqlString = "SELECT nombre_app, rol_neg_id, p.app_id "
-                        + "FROM APLICATIVOS "
-                        + "INNER JOIN PERMISOS p ON p.app_id = APLICATIVOS.app_id "
-                        + "WHERE user_id = " + UserAccount.getInstance().userId + " "
-                        + "AND estado='APROBADO'";
+                String sqlString = "EXEC sp_set_session_context 'user_id', 2024312677; "
+                        + "SELECT * FROM [APLICATIVOSAROBADOS];";
                 var res = statement.executeQuery(sqlString);
                 while (res.next()) {
                     String nombre_app = res.getString("nombre_app");
                     Integer app_id = res.getInt("app_id");
                     Integer rol_neg_id = res.getInt("rol_neg_id");
-                    
+
                     nombreAppRol.put(nombre_app, rol_neg_id);
                     nombreAppID.put(nombre_app, app_id);
                     aplicativos.addElement(nombre_app);
@@ -69,7 +66,7 @@ public class Home extends javax.swing.JFrame {
                 if (!arg0.getValueIsAdjusting()) {
                     Connection connection = DBConnection.getInstance().dbConnection;
                     Statement statement = null;
-                    
+
                     String nombreApp = jListAplicativos.getSelectedValue().toString();
 
                     try {
@@ -82,13 +79,10 @@ public class Home extends javax.swing.JFrame {
 
                     if (statement != null) {
                         try {
-                            String sqlString = 
-                                    "SELECT aplicativos.app_id, roles.menu_id, aplicativos.descripcion_menu, roles.rol_id " +
-                                    "FROM APLICATIVOS_MENU aplicativos " +
-                                    "INNER JOIN ROLES_APLICATIVOS_MENU roles " +
-                                    "ON aplicativos.app_id = roles.app_id " +
-                                    "WHERE aplicativos.app_id = " + nombreAppID.get(nombreApp) + " " + 
-                                    "AND roles.rol_id = " + nombreAppRol.get(nombreApp);
+                            String sqlString
+                                    = "EXEC sp_set_session_context 'app_id', " + nombreAppID.get(nombreApp) + "; "
+                                    + "EXEC sp_set_session_context 'rol_id', "+ nombreAppRol.get(nombreApp) + "; "
+                                    + "SELECT * FROM [MENUAPROBADOS];";
                             var res = statement.executeQuery(sqlString);
                             while (res.next()) {
                                 String nombre_menu = res.getString("descripcion_menu");

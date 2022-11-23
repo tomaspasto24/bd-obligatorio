@@ -177,7 +177,7 @@ public class Login extends javax.swing.JFrame {
 
         if (statement != null) {
             try {
-                String sqlString = "SELECT * FROM PERSONAS WHERE NOMBRES='" + inputNombre + "';";
+                String sqlString = "SELECT * FROM [PERSONAS LOGIN] WHERE NOMBRES='" + inputNombre + "';";
                 var res = statement.executeQuery(sqlString);
                 boolean logged = false;
                 while (res.next()) {
