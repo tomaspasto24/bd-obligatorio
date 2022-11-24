@@ -4,7 +4,6 @@
  */
 package Interfaz_gráfica;
 
-import Interfaz_gráfica.GetUserIdToRecoverPassword;
 import db_connection.DBConnection;
 import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
@@ -56,8 +55,6 @@ public class Login extends javax.swing.JFrame {
         passwordInput = new javax.swing.JPasswordField();
         loginBtn = new javax.swing.JPanel();
         loginText = new javax.swing.JLabel();
-        registerText = new javax.swing.JLabel();
-        recoverPasswordTxt = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
@@ -70,8 +67,6 @@ public class Login extends javax.swing.JFrame {
         title.setForeground(new java.awt.Color(255, 255, 255));
         title.setText("Bienvenido a Autoregistro de Usuario");
         jPanel1.add(title, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, -1, 60));
-
-        image.setIcon(new javax.swing.ImageIcon("C:\\Users\\juan-\\OneDrive - Universidad Católica del Uruguay\\UCU\\2do\\2do semestre\\BD I\\bd-obligatorio\\Images\\Auto-Registro\\fondoHome.jpg")); // NOI18N
         jPanel1.add(image, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 180));
 
         iniciarSesionText.setFont(new java.awt.Font("Calisto MT", 0, 24)); // NOI18N
@@ -150,30 +145,6 @@ public class Login extends javax.swing.JFrame {
 
         jPanel1.add(loginBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 430, 210, 50));
 
-        registerText.setFont(new java.awt.Font("Calisto MT", 0, 14)); // NOI18N
-        registerText.setForeground(new java.awt.Color(0, 0, 0));
-        registerText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        registerText.setText("Registrarse");
-        registerText.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        registerText.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                registerTextMouseClicked(evt);
-            }
-        });
-        jPanel1.add(registerText, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 500, 90, 30));
-
-        recoverPasswordTxt.setFont(new java.awt.Font("Calisto MT", 0, 14)); // NOI18N
-        recoverPasswordTxt.setForeground(new java.awt.Color(0, 0, 0));
-        recoverPasswordTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        recoverPasswordTxt.setText("Recuperar contraseña");
-        recoverPasswordTxt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        recoverPasswordTxt.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                recoverPasswordTxtMouseClicked(evt);
-            }
-        });
-        jPanel1.add(recoverPasswordTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 500, 150, 30));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -231,13 +202,6 @@ public class Login extends javax.swing.JFrame {
 
     }//GEN-LAST:event_loginBtnMouseClicked
 
-    private void registerTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerTextMouseClicked
-        nameInput.setText("");
-        passwordInput.setText("");
-        this.setVisible(false);
-        Register.getInstance().setVisible(true);
-    }//GEN-LAST:event_registerTextMouseClicked
-
     private void nameInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameInputActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nameInputActionPerformed
@@ -269,13 +233,6 @@ public class Login extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_passwordInputMousePressed
 
-    private void recoverPasswordTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_recoverPasswordTxtMouseClicked
-        nameInput.setText("");
-        passwordInput.setText("");
-        this.setVisible(false);
-        GetUserIdToRecoverPassword.getInstance().setVisible(true);
-    }//GEN-LAST:event_recoverPasswordTxtMouseClicked
-
     /**
      * @param args the command line arguments
      */
@@ -305,6 +262,10 @@ public class Login extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -326,8 +287,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel nameText;
     private javax.swing.JLabel nameText1;
     private javax.swing.JPasswordField passwordInput;
-    private javax.swing.JLabel recoverPasswordTxt;
-    private javax.swing.JLabel registerText;
     private javax.swing.JLabel title;
     // End of variables declaration//GEN-END:variables
 }

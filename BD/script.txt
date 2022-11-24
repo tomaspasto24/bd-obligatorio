@@ -1,6 +1,6 @@
 USE [master]
 GO
-/****** Object:  Database [ObligatorioDB]    Script Date: 11/14/2022 4:43:13 PM ******/
+/****** Object:  Database [ObligatorioDB]    Script Date: 23/11/2022 11:10:01 ******/
 CREATE DATABASE [ObligatorioDB]
  CONTAINMENT = NONE
  ON  PRIMARY 
@@ -82,52 +82,10 @@ ALTER DATABASE [ObligatorioDB] SET QUERY_STORE = OFF
 GO
 USE [ObligatorioDB]
 GO
-/****** Object:  User [usersql]    Script Date: 11/14/2022 4:43:13 PM ******/
-CREATE USER [usersql] FOR LOGIN [usersql] WITH DEFAULT_SCHEMA=[dbo]
+/****** Object:  User [usersql]    Script Date: 23/11/2022 11:10:01 ******/
+CREATE USER [usersql] WITHOUT LOGIN WITH DEFAULT_SCHEMA=[dbo]
 GO
-/****** Object:  Table [dbo].[APLICATIVOS]    Script Date: 11/14/2022 4:43:13 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[APLICATIVOS](
-	[app_id] [int] NOT NULL,
-	[nombre_app] [varchar](255) NOT NULL,
-PRIMARY KEY CLUSTERED 
-(
-	[app_id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[APLICATIVOS_MENU]    Script Date: 11/14/2022 4:43:13 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[APLICATIVOS_MENU](
-	[app_id] [int] NOT NULL,
-	[menu_id] [int] NOT NULL,
-	[descripcion_menu] [varchar](255) NOT NULL,
-PRIMARY KEY CLUSTERED 
-(
-	[menu_id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[PERMISOS]    Script Date: 11/14/2022 4:43:13 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[PERMISOS](
-	[user_id] [int] NOT NULL,
-	[app_id] [int] NOT NULL,
-	[rol_neg_id] [int] NOT NULL,
-	[fecha_solicitud] [date] NOT NULL,
-	[fecha_autorizacion_estado] [date] NULL
-) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[PERSONAS]    Script Date: 11/14/2022 4:43:13 PM ******/
+/****** Object:  Table [dbo].[PERSONAS]    Script Date: 23/11/2022 11:10:01 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -146,7 +104,17 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[PERSONAS_PREGUNTAS]    Script Date: 11/14/2022 4:43:13 PM ******/
+/****** Object:  View [dbo].[PERSONAS LOGIN]    Script Date: 23/11/2022 11:10:02 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE VIEW [dbo].[PERSONAS LOGIN]
+AS
+SELECT        user_id, hashpwd, nombres
+FROM            dbo.PERSONAS AS p
+GO
+/****** Object:  Table [dbo].[PERSONAS_PREGUNTAS]    Script Date: 23/11/2022 11:10:02 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -157,7 +125,7 @@ CREATE TABLE [dbo].[PERSONAS_PREGUNTAS](
 	[respuesta] [varchar](255) NOT NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[PREGUNTAS]    Script Date: 11/14/2022 4:43:13 PM ******/
+/****** Object:  Table [dbo].[PREGUNTAS]    Script Date: 23/11/2022 11:10:02 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -171,7 +139,136 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ROLES_APLICATIVOS]    Script Date: 11/14/2022 4:43:13 PM ******/
+/****** Object:  View [dbo].[PREGUNTAS RESPUESTAS]    Script Date: 23/11/2022 11:10:02 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+--SELECT *
+--FROM (SELECT * 
+--FROM PERSONAS_PREGUNTAS 
+--WHERE user_id= xd) p 
+--JOIN PREGUNTAS 
+--ON p.preg_id = PREGUNTAS.preg_id 
+
+-- pregunta, respuesta, preg_id
+
+CREATE VIEW [dbo].[PREGUNTAS RESPUESTAS] AS
+SELECT pregunta, respuesta, PREGUNTAS.preg_id
+FROM (SELECT * 
+FROM PERSONAS_PREGUNTAS 
+WHERE user_id= SESSION_CONTEXT(N'user_id') ) p 
+JOIN PREGUNTAS 
+ON p.preg_id = PREGUNTAS.preg_id 
+GO
+/****** Object:  View [dbo].[GETPREGUNTAS]    Script Date: 23/11/2022 11:10:02 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE VIEW [dbo].[GETPREGUNTAS] AS
+SELECT pregunta, preg_id
+FROM PREGUNTAS
+GO
+/****** Object:  Table [dbo].[APLICATIVOS]    Script Date: 23/11/2022 11:10:02 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[APLICATIVOS](
+	[app_id] [int] NOT NULL,
+	[nombre_app] [varchar](255) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[app_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  View [dbo].[GETAPLICATIVOS]    Script Date: 23/11/2022 11:10:02 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE VIEW [dbo].[GETAPLICATIVOS] AS
+SELECT nombre_app, app_id
+FROM APLICATIVOS
+GO
+/****** Object:  Table [dbo].[PERMISOS]    Script Date: 23/11/2022 11:10:02 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[PERMISOS](
+	[user_id] [int] NOT NULL,
+	[app_id] [int] NOT NULL,
+	[rol_neg_id] [int] NOT NULL,
+	[fecha_solicitud] [varchar](255) NOT NULL,
+	[fecha_autorizacion] [varchar](255) NULL,
+	[estado] [varchar](255) NOT NULL
+) ON [PRIMARY]
+GO
+/****** Object:  View [dbo].[APLICATIVOSAROBADOS]    Script Date: 23/11/2022 11:10:02 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+--SELECT nombre_app, rol_neg_id, p.app_id 
+--FROM APLICATIVOS
+--INNER JOIN PERMISOS p ON p.app_id = APLICATIVOS.app_id 
+--WHERE user_id = 2024312677
+--AND estado='APROBADO'
+
+
+CREATE VIEW [dbo].[APLICATIVOSAROBADOS] AS
+SELECT nombre_app, rol_neg_id, p.app_id 
+FROM APLICATIVOS
+INNER JOIN PERMISOS p ON p.app_id = APLICATIVOS.app_id 
+WHERE user_id = SESSION_CONTEXT(N'user_id')
+AND estado='APROBADO'
+GO
+/****** Object:  Table [dbo].[APLICATIVOS_MENU]    Script Date: 23/11/2022 11:10:02 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[APLICATIVOS_MENU](
+	[app_id] [int] NOT NULL,
+	[menu_id] [int] NOT NULL,
+	[descripcion_menu] [varchar](255) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[menu_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ROLES_APLICATIVOS_MENU]    Script Date: 23/11/2022 11:10:02 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ROLES_APLICATIVOS_MENU](
+	[app_id] [int] NOT NULL,
+	[rol_id] [int] NOT NULL,
+	[menu_id] [int] NOT NULL
+) ON [PRIMARY]
+GO
+/****** Object:  View [dbo].[MENUAPROBADOS]    Script Date: 23/11/2022 11:10:02 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+--SELECT nombre_app, rol_neg_id, p.app_id 
+--FROM APLICATIVOS
+
+CREATE VIEW [dbo].[MENUAPROBADOS] AS
+SELECT aplicativos.app_id, roles.menu_id, aplicativos.descripcion_menu, roles.rol_id 
+FROM APLICATIVOS_MENU aplicativos
+INNER JOIN ROLES_APLICATIVOS_MENU roles 
+ON aplicativos.app_id = roles.app_id 
+WHERE aplicativos.app_id = SESSION_CONTEXT(N'app_id')
+AND roles.rol_id = SESSION_CONTEXT(N'rol_id')
+GO
+/****** Object:  Table [dbo].[ROLES_APLICATIVOS]    Script Date: 23/11/2022 11:10:02 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -186,18 +283,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ROLES_APLICATIVOS_MENU]    Script Date: 11/14/2022 4:43:13 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[ROLES_APLICATIVOS_MENU](
-	[app_id] [int] NOT NULL,
-	[rol_id] [int] NOT NULL,
-	[menu_id] [int] NOT NULL
-) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[ROLES_NEGOCIO]    Script Date: 11/14/2022 4:43:13 PM ******/
+/****** Object:  Table [dbo].[ROLES_NEGOCIO]    Script Date: 23/11/2022 11:10:02 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -211,7 +297,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ROLES_NEGOCIO_APLICATIVOS]    Script Date: 11/14/2022 4:43:13 PM ******/
+/****** Object:  Table [dbo].[ROLES_NEGOCIO_APLICATIVOS]    Script Date: 23/11/2022 11:10:02 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -219,24 +305,138 @@ GO
 CREATE TABLE [dbo].[ROLES_NEGOCIO_APLICATIVOS](
 	[rol_neg_id] [int] NOT NULL,
 	[app_id] [int] NOT NULL,
-	[rol_id] [int] NOT NULL,
-PRIMARY KEY CLUSTERED 
-(
-	[rol_neg_id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+	[rol_id] [int] NOT NULL
 ) ON [PRIMARY]
+GO
+INSERT [dbo].[APLICATIVOS] ([app_id], [nombre_app]) VALUES (1, N'Gestión de Identidades y Permisos')
+GO
+INSERT [dbo].[APLICATIVOS] ([app_id], [nombre_app]) VALUES (2, N'Autoregistro de Usuarios')
+GO
+INSERT [dbo].[APLICATIVOS] ([app_id], [nombre_app]) VALUES (3, N'Dummy')
+GO
+INSERT [dbo].[APLICATIVOS_MENU] ([app_id], [menu_id], [descripcion_menu]) VALUES (1, 1, N'Menu 1')
+GO
+INSERT [dbo].[APLICATIVOS_MENU] ([app_id], [menu_id], [descripcion_menu]) VALUES (1, 2, N'Menu 2')
+GO
+INSERT [dbo].[APLICATIVOS_MENU] ([app_id], [menu_id], [descripcion_menu]) VALUES (2, 3, N'Menu 1')
+GO
+INSERT [dbo].[APLICATIVOS_MENU] ([app_id], [menu_id], [descripcion_menu]) VALUES (2, 4, N'Menu 2')
+GO
+INSERT [dbo].[APLICATIVOS_MENU] ([app_id], [menu_id], [descripcion_menu]) VALUES (3, 5, N'Menu 1')
+GO
+INSERT [dbo].[APLICATIVOS_MENU] ([app_id], [menu_id], [descripcion_menu]) VALUES (3, 6, N'Menu 2')
+GO
+INSERT [dbo].[PERMISOS] ([user_id], [app_id], [rol_neg_id], [fecha_solicitud], [fecha_autorizacion], [estado]) VALUES (1607446758, 2, 1, N'18/11/2022', N'null', N'PENDIENTE')
+GO
+INSERT [dbo].[PERMISOS] ([user_id], [app_id], [rol_neg_id], [fecha_solicitud], [fecha_autorizacion], [estado]) VALUES (1607446758, 3, 4, N'18/11/2022', N'null', N'PENDIENTE')
+GO
+INSERT [dbo].[PERMISOS] ([user_id], [app_id], [rol_neg_id], [fecha_solicitud], [fecha_autorizacion], [estado]) VALUES (2024312677, 2, 1, N'18/11/2022', N'null', N'APROBADO')
+GO
+INSERT [dbo].[PERMISOS] ([user_id], [app_id], [rol_neg_id], [fecha_solicitud], [fecha_autorizacion], [estado]) VALUES (2024312677, 1, 1, N'18/11/2022', N'null', N'APROBADO')
+GO
+INSERT [dbo].[PERMISOS] ([user_id], [app_id], [rol_neg_id], [fecha_solicitud], [fecha_autorizacion], [estado]) VALUES (2024312677, 2, 1, N'23/11/2022', N'null', N'PENDIENTE')
+GO
+INSERT [dbo].[PERSONAS] ([user_id], [nombres], [apellidos], [direccion], [ciudad], [departamento], [hashpwd]) VALUES (1607446758, N'juan', N'lupi cantera', N'canelones 1198', N'montevideo', N'montevideo', N'$argon2id$v=19$m=15360,t=2,p=1$Qs30QyQYK7i7N4CwAet4i5iW8pLSzDUI1YTJHOQw6ME$IaxXu3c6SNX+qGj6ef+zLGgXqZsIU4CwRsgAoTj4iNdl0sriL3nWXKGHYdE0fkh91wqdImumkbEZJ9OSOSIyng')
+GO
+INSERT [dbo].[PERSONAS] ([user_id], [nombres], [apellidos], [direccion], [ciudad], [departamento], [hashpwd]) VALUES (2024312677, N'Tomy2404', N'Pasto', N'tomaspasto24@gmail.com', N'Maldonado', N'Maldonado', N'$argon2id$v=19$m=15360,t=2,p=1$vcsb75/6iJ4KS2C6Jyh0QZsZJAcEbyneHPLTqxhd+fE$wYxMdx5oIyM9cVMLyNYeT9Z5VVlaOdMLel8T3AYqfFJMKScEIvD21GgiCRI+1lQuyKkSqITqmYzk/3nrtgeqOA')
+GO
+INSERT [dbo].[PERSONAS_PREGUNTAS] ([user_id], [preg_id], [respuesta]) VALUES (1607446758, 1, N'Patricia')
+GO
+INSERT [dbo].[PERSONAS_PREGUNTAS] ([user_id], [preg_id], [respuesta]) VALUES (1607446758, 3, N'Luna')
+GO
+INSERT [dbo].[PERSONAS_PREGUNTAS] ([user_id], [preg_id], [respuesta]) VALUES (1607446758, 2, N'2002')
+GO
+INSERT [dbo].[PERSONAS_PREGUNTAS] ([user_id], [preg_id], [respuesta]) VALUES (2024312677, 1, N'Andrea')
+GO
+INSERT [dbo].[PERSONAS_PREGUNTAS] ([user_id], [preg_id], [respuesta]) VALUES (2024312677, 2, N'2002')
+GO
+INSERT [dbo].[PERSONAS_PREGUNTAS] ([user_id], [preg_id], [respuesta]) VALUES (2024312677, 4, N'Nacional')
+GO
+INSERT [dbo].[PREGUNTAS] ([preg_id], [pregunta]) VALUES (1, N'¿Cómo se llama tu madre?')
+GO
+INSERT [dbo].[PREGUNTAS] ([preg_id], [pregunta]) VALUES (2, N'¿En que año naciste?')
+GO
+INSERT [dbo].[PREGUNTAS] ([preg_id], [pregunta]) VALUES (3, N'¿Como se llama tu primer mascota?')
+GO
+INSERT [dbo].[PREGUNTAS] ([preg_id], [pregunta]) VALUES (4, N'¿Cual es tu club de fútbol favorito?')
+GO
+INSERT [dbo].[ROLES_APLICATIVOS] ([app_id], [rol_id], [descripcion_rol]) VALUES (1, 1, N'Admin')
+GO
+INSERT [dbo].[ROLES_APLICATIVOS] ([app_id], [rol_id], [descripcion_rol]) VALUES (1, 2, N'Supervisor')
+GO
+INSERT [dbo].[ROLES_APLICATIVOS] ([app_id], [rol_id], [descripcion_rol]) VALUES (2, 3, N'Admin')
+GO
+INSERT [dbo].[ROLES_APLICATIVOS] ([app_id], [rol_id], [descripcion_rol]) VALUES (2, 4, N'Seguridad')
+GO
+INSERT [dbo].[ROLES_APLICATIVOS] ([app_id], [rol_id], [descripcion_rol]) VALUES (3, 5, N'Admin')
+GO
+INSERT [dbo].[ROLES_APLICATIVOS] ([app_id], [rol_id], [descripcion_rol]) VALUES (3, 6, N'Seguridad')
+GO
+INSERT [dbo].[ROLES_APLICATIVOS_MENU] ([app_id], [rol_id], [menu_id]) VALUES (1, 1, 1)
+GO
+INSERT [dbo].[ROLES_APLICATIVOS_MENU] ([app_id], [rol_id], [menu_id]) VALUES (1, 1, 2)
+GO
+INSERT [dbo].[ROLES_APLICATIVOS_MENU] ([app_id], [rol_id], [menu_id]) VALUES (1, 2, 1)
+GO
+INSERT [dbo].[ROLES_APLICATIVOS_MENU] ([app_id], [rol_id], [menu_id]) VALUES (1, 2, 2)
+GO
+INSERT [dbo].[ROLES_APLICATIVOS_MENU] ([app_id], [rol_id], [menu_id]) VALUES (2, 3, 3)
+GO
+INSERT [dbo].[ROLES_APLICATIVOS_MENU] ([app_id], [rol_id], [menu_id]) VALUES (2, 4, 4)
+GO
+INSERT [dbo].[ROLES_APLICATIVOS_MENU] ([app_id], [rol_id], [menu_id]) VALUES (2, 3, 4)
+GO
+INSERT [dbo].[ROLES_APLICATIVOS_MENU] ([app_id], [rol_id], [menu_id]) VALUES (2, 4, 3)
+GO
+INSERT [dbo].[ROLES_APLICATIVOS_MENU] ([app_id], [rol_id], [menu_id]) VALUES (3, 5, 5)
+GO
+INSERT [dbo].[ROLES_APLICATIVOS_MENU] ([app_id], [rol_id], [menu_id]) VALUES (3, 5, 6)
+GO
+INSERT [dbo].[ROLES_APLICATIVOS_MENU] ([app_id], [rol_id], [menu_id]) VALUES (3, 6, 5)
+GO
+INSERT [dbo].[ROLES_APLICATIVOS_MENU] ([app_id], [rol_id], [menu_id]) VALUES (3, 6, 6)
+GO
+INSERT [dbo].[ROLES_NEGOCIO] ([rol_neg_id], [descripcion_rol_neg]) VALUES (1, N'Administrador de Seguridad')
+GO
+INSERT [dbo].[ROLES_NEGOCIO] ([rol_neg_id], [descripcion_rol_neg]) VALUES (2, N'Contador')
+GO
+INSERT [dbo].[ROLES_NEGOCIO] ([rol_neg_id], [descripcion_rol_neg]) VALUES (3, N'Operario')
+GO
+INSERT [dbo].[ROLES_NEGOCIO] ([rol_neg_id], [descripcion_rol_neg]) VALUES (4, N'Seguridad')
+GO
+INSERT [dbo].[ROLES_NEGOCIO] ([rol_neg_id], [descripcion_rol_neg]) VALUES (5, N'Supervisor')
+GO
+INSERT [dbo].[ROLES_NEGOCIO_APLICATIVOS] ([rol_neg_id], [app_id], [rol_id]) VALUES (1, 2, 1)
+GO
+INSERT [dbo].[ROLES_NEGOCIO_APLICATIVOS] ([rol_neg_id], [app_id], [rol_id]) VALUES (4, 2, 2)
+GO
+INSERT [dbo].[ROLES_NEGOCIO_APLICATIVOS] ([rol_neg_id], [app_id], [rol_id]) VALUES (5, 2, 2)
+GO
+INSERT [dbo].[ROLES_NEGOCIO_APLICATIVOS] ([rol_neg_id], [app_id], [rol_id]) VALUES (1, 1, 1)
+GO
+INSERT [dbo].[ROLES_NEGOCIO_APLICATIVOS] ([rol_neg_id], [app_id], [rol_id]) VALUES (5, 1, 2)
+GO
+INSERT [dbo].[ROLES_NEGOCIO_APLICATIVOS] ([rol_neg_id], [app_id], [rol_id]) VALUES (1, 3, 1)
+GO
+INSERT [dbo].[ROLES_NEGOCIO_APLICATIVOS] ([rol_neg_id], [app_id], [rol_id]) VALUES (4, 3, 6)
 GO
 ALTER TABLE [dbo].[APLICATIVOS_MENU]  WITH CHECK ADD FOREIGN KEY([app_id])
 REFERENCES [dbo].[APLICATIVOS] ([app_id])
 GO
-ALTER TABLE [dbo].[PERMISOS]  WITH CHECK ADD FOREIGN KEY([app_id])
+ALTER TABLE [dbo].[PERMISOS]  WITH CHECK ADD  CONSTRAINT [FK__PERMISOS__app_id__3C69FB99] FOREIGN KEY([app_id])
 REFERENCES [dbo].[APLICATIVOS] ([app_id])
 GO
-ALTER TABLE [dbo].[PERMISOS]  WITH CHECK ADD FOREIGN KEY([rol_neg_id])
+ALTER TABLE [dbo].[PERMISOS] CHECK CONSTRAINT [FK__PERMISOS__app_id__3C69FB99]
+GO
+ALTER TABLE [dbo].[PERMISOS]  WITH CHECK ADD  CONSTRAINT [FK__PERMISOS__rol_ne__3D5E1FD2] FOREIGN KEY([rol_neg_id])
 REFERENCES [dbo].[ROLES_NEGOCIO] ([rol_neg_id])
 GO
-ALTER TABLE [dbo].[PERMISOS]  WITH CHECK ADD FOREIGN KEY([user_id])
+ALTER TABLE [dbo].[PERMISOS] CHECK CONSTRAINT [FK__PERMISOS__rol_ne__3D5E1FD2]
+GO
+ALTER TABLE [dbo].[PERMISOS]  WITH CHECK ADD  CONSTRAINT [FK__PERMISOS__user_i__3B75D760] FOREIGN KEY([user_id])
 REFERENCES [dbo].[PERSONAS] ([user_id])
+GO
+ALTER TABLE [dbo].[PERMISOS] CHECK CONSTRAINT [FK__PERMISOS__user_i__3B75D760]
 GO
 ALTER TABLE [dbo].[PERSONAS_PREGUNTAS]  WITH CHECK ADD FOREIGN KEY([preg_id])
 REFERENCES [dbo].[PREGUNTAS] ([preg_id])
@@ -261,6 +461,122 @@ REFERENCES [dbo].[APLICATIVOS] ([app_id])
 GO
 ALTER TABLE [dbo].[ROLES_NEGOCIO_APLICATIVOS]  WITH CHECK ADD FOREIGN KEY([rol_id])
 REFERENCES [dbo].[ROLES_APLICATIVOS] ([rol_id])
+GO
+ALTER TABLE [dbo].[ROLES_NEGOCIO_APLICATIVOS]  WITH CHECK ADD  CONSTRAINT [FK_ROLES_NEGOCIO_APLICATIVOS_ROLES_NEGOCIO] FOREIGN KEY([rol_neg_id])
+REFERENCES [dbo].[ROLES_NEGOCIO] ([rol_neg_id])
+GO
+ALTER TABLE [dbo].[ROLES_NEGOCIO_APLICATIVOS] CHECK CONSTRAINT [FK_ROLES_NEGOCIO_APLICATIVOS_ROLES_NEGOCIO]
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPane1', @value=N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
+Begin DesignProperties = 
+   Begin PaneConfigurations = 
+      Begin PaneConfiguration = 0
+         NumPanes = 4
+         Configuration = "(H (1[40] 4[20] 2[20] 3) )"
+      End
+      Begin PaneConfiguration = 1
+         NumPanes = 3
+         Configuration = "(H (1 [50] 4 [25] 3))"
+      End
+      Begin PaneConfiguration = 2
+         NumPanes = 3
+         Configuration = "(H (1 [50] 2 [25] 3))"
+      End
+      Begin PaneConfiguration = 3
+         NumPanes = 3
+         Configuration = "(H (4 [30] 2 [40] 3))"
+      End
+      Begin PaneConfiguration = 4
+         NumPanes = 2
+         Configuration = "(H (1 [56] 3))"
+      End
+      Begin PaneConfiguration = 5
+         NumPanes = 2
+         Configuration = "(H (2 [66] 3))"
+      End
+      Begin PaneConfiguration = 6
+         NumPanes = 2
+         Configuration = "(H (4 [50] 3))"
+      End
+      Begin PaneConfiguration = 7
+         NumPanes = 1
+         Configuration = "(V (3))"
+      End
+      Begin PaneConfiguration = 8
+         NumPanes = 3
+         Configuration = "(H (1[56] 4[18] 2) )"
+      End
+      Begin PaneConfiguration = 9
+         NumPanes = 2
+         Configuration = "(H (1 [75] 4))"
+      End
+      Begin PaneConfiguration = 10
+         NumPanes = 2
+         Configuration = "(H (1[66] 2) )"
+      End
+      Begin PaneConfiguration = 11
+         NumPanes = 2
+         Configuration = "(H (4 [60] 2))"
+      End
+      Begin PaneConfiguration = 12
+         NumPanes = 1
+         Configuration = "(H (1) )"
+      End
+      Begin PaneConfiguration = 13
+         NumPanes = 1
+         Configuration = "(V (4))"
+      End
+      Begin PaneConfiguration = 14
+         NumPanes = 1
+         Configuration = "(V (2))"
+      End
+      ActivePaneConfig = 0
+   End
+   Begin DiagramPane = 
+      Begin Origin = 
+         Top = 0
+         Left = 0
+      End
+      Begin Tables = 
+         Begin Table = "p"
+            Begin Extent = 
+               Top = 6
+               Left = 38
+               Bottom = 136
+               Right = 208
+            End
+            DisplayFlags = 280
+            TopColumn = 1
+         End
+      End
+   End
+   Begin SQLPane = 
+   End
+   Begin DataPane = 
+      Begin ParameterDefaults = ""
+      End
+   End
+   Begin CriteriaPane = 
+      Begin ColumnWidths = 11
+         Column = 1440
+         Alias = 900
+         Table = 1170
+         Output = 720
+         Append = 1400
+         NewValue = 1170
+         SortType = 1350
+         SortOrder = 1410
+         GroupBy = 1350
+         Filter = 1350
+         Or = 1350
+         Or = 1350
+         Or = 1350
+      End
+   End
+End
+' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'PERSONAS LOGIN'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPaneCount', @value=1 , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'PERSONAS LOGIN'
 GO
 USE [master]
 GO

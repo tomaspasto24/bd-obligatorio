@@ -49,8 +49,7 @@ public class RegisterQuestions extends javax.swing.JFrame {
 
         if (statement != null) {
             try {
-                String sqlString = "SELECT * "
-                        + "FROM PREGUNTAS";
+                String sqlString = "SELECT * FROM [GETPREGUNTAS];";
                 var res = statement.executeQuery(sqlString);
                 while (res.next()) {
                     String pregunta = res.getString("pregunta");

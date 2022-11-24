@@ -24,7 +24,7 @@ public class RecoverPassword extends javax.swing.JFrame {
      * Creates new form RecoverPassword
      */
     private Map<Integer, String> respuestasId;
-    private Map<String,Integer> preguntasId;
+    private Map<String, Integer> preguntasId;
 
     public RecoverPassword() {
         initComponents();
@@ -38,23 +38,19 @@ public class RecoverPassword extends javax.swing.JFrame {
         }
 
         respuestasId = new HashMap<Integer, String>();
-        preguntasId = new HashMap<String,Integer>();
+        preguntasId = new HashMap<String, Integer>();
 
         if (statement != null) {
             try {
                 String sqlString
-                        = "SELECT * "
-                        + "FROM (SELECT * "
-                        + "FROM PERSONAS_PREGUNTAS "
-                        + "WHERE user_id=" + UserAccount.UserAccount.getInstance().getUserId() + ") p "
-                        + "JOIN PREGUNTAS "
-                        + "ON p.preg_id = PREGUNTAS.preg_id ";
+                        = "EXEC sp_set_session_context 'user_id', " + UserAccount.UserAccount.getInstance().getUserId() + "; "
+                        + "SELECT * FROM [PREGUNTAS RESPUESTAS]";
                 var res = statement.executeQuery(sqlString);
                 while (res.next()) {
                     String pregunta = res.getString("pregunta");
                     String respuesta = res.getString("respuesta");
                     Integer id = res.getInt("preg_id");
-                    preguntasId.put(pregunta,id);
+                    preguntasId.put(pregunta, id);
                     respuestasId.put(id, respuesta);
                 }
                 Object[] set = preguntasId.keySet().toArray();
