@@ -11,6 +11,7 @@ import java.util.HashMap;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import UserAccount.UserAccount;
+import java.awt.Color;
 import javax.swing.DefaultListModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -132,6 +133,10 @@ public class Home extends javax.swing.JFrame {
         jListAplicativos = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocationByPlatform(true);
+        setMinimumSize(new java.awt.Dimension(800, 565));
+        setUndecorated(true);
+        setResizable(false);
 
         bg15.setBackground(new java.awt.Color(255, 255, 255));
         bg15.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -204,6 +209,7 @@ public class Home extends javax.swing.JFrame {
         bg15.add(header, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 740, 30));
 
         goBackBtn.setBackground(new java.awt.Color(255, 255, 255));
+        goBackBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         goBackBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 goBackBtnMouseClicked(evt);
@@ -242,13 +248,13 @@ public class Home extends javax.swing.JFrame {
         bg15.add(title12, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 70, 340, 50));
 
         jListMenus.setBorder(javax.swing.BorderFactory.createCompoundBorder());
-        jListMenus.setFont(new java.awt.Font("Calisto MT", 0, 12)); // NOI18N
+        jListMenus.setFont(new java.awt.Font("Calisto MT", 0, 14)); // NOI18N
         jScrollPane1.setViewportView(jListMenus);
 
         bg15.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 120, 370, 430));
 
         jListAplicativos.setBorder(javax.swing.BorderFactory.createCompoundBorder());
-        jListAplicativos.setFont(new java.awt.Font("Calisto MT", 0, 12)); // NOI18N
+        jListAplicativos.setFont(new java.awt.Font("Calisto MT", 0, 18)); // NOI18N
         jScrollPane3.setViewportView(jListAplicativos);
 
         bg15.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 370, 430));
@@ -261,7 +267,7 @@ public class Home extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(bg15, javax.swing.GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE)
         );
 
         pack();
@@ -272,17 +278,24 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_exitBtn12MouseClicked
 
     private void exitBtn12MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitBtn12MouseEntered
+        exitBtn12.setBackground(Color.red);
     }//GEN-LAST:event_exitBtn12MouseEntered
 
     private void exitBtn12MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitBtn12MouseExited
+        exitBtn12.setBackground(Color.white);
+
     }//GEN-LAST:event_exitBtn12MouseExited
 
     private void headerMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_headerMouseDragged
         int x = evt.getXOnScreen();
         int y = evt.getYOnScreen();
+        this.setLocation(x - xMouse, y - yMouse);
     }//GEN-LAST:event_headerMouseDragged
 
+    int xMouse, yMouse;
     private void headerMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_headerMousePressed
+        xMouse = evt.getX();
+        yMouse = evt.getY();
     }//GEN-LAST:event_headerMousePressed
 
     private void goBackBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goBackBtnMouseClicked
@@ -291,9 +304,11 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_goBackBtnMouseClicked
 
     private void goBackBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goBackBtnMouseEntered
+        goBackBtn.setBackground(Color.red);
     }//GEN-LAST:event_goBackBtnMouseEntered
 
     private void goBackBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goBackBtnMouseExited
+        goBackBtn.setBackground(Color.white);
     }//GEN-LAST:event_goBackBtnMouseExited
 
     /**
@@ -332,109 +347,19 @@ public class Home extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel bg;
-    private javax.swing.JPanel bg1;
-    private javax.swing.JPanel bg10;
-    private javax.swing.JPanel bg11;
-    private javax.swing.JPanel bg12;
-    private javax.swing.JPanel bg13;
-    private javax.swing.JPanel bg14;
     private javax.swing.JPanel bg15;
-    private javax.swing.JPanel bg2;
-    private javax.swing.JPanel bg3;
-    private javax.swing.JPanel bg4;
-    private javax.swing.JPanel bg5;
-    private javax.swing.JPanel bg6;
-    private javax.swing.JPanel bg7;
-    private javax.swing.JPanel bg8;
-    private javax.swing.JPanel bg9;
-    private javax.swing.JPanel exitBtn;
-    private javax.swing.JPanel exitBtn1;
-    private javax.swing.JPanel exitBtn10;
-    private javax.swing.JPanel exitBtn11;
     private javax.swing.JPanel exitBtn12;
-    private javax.swing.JPanel exitBtn2;
-    private javax.swing.JPanel exitBtn3;
-    private javax.swing.JPanel exitBtn4;
-    private javax.swing.JPanel exitBtn5;
-    private javax.swing.JPanel exitBtn6;
-    private javax.swing.JPanel exitBtn7;
-    private javax.swing.JPanel exitBtn8;
-    private javax.swing.JPanel exitBtn9;
-    private javax.swing.JLabel exitTxt;
-    private javax.swing.JLabel exitTxt1;
-    private javax.swing.JLabel exitTxt10;
-    private javax.swing.JLabel exitTxt11;
     private javax.swing.JLabel exitTxt12;
-    private javax.swing.JLabel exitTxt2;
-    private javax.swing.JLabel exitTxt3;
-    private javax.swing.JLabel exitTxt4;
-    private javax.swing.JLabel exitTxt5;
-    private javax.swing.JLabel exitTxt6;
-    private javax.swing.JLabel exitTxt7;
-    private javax.swing.JLabel exitTxt8;
-    private javax.swing.JLabel exitTxt9;
     private javax.swing.JPanel goBackBtn;
     private javax.swing.JLabel goBackTxt;
     private javax.swing.JPanel header;
-    private javax.swing.JLabel image;
-    private javax.swing.JLabel image1;
-    private javax.swing.JLabel image10;
-    private javax.swing.JLabel image11;
-    private javax.swing.JLabel image12;
-    private javax.swing.JLabel image13;
-    private javax.swing.JLabel image14;
-    private javax.swing.JLabel image15;
-    private javax.swing.JLabel image16;
-    private javax.swing.JLabel image2;
-    private javax.swing.JLabel image3;
-    private javax.swing.JLabel image4;
-    private javax.swing.JLabel image5;
-    private javax.swing.JLabel image6;
-    private javax.swing.JLabel image7;
-    private javax.swing.JLabel image8;
-    private javax.swing.JLabel image9;
-    private javax.swing.JLabel iniciarSesionText;
-    private javax.swing.JLabel iniciarSesionText1;
-    private javax.swing.JLabel iniciarSesionText2;
-    private javax.swing.JLabel iniciarSesionText3;
-    private javax.swing.JLabel iniciarSesionText4;
     private javax.swing.JList<String> jListAplicativos;
     private javax.swing.JList<String> jListMenus;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTextField nameInput;
-    private javax.swing.JTextField nameInput1;
-    private javax.swing.JTextField nameInput2;
-    private javax.swing.JTextField nameInput3;
-    private javax.swing.JTextField nameInput4;
-    private javax.swing.JLabel nameText;
-    private javax.swing.JLabel nameText1;
-    private javax.swing.JLabel nameText2;
-    private javax.swing.JLabel nameText3;
-    private javax.swing.JLabel nameText4;
-    private javax.swing.JLabel title;
-    private javax.swing.JLabel title1;
-    private javax.swing.JLabel title10;
     private javax.swing.JLabel title11;
     private javax.swing.JLabel title12;
-    private javax.swing.JLabel title2;
-    private javax.swing.JLabel title3;
-    private javax.swing.JLabel title4;
-    private javax.swing.JLabel title5;
-    private javax.swing.JLabel title6;
-    private javax.swing.JLabel title7;
-    private javax.swing.JLabel title8;
-    private javax.swing.JLabel title9;
-    private javax.swing.JPanel topBg;
-    private javax.swing.JPanel topBg1;
-    private javax.swing.JPanel topBg2;
     // End of variables declaration//GEN-END:variables
 }
