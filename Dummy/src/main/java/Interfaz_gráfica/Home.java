@@ -41,7 +41,7 @@ public class Home extends javax.swing.JFrame {
 
         if (statement != null) {
             try {
-                String sqlString = "EXEC sp_set_session_context 'user_id', 2024312677; "
+                String sqlString = "EXEC sp_set_session_context 'user_id'," + UserAccount.getInstance().userId + "; "
                         + "SELECT * FROM [APLICATIVOSAROBADOS];";
                 var res = statement.executeQuery(sqlString);
                 while (res.next()) {
@@ -81,9 +81,10 @@ public class Home extends javax.swing.JFrame {
                         try {
                             String sqlString
                                     = "EXEC sp_set_session_context 'app_id', " + nombreAppID.get(nombreApp) + "; "
-                                    + "EXEC sp_set_session_context 'rol_id', "+ nombreAppRol.get(nombreApp) + "; "
+                                    + "EXEC sp_set_session_context 'rol_id', " + nombreAppRol.get(nombreApp) + "; "
                                     + "SELECT * FROM [MENUAPROBADOS];";
                             var res = statement.executeQuery(sqlString);
+                            System.out.println(sqlString);
                             while (res.next()) {
                                 String nombre_menu = res.getString("descripcion_menu");
                                 menus.addElement(nombre_menu);
