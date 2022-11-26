@@ -227,9 +227,9 @@ public class GetUserIdToRecoverPassword extends javax.swing.JFrame {
         } else {
             if (statement != null) {
                 try {
-                    String sqlString = "SELECT * "
-                            + "FROM [PERSONAS LOGIN] "
-                            + "WHERE nombres='" + nombreUsuario.getText() + "'";
+                    String sqlString = "EXEC sp_set_session_context 'nombreUser', " + nombreUsuario.getText() + "; "
+                            + "SELECT * "
+                            + "FROM [PERSONAS_LOGIN] ";
                     var res = statement.executeQuery(sqlString);
                     if (res.next()) {
                         this.setVisible(false);

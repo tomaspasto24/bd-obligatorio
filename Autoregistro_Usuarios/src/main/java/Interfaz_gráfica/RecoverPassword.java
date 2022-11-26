@@ -44,7 +44,7 @@ public class RecoverPassword extends javax.swing.JFrame {
             try {
                 String sqlString
                         = "EXEC sp_set_session_context 'user_id', " + UserAccount.UserAccount.getInstance().getUserId() + "; "
-                        + "SELECT * FROM [PREGUNTAS RESPUESTAS]";
+                        + "SELECT * FROM [PREGUNTAS_RESPUESTAS]";
                 var res = statement.executeQuery(sqlString);
                 while (res.next()) {
                     String pregunta = res.getString("pregunta");
@@ -199,7 +199,7 @@ public class RecoverPassword extends javax.swing.JFrame {
         bg.add(header, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 710, 30));
 
         image.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        image.setIcon(new javax.swing.ImageIcon("C:\\Users\\juan-\\OneDrive - Universidad Católica del Uruguay\\UCU\\2do\\2do semestre\\BD I\\bd-obligatorio\\Images\\Auto-Registro\\fondoRecoverPassword.jpg")); // NOI18N
+        image.setIcon(new javax.swing.ImageIcon("C:\\Users\\juan-\\OneDrive - Universidad Católica del Uruguay\\UCU\\2do\\2do semestre\\BD I\\bd-obligatorio\\Autoregistro_Usuarios\\src\\main\\java\\com\\images\\fondoRecoverPassword.jpg")); // NOI18N
         bg.add(image, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 570));
 
         title.setFont(new java.awt.Font("Calisto MT", 0, 36)); // NOI18N

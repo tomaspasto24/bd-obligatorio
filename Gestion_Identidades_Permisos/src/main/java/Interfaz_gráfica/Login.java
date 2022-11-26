@@ -4,7 +4,7 @@
  */
 package Interfaz_gráfica;
 
-import Interfaz_gráfica.GetUserIdToRecoverPassword;
+//import Interfaz_gráfica.GetUserIdToRecoverPassword;
 import db_connection.DBConnection;
 import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
@@ -49,15 +49,13 @@ public class Login extends javax.swing.JFrame {
         image = new javax.swing.JLabel();
         iniciarSesionText = new javax.swing.JLabel();
         nameText = new javax.swing.JLabel();
-        userNameInput = new javax.swing.JTextField();
+        nameInput = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         nameText1 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         passwordInput = new javax.swing.JPasswordField();
         loginBtn = new javax.swing.JPanel();
         loginText = new javax.swing.JLabel();
-        registerText = new javax.swing.JLabel();
-        recoverPasswordTxt = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
@@ -68,10 +66,10 @@ public class Login extends javax.swing.JFrame {
 
         title.setFont(new java.awt.Font("Calisto MT", 0, 36)); // NOI18N
         title.setForeground(new java.awt.Color(255, 255, 255));
-        title.setText("Bienvenido a Autoregistro de Usuario");
-        jPanel1.add(title, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, -1, 60));
+        title.setText("Bienvenido a Gestión de Permisos");
+        jPanel1.add(title, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, -1, 60));
 
-        image.setIcon(new javax.swing.ImageIcon("C:\\Users\\juan-\\OneDrive - Universidad Católica del Uruguay\\UCU\\2do\\2do semestre\\BD I\\bd-obligatorio\\Autoregistro_Usuarios\\src\\main\\java\\com\\images\\fondoHome.jpg")); // NOI18N
+        image.setIcon(new javax.swing.ImageIcon("C:\\Users\\juan-\\OneDrive - Universidad Católica del Uruguay\\UCU\\2do\\2do semestre\\BD I\\bd-obligatorio\\Gestion_Identidades_Permisos\\src\\main\\java\\com\\images\\fondoHome.jpg")); // NOI18N
         jPanel1.add(image, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 180));
 
         iniciarSesionText.setFont(new java.awt.Font("Calisto MT", 0, 24)); // NOI18N
@@ -81,25 +79,25 @@ public class Login extends javax.swing.JFrame {
 
         nameText.setFont(new java.awt.Font("Calisto MT", 0, 18)); // NOI18N
         nameText.setForeground(new java.awt.Color(0, 0, 0));
-        nameText.setText("Nombre de usuario");
+        nameText.setText("Nombre");
         jPanel1.add(nameText, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 250, -1, -1));
 
-        userNameInput.setBackground(new java.awt.Color(255, 255, 255));
-        userNameInput.setFont(new java.awt.Font("Calisto MT", 0, 14)); // NOI18N
-        userNameInput.setForeground(new java.awt.Color(153, 153, 153));
-        userNameInput.setText("Ingrese su nombre de usuario");
-        userNameInput.setBorder(null);
-        userNameInput.addMouseListener(new java.awt.event.MouseAdapter() {
+        nameInput.setBackground(new java.awt.Color(255, 255, 255));
+        nameInput.setFont(new java.awt.Font("Calisto MT", 0, 14)); // NOI18N
+        nameInput.setForeground(new java.awt.Color(153, 153, 153));
+        nameInput.setText("Ingrese su nombre/s");
+        nameInput.setBorder(null);
+        nameInput.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                userNameInputMousePressed(evt);
+                nameInputMousePressed(evt);
             }
         });
-        userNameInput.addActionListener(new java.awt.event.ActionListener() {
+        nameInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                userNameInputActionPerformed(evt);
+                nameInputActionPerformed(evt);
             }
         });
-        jPanel1.add(userNameInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 290, 290, -1));
+        jPanel1.add(nameInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 290, 290, -1));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 310, 290, -1));
 
         nameText1.setFont(new java.awt.Font("Calisto MT", 0, 18)); // NOI18N
@@ -150,30 +148,6 @@ public class Login extends javax.swing.JFrame {
 
         jPanel1.add(loginBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 430, 210, 50));
 
-        registerText.setFont(new java.awt.Font("Calisto MT", 0, 14)); // NOI18N
-        registerText.setForeground(new java.awt.Color(0, 0, 0));
-        registerText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        registerText.setText("Registrarse");
-        registerText.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        registerText.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                registerTextMouseClicked(evt);
-            }
-        });
-        jPanel1.add(registerText, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 500, 90, 30));
-
-        recoverPasswordTxt.setFont(new java.awt.Font("Calisto MT", 0, 14)); // NOI18N
-        recoverPasswordTxt.setForeground(new java.awt.Color(0, 0, 0));
-        recoverPasswordTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        recoverPasswordTxt.setText("Recuperar contraseña");
-        recoverPasswordTxt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        recoverPasswordTxt.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                recoverPasswordTxtMouseClicked(evt);
-            }
-        });
-        jPanel1.add(recoverPasswordTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 500, 150, 30));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -189,7 +163,7 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginBtnMouseClicked
-        String inputNombreUsuario = userNameInput.getText();
+        String inputNombreUsuario = nameInput.getText();
         String inputPassword = passwordInput.getText();
 
         Connection connection = DBConnection.getInstance().dbConnection;
@@ -207,75 +181,70 @@ public class Login extends javax.swing.JFrame {
         if (statement != null) {
             try {
                 String sqlString = "EXEC sp_set_session_context 'nombreUser', " + inputNombreUsuario + "; "
-                        + "SELECT * FROM [PERSONAS_LOGIN]";
+                        + "SELECT * FROM [PERSONAS_LOGIN_PERMISO]";
                 var res = statement.executeQuery(sqlString);
-                boolean logged = false;
+                boolean correctPsw = false;
+                boolean permiso = false;
                 while (res.next()) {
                     boolean validPassword = argon2.verify(res.getString("hashpwd"), inputPassword.toCharArray());
                     if (validPassword) {
-                        logged = true;
-                        userNameInput.setText("");
-                        passwordInput.setText("");
-                        UserAccount.UserAccount.getInstance().setUserId(res.getInt("user_id"));
-                        this.setVisible(false);
-                        Home.getInstance().setVisible(true);
+                        correctPsw = true;
+                        boolean tienePermiso = res.getInt("rol_neg_id") == 1
+                                && res.getInt("app_id") == 1
+                                && res.getString("estado").equals("ACTIVO");
+                        if (tienePermiso) {
+                            permiso = true;
+                            nameInput.setText("");
+                            passwordInput.setText("");
+                            UserAccount.UserAccount.getInstance().setUserId(res.getInt("user_id"));
+                            this.setVisible(false);
+                            Home.getInstance().setVisible(true);
+                        }
                     }
                 }
-                if (!logged) {
+                if (!correctPsw) {
                     JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos.");
-
+                }
+                if (!permiso && correctPsw) {
+                    JOptionPane.showMessageDialog(null, "Usuario no cuenta con los permisos requeridos");
                 }
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Erro al obtener user, error: " + e.toString());
+                JOptionPane.showMessageDialog(null, "Error al obtener user, error: " + e.toString());
             }
         }
 
     }//GEN-LAST:event_loginBtnMouseClicked
 
-    private void registerTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerTextMouseClicked
-        userNameInput.setText("");
-        passwordInput.setText("");
-        this.setVisible(false);
-        Register.getInstance().setVisible(true);
-    }//GEN-LAST:event_registerTextMouseClicked
-
-    private void userNameInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userNameInputActionPerformed
+    private void nameInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameInputActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_userNameInputActionPerformed
+    }//GEN-LAST:event_nameInputActionPerformed
 
     private void passwordInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordInputActionPerformed
         // TODO add your handling code here:
 
     }//GEN-LAST:event_passwordInputActionPerformed
 
-    private void userNameInputMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userNameInputMousePressed
-        if (userNameInput.getText().equals("Ingrese su nombre de usuario")) {
-            userNameInput.setText("");
-            userNameInput.setForeground(Color.black);
+    private void nameInputMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nameInputMousePressed
+        if (nameInput.getText().equals("Ingrese su nombre/s")) {
+            nameInput.setText("");
+            nameInput.setForeground(Color.black);
         }
         if (String.valueOf(passwordInput.getText()).isEmpty()) {
             passwordInput.setText("**********");
             passwordInput.setForeground(Color.gray);
         }
-    }//GEN-LAST:event_userNameInputMousePressed
+    }//GEN-LAST:event_nameInputMousePressed
 
     private void passwordInputMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passwordInputMousePressed
         if (passwordInput.getText().equals("**********")) {
             passwordInput.setText("");
             passwordInput.setForeground(Color.black);
         }
-        if (String.valueOf(userNameInput.getText()).isEmpty()) {
-            userNameInput.setText("Ingrese su nombre de usuario");
-            userNameInput.setForeground(Color.gray);
+        if (String.valueOf(nameInput.getText()).isEmpty()) {
+            nameInput.setText("Ingrese su nombre/s");
+            nameInput.setForeground(Color.gray);
         }
     }//GEN-LAST:event_passwordInputMousePressed
-
-    private void recoverPasswordTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_recoverPasswordTxtMouseClicked
-        userNameInput.setText("");
-        passwordInput.setText("");
-        this.setVisible(false);
-        GetUserIdToRecoverPassword.getInstance().setVisible(true);
-    }//GEN-LAST:event_recoverPasswordTxtMouseClicked
 
     /**
      * @param args the command line arguments
@@ -323,12 +292,10 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JPanel loginBtn;
     private javax.swing.JLabel loginText;
+    private javax.swing.JTextField nameInput;
     private javax.swing.JLabel nameText;
     private javax.swing.JLabel nameText1;
     private javax.swing.JPasswordField passwordInput;
-    private javax.swing.JLabel recoverPasswordTxt;
-    private javax.swing.JLabel registerText;
     private javax.swing.JLabel title;
-    private javax.swing.JTextField userNameInput;
     // End of variables declaration//GEN-END:variables
 }

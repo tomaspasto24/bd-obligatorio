@@ -1,0 +1,1777 @@
+USE [master]
+GO
+/****** Object:  Database [ObligatorioDB]    Script Date: 11/25/2022 11:59:17 PM ******/
+CREATE DATABASE [ObligatorioDB]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'Obligatorio DB', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\DATA\Obligatorio DB.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+ LOG ON 
+( NAME = N'Obligatorio DB_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\DATA\Obligatorio DB_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+ WITH CATALOG_COLLATION = DATABASE_DEFAULT
+GO
+ALTER DATABASE [ObligatorioDB] SET COMPATIBILITY_LEVEL = 150
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [ObligatorioDB].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [ObligatorioDB] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [ObligatorioDB] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [ObligatorioDB] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [ObligatorioDB] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [ObligatorioDB] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [ObligatorioDB] SET AUTO_CLOSE OFF 
+GO
+ALTER DATABASE [ObligatorioDB] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [ObligatorioDB] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [ObligatorioDB] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [ObligatorioDB] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [ObligatorioDB] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [ObligatorioDB] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [ObligatorioDB] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [ObligatorioDB] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [ObligatorioDB] SET  DISABLE_BROKER 
+GO
+ALTER DATABASE [ObligatorioDB] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [ObligatorioDB] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [ObligatorioDB] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [ObligatorioDB] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [ObligatorioDB] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [ObligatorioDB] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+ALTER DATABASE [ObligatorioDB] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [ObligatorioDB] SET RECOVERY FULL 
+GO
+ALTER DATABASE [ObligatorioDB] SET  MULTI_USER 
+GO
+ALTER DATABASE [ObligatorioDB] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [ObligatorioDB] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [ObligatorioDB] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [ObligatorioDB] SET TARGET_RECOVERY_TIME = 60 SECONDS 
+GO
+ALTER DATABASE [ObligatorioDB] SET DELAYED_DURABILITY = DISABLED 
+GO
+ALTER DATABASE [ObligatorioDB] SET ACCELERATED_DATABASE_RECOVERY = OFF  
+GO
+EXEC sys.sp_db_vardecimal_storage_format N'ObligatorioDB', N'ON'
+GO
+ALTER DATABASE [ObligatorioDB] SET QUERY_STORE = OFF
+GO
+USE [ObligatorioDB]
+GO
+/****** Object:  User [usersql]    Script Date: 11/25/2022 11:59:18 PM ******/
+CREATE USER [usersql] WITHOUT LOGIN WITH DEFAULT_SCHEMA=[dbo]
+GO
+/****** Object:  Table [dbo].[PERSONAS]    Script Date: 11/25/2022 11:59:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[PERSONAS](
+	[user_id] [int] NOT NULL,
+	[nombres] [varchar](255) NOT NULL,
+	[apellidos] [varchar](255) NOT NULL,
+	[direccion] [varchar](255) NOT NULL,
+	[ciudad] [varchar](255) NOT NULL,
+	[departamento] [varchar](255) NOT NULL,
+	[hashpwd] [varchar](255) NOT NULL,
+	[nombre_usuario] [varchar](255) NOT NULL,
+ CONSTRAINT [PK__PERSONAS__B9BE370FCE4CED27] PRIMARY KEY CLUSTERED 
+(
+	[user_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  View [dbo].[PERSONAS_LOGIN]    Script Date: 11/25/2022 11:59:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE VIEW [dbo].[PERSONAS_LOGIN]
+AS
+SELECT        user_id, hashpwd, nombre_usuario
+FROM            dbo.PERSONAS AS p
+WHERE        (nombre_usuario = SESSION_CONTEXT(N'nombreUser'))
+GO
+/****** Object:  Table [dbo].[PERSONAS_PREGUNTAS]    Script Date: 11/25/2022 11:59:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[PERSONAS_PREGUNTAS](
+	[user_id] [int] NOT NULL,
+	[preg_id] [int] NOT NULL,
+	[respuesta] [varchar](255) NOT NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[PREGUNTAS]    Script Date: 11/25/2022 11:59:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[PREGUNTAS](
+	[preg_id] [int] NOT NULL,
+	[pregunta] [varchar](255) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[preg_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  View [dbo].[PREGUNTAS_RESPUESTAS]    Script Date: 11/25/2022 11:59:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+--SELECT *
+--FROM (SELECT * 
+--FROM PERSONAS_PREGUNTAS 
+--WHERE user_id= xd) p 
+--JOIN PREGUNTAS 
+--ON p.preg_id = PREGUNTAS.preg_id 
+
+-- pregunta, respuesta, preg_id
+
+CREATE VIEW [dbo].[PREGUNTAS_RESPUESTAS] AS
+SELECT pregunta, respuesta, PREGUNTAS.preg_id
+FROM (SELECT * 
+FROM PERSONAS_PREGUNTAS 
+WHERE user_id= SESSION_CONTEXT(N'user_id') ) p 
+JOIN PREGUNTAS 
+ON p.preg_id = PREGUNTAS.preg_id 
+GO
+/****** Object:  View [dbo].[GET_PREGUNTAS]    Script Date: 11/25/2022 11:59:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE VIEW [dbo].[GET_PREGUNTAS] AS
+SELECT pregunta, preg_id
+FROM PREGUNTAS
+GO
+/****** Object:  Table [dbo].[APLICATIVOS]    Script Date: 11/25/2022 11:59:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[APLICATIVOS](
+	[app_id] [int] NOT NULL,
+	[nombre_app] [varchar](255) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[app_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  View [dbo].[GET_APLICATIVOS]    Script Date: 11/25/2022 11:59:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE VIEW [dbo].[GET_APLICATIVOS] AS
+SELECT nombre_app, app_id
+FROM APLICATIVOS
+GO
+/****** Object:  Table [dbo].[ROLES_NEGOCIO_APLICATIVOS]    Script Date: 11/25/2022 11:59:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ROLES_NEGOCIO_APLICATIVOS](
+	[rol_neg_id] [int] NOT NULL,
+	[app_id] [int] NOT NULL,
+	[rol_id] [int] NOT NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[PERMISOS]    Script Date: 11/25/2022 11:59:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[PERMISOS](
+	[user_id] [int] NOT NULL,
+	[app_id] [int] NOT NULL,
+	[rol_neg_id] [int] NOT NULL,
+	[fecha_solicitud] [varchar](255) NOT NULL,
+	[fecha_autorizacion] [varchar](255) NULL,
+	[estado] [varchar](255) NOT NULL
+) ON [PRIMARY]
+GO
+/****** Object:  View [dbo].[APLICATIVOS_APROBADOS]    Script Date: 11/25/2022 11:59:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+/*SELECT nombre_app, rol_neg_id, p.app_id 
+FROM APLICATIVOS
+INNER JOIN PERMISOS p ON p.app_id = APLICATIVOS.app_id 
+WHERE user_id = 2024312677
+AND estado='APROBADO'*/
+CREATE VIEW [dbo].[APLICATIVOS_APROBADOS]
+AS
+SELECT        a.nombre_app, rolesA.rol_id, rolesA.app_id
+FROM            dbo.APLICATIVOS AS a INNER JOIN
+                             (SELECT        ra.rol_id, p.app_id, p.user_id, p.estado
+                               FROM            dbo.PERMISOS AS p INNER JOIN
+                                                         dbo.ROLES_NEGOCIO_APLICATIVOS AS ra ON p.app_id = ra.app_id AND p.rol_neg_id = ra.rol_neg_id) AS rolesA ON a.app_id = rolesA.app_id
+WHERE        (rolesA.user_id = SESSION_CONTEXT(N'user_id')) AND (rolesA.estado = 'ACTIVO')
+GROUP BY a.nombre_app, rolesA.rol_id, rolesA.app_id
+GO
+/****** Object:  Table [dbo].[APLICATIVOS_MENU]    Script Date: 11/25/2022 11:59:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[APLICATIVOS_MENU](
+	[app_id] [int] NOT NULL,
+	[menu_id] [int] NOT NULL,
+	[descripcion_menu] [varchar](255) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[menu_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ROLES_APLICATIVOS_MENU]    Script Date: 11/25/2022 11:59:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ROLES_APLICATIVOS_MENU](
+	[app_id] [int] NOT NULL,
+	[rol_id] [int] NOT NULL,
+	[menu_id] [int] NOT NULL
+) ON [PRIMARY]
+GO
+/****** Object:  View [dbo].[MENU_APROBADOS]    Script Date: 11/25/2022 11:59:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+/*SELECT nombre_app, rol_neg_id, p.app_id 
+FROM APLICATIVOS*/
+CREATE VIEW [dbo].[MENU_APROBADOS]
+AS
+SELECT        am.descripcion_menu
+FROM            dbo.APLICATIVOS_MENU AS am INNER JOIN
+                             (SELECT        menu_id
+                               FROM            dbo.ROLES_APLICATIVOS_MENU AS ra
+                               WHERE        (app_id = SESSION_CONTEXT(N'app_id')) AND (rol_id = SESSION_CONTEXT(N'rol_id'))) AS menuID ON am.menu_id = menuID.menu_id
+GROUP BY am.descripcion_menu
+GO
+/****** Object:  View [dbo].[PERSONAS_LOGIN_PERMISO]    Script Date: 11/25/2022 11:59:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE VIEW [dbo].[PERSONAS_LOGIN_PERMISO]
+AS
+SELECT        dbo.PERSONAS.user_id, dbo.PERSONAS.nombres, dbo.PERSONAS.hashpwd, dbo.PERMISOS.rol_neg_id, dbo.PERMISOS.estado, dbo.PERMISOS.app_id
+FROM            dbo.PERMISOS INNER JOIN
+                         dbo.PERSONAS ON dbo.PERSONAS.user_id = dbo.PERMISOS.user_id
+WHERE        (dbo.PERSONAS.nombre_usuario = SESSION_CONTEXT(N'nombreUser'))
+GO
+/****** Object:  Table [dbo].[ROLES_NEGOCIO]    Script Date: 11/25/2022 11:59:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ROLES_NEGOCIO](
+	[rol_neg_id] [int] NOT NULL,
+	[descripcion_rol_neg] [varchar](255) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[rol_neg_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  View [dbo].[PERMISOS_AUTOREGISTRO]    Script Date: 11/25/2022 11:59:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE VIEW [dbo].[PERMISOS_AUTOREGISTRO]
+AS
+SELECT        dbo.PERSONAS.user_id, dbo.PERSONAS.nombres, PERMISO_NEGOCIO.rol_neg_id, PERMISO_NEGOCIO.descripcion_rol_neg, PERMISO_NEGOCIO.estado
+FROM            dbo.PERSONAS INNER JOIN
+                             (SELECT        dbo.PERMISOS.user_id, dbo.PERMISOS.rol_neg_id, dbo.PERMISOS.estado, dbo.ROLES_NEGOCIO.descripcion_rol_neg
+                               FROM            dbo.PERMISOS INNER JOIN
+                                                         dbo.ROLES_NEGOCIO ON dbo.PERMISOS.rol_neg_id = dbo.ROLES_NEGOCIO.rol_neg_id
+                               WHERE        (dbo.PERMISOS.app_id = 2) AND (dbo.PERMISOS.estado = 'PENDIENTE')) AS PERMISO_NEGOCIO ON dbo.PERSONAS.user_id = PERMISO_NEGOCIO.user_id
+WHERE        (dbo.PERSONAS.user_id <> SESSION_CONTEXT(N'userID'))
+GO
+/****** Object:  View [dbo].[GET_APLICATIVOS_ROLES]    Script Date: 11/25/2022 11:59:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE VIEW [dbo].[GET_APLICATIVOS_ROLES]
+AS
+SELECT        p.rol_neg_id, p.app_id, p.rol_id, dbo.ROLES_NEGOCIO.rol_neg_id AS Expr1, dbo.ROLES_NEGOCIO.descripcion_rol_neg
+FROM            (SELECT        rol_neg_id, app_id, rol_id
+                          FROM            dbo.ROLES_NEGOCIO_APLICATIVOS
+                          WHERE        (app_id = SESSION_CONTEXT(N'app_id'))) AS p INNER JOIN
+                         dbo.ROLES_NEGOCIO ON p.rol_neg_id = dbo.ROLES_NEGOCIO.rol_neg_id
+GO
+/****** Object:  View [dbo].[GET_USERNAMES]    Script Date: 11/25/2022 11:59:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE VIEW [dbo].[GET_USERNAMES]
+AS
+SELECT        nombre_usuario
+FROM            dbo.PERSONAS
+GO
+/****** Object:  View [dbo].[PERMISOS_DUMMY]    Script Date: 11/25/2022 11:59:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE VIEW [dbo].[PERMISOS_DUMMY]
+AS
+SELECT        dbo.PERSONAS.user_id, dbo.PERSONAS.nombres, PERMISO_NEGOCIO.rol_neg_id, PERMISO_NEGOCIO.descripcion_rol_neg, PERMISO_NEGOCIO.estado
+FROM            dbo.PERSONAS INNER JOIN
+                             (SELECT        dbo.PERMISOS.user_id, dbo.PERMISOS.rol_neg_id, dbo.PERMISOS.estado, dbo.ROLES_NEGOCIO.descripcion_rol_neg
+                               FROM            dbo.PERMISOS INNER JOIN
+                                                         dbo.ROLES_NEGOCIO ON dbo.PERMISOS.rol_neg_id = dbo.ROLES_NEGOCIO.rol_neg_id
+                               WHERE        (dbo.PERMISOS.app_id = 3) AND (dbo.PERMISOS.estado = 'PENDIENTE')) AS PERMISO_NEGOCIO ON dbo.PERSONAS.user_id = PERMISO_NEGOCIO.user_id
+WHERE        (dbo.PERSONAS.user_id <> SESSION_CONTEXT(N'userID'))
+GO
+/****** Object:  View [dbo].[PERMISOS_GESTION_PERMISOS]    Script Date: 11/25/2022 11:59:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE VIEW [dbo].[PERMISOS_GESTION_PERMISOS]
+AS
+SELECT        dbo.PERSONAS.user_id, dbo.PERSONAS.nombres, PERMISO_NEGOCIO.rol_neg_id, PERMISO_NEGOCIO.descripcion_rol_neg, PERMISO_NEGOCIO.estado
+FROM            dbo.PERSONAS INNER JOIN
+                             (SELECT        dbo.PERMISOS.user_id, dbo.PERMISOS.rol_neg_id, dbo.PERMISOS.estado, dbo.ROLES_NEGOCIO.descripcion_rol_neg
+                               FROM            dbo.PERMISOS INNER JOIN
+                                                         dbo.ROLES_NEGOCIO ON dbo.PERMISOS.rol_neg_id = dbo.ROLES_NEGOCIO.rol_neg_id
+                               WHERE        (dbo.PERMISOS.app_id = 1) AND (dbo.PERMISOS.estado = 'PENDIENTE')) AS PERMISO_NEGOCIO ON dbo.PERSONAS.user_id = PERMISO_NEGOCIO.user_id
+WHERE        (dbo.PERSONAS.user_id <> SESSION_CONTEXT(N'userID'))
+GO
+/****** Object:  View [dbo].[GET_PERMISOS]    Script Date: 11/25/2022 11:59:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE VIEW [dbo].[GET_PERMISOS]
+AS
+SELECT        user_id, rol_neg_id, app_id
+FROM            dbo.PERMISOS
+GO
+/****** Object:  Table [dbo].[ROLES_APLICATIVOS]    Script Date: 11/25/2022 11:59:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ROLES_APLICATIVOS](
+	[app_id] [int] NOT NULL,
+	[rol_id] [int] NOT NULL,
+	[descripcion_rol] [varchar](255) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[rol_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+INSERT [dbo].[APLICATIVOS] ([app_id], [nombre_app]) VALUES (1, N'Gestión de Identidades y Permisos')
+GO
+INSERT [dbo].[APLICATIVOS] ([app_id], [nombre_app]) VALUES (2, N'Autoregistro de Usuarios')
+GO
+INSERT [dbo].[APLICATIVOS] ([app_id], [nombre_app]) VALUES (3, N'Dummy')
+GO
+INSERT [dbo].[APLICATIVOS_MENU] ([app_id], [menu_id], [descripcion_menu]) VALUES (1, 1, N'Funcion admin aplicacion 1')
+GO
+INSERT [dbo].[APLICATIVOS_MENU] ([app_id], [menu_id], [descripcion_menu]) VALUES (1, 2, N'Funcion admin aplicacion 1 (2)')
+GO
+INSERT [dbo].[APLICATIVOS_MENU] ([app_id], [menu_id], [descripcion_menu]) VALUES (2, 3, N'Funcion admin aplicacion 2')
+GO
+INSERT [dbo].[APLICATIVOS_MENU] ([app_id], [menu_id], [descripcion_menu]) VALUES (2, 4, N'Funcion admin aplicacion 2 (2)')
+GO
+INSERT [dbo].[APLICATIVOS_MENU] ([app_id], [menu_id], [descripcion_menu]) VALUES (2, 5, N'Funcion Cajero app 2')
+GO
+INSERT [dbo].[APLICATIVOS_MENU] ([app_id], [menu_id], [descripcion_menu]) VALUES (2, 6, N'Funcion Limpieza app2')
+GO
+INSERT [dbo].[APLICATIVOS_MENU] ([app_id], [menu_id], [descripcion_menu]) VALUES (2, 7, N'Funcion administacion app 2')
+GO
+INSERT [dbo].[APLICATIVOS_MENU] ([app_id], [menu_id], [descripcion_menu]) VALUES (3, 8, N'Funcion operario app3')
+GO
+INSERT [dbo].[APLICATIVOS_MENU] ([app_id], [menu_id], [descripcion_menu]) VALUES (3, 9, N'Funcion supervisor app3')
+GO
+INSERT [dbo].[APLICATIVOS_MENU] ([app_id], [menu_id], [descripcion_menu]) VALUES (3, 10, N'Funcion contador app3')
+GO
+INSERT [dbo].[PERMISOS] ([user_id], [app_id], [rol_neg_id], [fecha_solicitud], [fecha_autorizacion], [estado]) VALUES (1760875254, 1, 1, N'25/11/2022', NULL, N'ACTIVO')
+GO
+INSERT [dbo].[PERMISOS] ([user_id], [app_id], [rol_neg_id], [fecha_solicitud], [fecha_autorizacion], [estado]) VALUES (1760875254, 2, 1, N'25/11/2022', NULL, N'ACTIVO')
+GO
+INSERT [dbo].[PERMISOS] ([user_id], [app_id], [rol_neg_id], [fecha_solicitud], [fecha_autorizacion], [estado]) VALUES (1760875254, 3, 1, N'25/11/2022', NULL, N'ACTIVO')
+GO
+INSERT [dbo].[PERMISOS] ([user_id], [app_id], [rol_neg_id], [fecha_solicitud], [fecha_autorizacion], [estado]) VALUES (1578635394, 2, 3, N'25/11/2022', N'25/11/2022', N'ACTIVO')
+GO
+INSERT [dbo].[PERMISOS] ([user_id], [app_id], [rol_neg_id], [fecha_solicitud], [fecha_autorizacion], [estado]) VALUES (1578635394, 2, 7, N'25/11/2022', N'null', N'PENDIENTE')
+GO
+INSERT [dbo].[PERMISOS] ([user_id], [app_id], [rol_neg_id], [fecha_solicitud], [fecha_autorizacion], [estado]) VALUES (1578635394, 2, 5, N'25/11/2022', N'25/11/2022', N'ACTIVO')
+GO
+INSERT [dbo].[PERMISOS] ([user_id], [app_id], [rol_neg_id], [fecha_solicitud], [fecha_autorizacion], [estado]) VALUES (1578635394, 3, 3, N'25/11/2022', N'25/11/2022', N'ACTIVO')
+GO
+INSERT [dbo].[PERSONAS] ([user_id], [nombres], [apellidos], [direccion], [ciudad], [departamento], [hashpwd], [nombre_usuario]) VALUES (1578635394, N'usuario1', N'usuario1', N'usuario1', N'usuario1', N'usuario1', N'$argon2id$v=19$m=15360,t=2,p=1$ADjc82HDUv4Z1N6iRdXGVbxO47F865Em0kNvxHtijTg$l0RtuVd6h9xe3kwBSdiU/zrc1GzVpILuwsCiRjKMpNMr4eKvK4c+dux68woXB1Ls7BTIb9LgVBzxQt20qd1/EA', N'usuario1')
+GO
+INSERT [dbo].[PERSONAS] ([user_id], [nombres], [apellidos], [direccion], [ciudad], [departamento], [hashpwd], [nombre_usuario]) VALUES (1760875254, N'Juan Federico', N'Lupi Cantera', N'Canelones 1198', N'Montevideo', N'Montevideo', N'$argon2id$v=19$m=15360,t=2,p=1$5HGNwp4V8bqDK4LEUWoi8JdLnhWd7/T0QTiufEVIOpA$voruDWwDvnWd7U89OvXbP3/2hpq5Ab9AkMH7+sRlz7PMnBCK5f52EE5VcjSEmPuADEuXU22Zzo6GuDSOy19/5w', N'juanlupi8')
+GO
+INSERT [dbo].[PERSONAS_PREGUNTAS] ([user_id], [preg_id], [respuesta]) VALUES (1760875254, 3, N'Luna')
+GO
+INSERT [dbo].[PERSONAS_PREGUNTAS] ([user_id], [preg_id], [respuesta]) VALUES (1760875254, 5, N'8')
+GO
+INSERT [dbo].[PERSONAS_PREGUNTAS] ([user_id], [preg_id], [respuesta]) VALUES (1760875254, 2, N'2002')
+GO
+INSERT [dbo].[PERSONAS_PREGUNTAS] ([user_id], [preg_id], [respuesta]) VALUES (1578635394, 3, N'1')
+GO
+INSERT [dbo].[PERSONAS_PREGUNTAS] ([user_id], [preg_id], [respuesta]) VALUES (1578635394, 2, N'1')
+GO
+INSERT [dbo].[PERSONAS_PREGUNTAS] ([user_id], [preg_id], [respuesta]) VALUES (1578635394, 4, N'1')
+GO
+INSERT [dbo].[PREGUNTAS] ([preg_id], [pregunta]) VALUES (1, N'¿Cual es tu deporte favorito?')
+GO
+INSERT [dbo].[PREGUNTAS] ([preg_id], [pregunta]) VALUES (2, N'¿En que año naciste?')
+GO
+INSERT [dbo].[PREGUNTAS] ([preg_id], [pregunta]) VALUES (3, N'¿Como se llama tu primer mascota?')
+GO
+INSERT [dbo].[PREGUNTAS] ([preg_id], [pregunta]) VALUES (4, N'¿Cual es tu club de fútbol favorito?')
+GO
+INSERT [dbo].[PREGUNTAS] ([preg_id], [pregunta]) VALUES (5, N'¿Cual es tu numero favorito?')
+GO
+INSERT [dbo].[ROLES_APLICATIVOS] ([app_id], [rol_id], [descripcion_rol]) VALUES (1, 1, N'Admin')
+GO
+INSERT [dbo].[ROLES_APLICATIVOS] ([app_id], [rol_id], [descripcion_rol]) VALUES (2, 2, N'Admin')
+GO
+INSERT [dbo].[ROLES_APLICATIVOS] ([app_id], [rol_id], [descripcion_rol]) VALUES (3, 3, N'Admin')
+GO
+INSERT [dbo].[ROLES_APLICATIVOS] ([app_id], [rol_id], [descripcion_rol]) VALUES (2, 4, N'Cajero')
+GO
+INSERT [dbo].[ROLES_APLICATIVOS] ([app_id], [rol_id], [descripcion_rol]) VALUES (2, 5, N'Limpieza')
+GO
+INSERT [dbo].[ROLES_APLICATIVOS] ([app_id], [rol_id], [descripcion_rol]) VALUES (2, 6, N'Administracion')
+GO
+INSERT [dbo].[ROLES_APLICATIVOS] ([app_id], [rol_id], [descripcion_rol]) VALUES (3, 7, N'Operario')
+GO
+INSERT [dbo].[ROLES_APLICATIVOS] ([app_id], [rol_id], [descripcion_rol]) VALUES (3, 8, N'Supervisor')
+GO
+INSERT [dbo].[ROLES_APLICATIVOS] ([app_id], [rol_id], [descripcion_rol]) VALUES (3, 9, N'Contador')
+GO
+INSERT [dbo].[ROLES_APLICATIVOS_MENU] ([app_id], [rol_id], [menu_id]) VALUES (1, 1, 1)
+GO
+INSERT [dbo].[ROLES_APLICATIVOS_MENU] ([app_id], [rol_id], [menu_id]) VALUES (1, 1, 2)
+GO
+INSERT [dbo].[ROLES_APLICATIVOS_MENU] ([app_id], [rol_id], [menu_id]) VALUES (2, 2, 3)
+GO
+INSERT [dbo].[ROLES_APLICATIVOS_MENU] ([app_id], [rol_id], [menu_id]) VALUES (2, 2, 4)
+GO
+INSERT [dbo].[ROLES_APLICATIVOS_MENU] ([app_id], [rol_id], [menu_id]) VALUES (2, 4, 5)
+GO
+INSERT [dbo].[ROLES_APLICATIVOS_MENU] ([app_id], [rol_id], [menu_id]) VALUES (2, 5, 6)
+GO
+INSERT [dbo].[ROLES_APLICATIVOS_MENU] ([app_id], [rol_id], [menu_id]) VALUES (2, 6, 7)
+GO
+INSERT [dbo].[ROLES_APLICATIVOS_MENU] ([app_id], [rol_id], [menu_id]) VALUES (2, 6, 5)
+GO
+INSERT [dbo].[ROLES_APLICATIVOS_MENU] ([app_id], [rol_id], [menu_id]) VALUES (3, 7, 8)
+GO
+INSERT [dbo].[ROLES_APLICATIVOS_MENU] ([app_id], [rol_id], [menu_id]) VALUES (3, 8, 8)
+GO
+INSERT [dbo].[ROLES_APLICATIVOS_MENU] ([app_id], [rol_id], [menu_id]) VALUES (3, 8, 8)
+GO
+INSERT [dbo].[ROLES_APLICATIVOS_MENU] ([app_id], [rol_id], [menu_id]) VALUES (3, 8, 9)
+GO
+INSERT [dbo].[ROLES_APLICATIVOS_MENU] ([app_id], [rol_id], [menu_id]) VALUES (3, 8, 10)
+GO
+INSERT [dbo].[ROLES_APLICATIVOS_MENU] ([app_id], [rol_id], [menu_id]) VALUES (3, 9, 8)
+GO
+INSERT [dbo].[ROLES_APLICATIVOS_MENU] ([app_id], [rol_id], [menu_id]) VALUES (3, 9, 10)
+GO
+INSERT [dbo].[ROLES_NEGOCIO] ([rol_neg_id], [descripcion_rol_neg]) VALUES (1, N'Administrador de Seguridad')
+GO
+INSERT [dbo].[ROLES_NEGOCIO] ([rol_neg_id], [descripcion_rol_neg]) VALUES (2, N'Contador')
+GO
+INSERT [dbo].[ROLES_NEGOCIO] ([rol_neg_id], [descripcion_rol_neg]) VALUES (3, N'Operario')
+GO
+INSERT [dbo].[ROLES_NEGOCIO] ([rol_neg_id], [descripcion_rol_neg]) VALUES (4, N'Seguridad')
+GO
+INSERT [dbo].[ROLES_NEGOCIO] ([rol_neg_id], [descripcion_rol_neg]) VALUES (5, N'Supervisor')
+GO
+INSERT [dbo].[ROLES_NEGOCIO] ([rol_neg_id], [descripcion_rol_neg]) VALUES (6, N'Cajero')
+GO
+INSERT [dbo].[ROLES_NEGOCIO] ([rol_neg_id], [descripcion_rol_neg]) VALUES (7, N'Limpieza')
+GO
+INSERT [dbo].[ROLES_NEGOCIO] ([rol_neg_id], [descripcion_rol_neg]) VALUES (8, N'Administacion')
+GO
+INSERT [dbo].[ROLES_NEGOCIO_APLICATIVOS] ([rol_neg_id], [app_id], [rol_id]) VALUES (1, 2, 2)
+GO
+INSERT [dbo].[ROLES_NEGOCIO_APLICATIVOS] ([rol_neg_id], [app_id], [rol_id]) VALUES (1, 1, 1)
+GO
+INSERT [dbo].[ROLES_NEGOCIO_APLICATIVOS] ([rol_neg_id], [app_id], [rol_id]) VALUES (1, 3, 3)
+GO
+INSERT [dbo].[ROLES_NEGOCIO_APLICATIVOS] ([rol_neg_id], [app_id], [rol_id]) VALUES (5, 3, 8)
+GO
+INSERT [dbo].[ROLES_NEGOCIO_APLICATIVOS] ([rol_neg_id], [app_id], [rol_id]) VALUES (2, 3, 9)
+GO
+INSERT [dbo].[ROLES_NEGOCIO_APLICATIVOS] ([rol_neg_id], [app_id], [rol_id]) VALUES (7, 2, 5)
+GO
+INSERT [dbo].[ROLES_NEGOCIO_APLICATIVOS] ([rol_neg_id], [app_id], [rol_id]) VALUES (8, 2, 4)
+GO
+INSERT [dbo].[ROLES_NEGOCIO_APLICATIVOS] ([rol_neg_id], [app_id], [rol_id]) VALUES (3, 2, 4)
+GO
+INSERT [dbo].[ROLES_NEGOCIO_APLICATIVOS] ([rol_neg_id], [app_id], [rol_id]) VALUES (5, 2, 4)
+GO
+INSERT [dbo].[ROLES_NEGOCIO_APLICATIVOS] ([rol_neg_id], [app_id], [rol_id]) VALUES (3, 3, 7)
+GO
+INSERT [dbo].[ROLES_NEGOCIO_APLICATIVOS] ([rol_neg_id], [app_id], [rol_id]) VALUES (5, 3, 8)
+GO
+ALTER TABLE [dbo].[APLICATIVOS_MENU]  WITH CHECK ADD FOREIGN KEY([app_id])
+REFERENCES [dbo].[APLICATIVOS] ([app_id])
+GO
+ALTER TABLE [dbo].[PERSONAS_PREGUNTAS]  WITH CHECK ADD FOREIGN KEY([preg_id])
+REFERENCES [dbo].[PREGUNTAS] ([preg_id])
+GO
+ALTER TABLE [dbo].[PERSONAS_PREGUNTAS]  WITH CHECK ADD  CONSTRAINT [FK__PERSONAS___user___3C69FB99] FOREIGN KEY([user_id])
+REFERENCES [dbo].[PERSONAS] ([user_id])
+GO
+ALTER TABLE [dbo].[PERSONAS_PREGUNTAS] CHECK CONSTRAINT [FK__PERSONAS___user___3C69FB99]
+GO
+ALTER TABLE [dbo].[ROLES_APLICATIVOS]  WITH CHECK ADD FOREIGN KEY([app_id])
+REFERENCES [dbo].[APLICATIVOS] ([app_id])
+GO
+ALTER TABLE [dbo].[ROLES_APLICATIVOS_MENU]  WITH CHECK ADD FOREIGN KEY([app_id])
+REFERENCES [dbo].[APLICATIVOS] ([app_id])
+GO
+ALTER TABLE [dbo].[ROLES_APLICATIVOS_MENU]  WITH CHECK ADD FOREIGN KEY([menu_id])
+REFERENCES [dbo].[APLICATIVOS_MENU] ([menu_id])
+GO
+ALTER TABLE [dbo].[ROLES_APLICATIVOS_MENU]  WITH CHECK ADD FOREIGN KEY([rol_id])
+REFERENCES [dbo].[ROLES_APLICATIVOS] ([rol_id])
+GO
+ALTER TABLE [dbo].[ROLES_NEGOCIO_APLICATIVOS]  WITH CHECK ADD  CONSTRAINT [FK_ROLES_NEGOCIO_APLICATIVOS_APLICATIVOS] FOREIGN KEY([app_id])
+REFERENCES [dbo].[APLICATIVOS] ([app_id])
+GO
+ALTER TABLE [dbo].[ROLES_NEGOCIO_APLICATIVOS] CHECK CONSTRAINT [FK_ROLES_NEGOCIO_APLICATIVOS_APLICATIVOS]
+GO
+ALTER TABLE [dbo].[ROLES_NEGOCIO_APLICATIVOS]  WITH CHECK ADD  CONSTRAINT [FK_ROLES_NEGOCIO_APLICATIVOS_ROLES_APLICATIVOS] FOREIGN KEY([rol_id])
+REFERENCES [dbo].[ROLES_APLICATIVOS] ([rol_id])
+GO
+ALTER TABLE [dbo].[ROLES_NEGOCIO_APLICATIVOS] CHECK CONSTRAINT [FK_ROLES_NEGOCIO_APLICATIVOS_ROLES_APLICATIVOS]
+GO
+ALTER TABLE [dbo].[ROLES_NEGOCIO_APLICATIVOS]  WITH CHECK ADD  CONSTRAINT [FK_ROLES_NEGOCIO_APLICATIVOS_ROLES_NEGOCIO] FOREIGN KEY([rol_neg_id])
+REFERENCES [dbo].[ROLES_NEGOCIO] ([rol_neg_id])
+GO
+ALTER TABLE [dbo].[ROLES_NEGOCIO_APLICATIVOS] CHECK CONSTRAINT [FK_ROLES_NEGOCIO_APLICATIVOS_ROLES_NEGOCIO]
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPane1', @value=N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
+Begin DesignProperties = 
+   Begin PaneConfigurations = 
+      Begin PaneConfiguration = 0
+         NumPanes = 4
+         Configuration = "(H (1[40] 4[20] 2[20] 3) )"
+      End
+      Begin PaneConfiguration = 1
+         NumPanes = 3
+         Configuration = "(H (1 [50] 4 [25] 3))"
+      End
+      Begin PaneConfiguration = 2
+         NumPanes = 3
+         Configuration = "(H (1 [50] 2 [25] 3))"
+      End
+      Begin PaneConfiguration = 3
+         NumPanes = 3
+         Configuration = "(H (4 [30] 2 [40] 3))"
+      End
+      Begin PaneConfiguration = 4
+         NumPanes = 2
+         Configuration = "(H (1 [56] 3))"
+      End
+      Begin PaneConfiguration = 5
+         NumPanes = 2
+         Configuration = "(H (2 [66] 3))"
+      End
+      Begin PaneConfiguration = 6
+         NumPanes = 2
+         Configuration = "(H (4 [50] 3))"
+      End
+      Begin PaneConfiguration = 7
+         NumPanes = 1
+         Configuration = "(V (3))"
+      End
+      Begin PaneConfiguration = 8
+         NumPanes = 3
+         Configuration = "(H (1[56] 4[18] 2) )"
+      End
+      Begin PaneConfiguration = 9
+         NumPanes = 2
+         Configuration = "(H (1 [75] 4))"
+      End
+      Begin PaneConfiguration = 10
+         NumPanes = 2
+         Configuration = "(H (1[66] 2) )"
+      End
+      Begin PaneConfiguration = 11
+         NumPanes = 2
+         Configuration = "(H (4 [60] 2))"
+      End
+      Begin PaneConfiguration = 12
+         NumPanes = 1
+         Configuration = "(H (1) )"
+      End
+      Begin PaneConfiguration = 13
+         NumPanes = 1
+         Configuration = "(V (4))"
+      End
+      Begin PaneConfiguration = 14
+         NumPanes = 1
+         Configuration = "(V (2))"
+      End
+      ActivePaneConfig = 0
+   End
+   Begin DiagramPane = 
+      Begin Origin = 
+         Top = 0
+         Left = 0
+      End
+      Begin Tables = 
+         Begin Table = "a"
+            Begin Extent = 
+               Top = 6
+               Left = 38
+               Bottom = 102
+               Right = 208
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "rolesA"
+            Begin Extent = 
+               Top = 6
+               Left = 246
+               Bottom = 136
+               Right = 416
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+      End
+   End
+   Begin SQLPane = 
+   End
+   Begin DataPane = 
+      Begin ParameterDefaults = ""
+      End
+   End
+   Begin CriteriaPane = 
+      Begin ColumnWidths = 12
+         Column = 1440
+         Alias = 900
+         Table = 1170
+         Output = 720
+         Append = 1400
+         NewValue = 1170
+         SortType = 1350
+         SortOrder = 1410
+         GroupBy = 1350
+         Filter = 1350
+         Or = 1350
+         Or = 1350
+         Or = 1350
+      End
+   End
+End
+' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'APLICATIVOS_APROBADOS'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPaneCount', @value=1 , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'APLICATIVOS_APROBADOS'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPane1', @value=N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
+Begin DesignProperties = 
+   Begin PaneConfigurations = 
+      Begin PaneConfiguration = 0
+         NumPanes = 4
+         Configuration = "(H (1[40] 4[20] 2[20] 3) )"
+      End
+      Begin PaneConfiguration = 1
+         NumPanes = 3
+         Configuration = "(H (1 [50] 4 [25] 3))"
+      End
+      Begin PaneConfiguration = 2
+         NumPanes = 3
+         Configuration = "(H (1 [50] 2 [25] 3))"
+      End
+      Begin PaneConfiguration = 3
+         NumPanes = 3
+         Configuration = "(H (4 [30] 2 [40] 3))"
+      End
+      Begin PaneConfiguration = 4
+         NumPanes = 2
+         Configuration = "(H (1 [56] 3))"
+      End
+      Begin PaneConfiguration = 5
+         NumPanes = 2
+         Configuration = "(H (2 [66] 3))"
+      End
+      Begin PaneConfiguration = 6
+         NumPanes = 2
+         Configuration = "(H (4 [50] 3))"
+      End
+      Begin PaneConfiguration = 7
+         NumPanes = 1
+         Configuration = "(V (3))"
+      End
+      Begin PaneConfiguration = 8
+         NumPanes = 3
+         Configuration = "(H (1[56] 4[18] 2) )"
+      End
+      Begin PaneConfiguration = 9
+         NumPanes = 2
+         Configuration = "(H (1 [75] 4))"
+      End
+      Begin PaneConfiguration = 10
+         NumPanes = 2
+         Configuration = "(H (1[66] 2) )"
+      End
+      Begin PaneConfiguration = 11
+         NumPanes = 2
+         Configuration = "(H (4 [60] 2))"
+      End
+      Begin PaneConfiguration = 12
+         NumPanes = 1
+         Configuration = "(H (1) )"
+      End
+      Begin PaneConfiguration = 13
+         NumPanes = 1
+         Configuration = "(V (4))"
+      End
+      Begin PaneConfiguration = 14
+         NumPanes = 1
+         Configuration = "(V (2))"
+      End
+      ActivePaneConfig = 0
+   End
+   Begin DiagramPane = 
+      Begin Origin = 
+         Top = 0
+         Left = 0
+      End
+      Begin Tables = 
+         Begin Table = "ROLES_NEGOCIO"
+            Begin Extent = 
+               Top = 6
+               Left = 246
+               Bottom = 102
+               Right = 440
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "p"
+            Begin Extent = 
+               Top = 6
+               Left = 38
+               Bottom = 119
+               Right = 208
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+      End
+   End
+   Begin SQLPane = 
+   End
+   Begin DataPane = 
+      Begin ParameterDefaults = ""
+      End
+   End
+   Begin CriteriaPane = 
+      Begin ColumnWidths = 11
+         Column = 1440
+         Alias = 900
+         Table = 1170
+         Output = 720
+         Append = 1400
+         NewValue = 1170
+         SortType = 1350
+         SortOrder = 1410
+         GroupBy = 1350
+         Filter = 1350
+         Or = 1350
+         Or = 1350
+         Or = 1350
+      End
+   End
+End
+' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'GET_APLICATIVOS_ROLES'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPaneCount', @value=1 , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'GET_APLICATIVOS_ROLES'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPane1', @value=N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
+Begin DesignProperties = 
+   Begin PaneConfigurations = 
+      Begin PaneConfiguration = 0
+         NumPanes = 4
+         Configuration = "(H (1[40] 4[20] 2[20] 3) )"
+      End
+      Begin PaneConfiguration = 1
+         NumPanes = 3
+         Configuration = "(H (1 [50] 4 [25] 3))"
+      End
+      Begin PaneConfiguration = 2
+         NumPanes = 3
+         Configuration = "(H (1 [50] 2 [25] 3))"
+      End
+      Begin PaneConfiguration = 3
+         NumPanes = 3
+         Configuration = "(H (4 [30] 2 [40] 3))"
+      End
+      Begin PaneConfiguration = 4
+         NumPanes = 2
+         Configuration = "(H (1 [56] 3))"
+      End
+      Begin PaneConfiguration = 5
+         NumPanes = 2
+         Configuration = "(H (2 [66] 3))"
+      End
+      Begin PaneConfiguration = 6
+         NumPanes = 2
+         Configuration = "(H (4 [50] 3))"
+      End
+      Begin PaneConfiguration = 7
+         NumPanes = 1
+         Configuration = "(V (3))"
+      End
+      Begin PaneConfiguration = 8
+         NumPanes = 3
+         Configuration = "(H (1[56] 4[18] 2) )"
+      End
+      Begin PaneConfiguration = 9
+         NumPanes = 2
+         Configuration = "(H (1 [75] 4))"
+      End
+      Begin PaneConfiguration = 10
+         NumPanes = 2
+         Configuration = "(H (1[66] 2) )"
+      End
+      Begin PaneConfiguration = 11
+         NumPanes = 2
+         Configuration = "(H (4 [60] 2))"
+      End
+      Begin PaneConfiguration = 12
+         NumPanes = 1
+         Configuration = "(H (1) )"
+      End
+      Begin PaneConfiguration = 13
+         NumPanes = 1
+         Configuration = "(V (4))"
+      End
+      Begin PaneConfiguration = 14
+         NumPanes = 1
+         Configuration = "(V (2))"
+      End
+      ActivePaneConfig = 0
+   End
+   Begin DiagramPane = 
+      Begin Origin = 
+         Top = 0
+         Left = 0
+      End
+      Begin Tables = 
+         Begin Table = "PERMISOS"
+            Begin Extent = 
+               Top = 6
+               Left = 38
+               Bottom = 136
+               Right = 226
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+      End
+   End
+   Begin SQLPane = 
+   End
+   Begin DataPane = 
+      Begin ParameterDefaults = ""
+      End
+   End
+   Begin CriteriaPane = 
+      Begin ColumnWidths = 11
+         Column = 1440
+         Alias = 900
+         Table = 1170
+         Output = 720
+         Append = 1400
+         NewValue = 1170
+         SortType = 1350
+         SortOrder = 1410
+         GroupBy = 1350
+         Filter = 1350
+         Or = 1350
+         Or = 1350
+         Or = 1350
+      End
+   End
+End
+' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'GET_PERMISOS'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPaneCount', @value=1 , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'GET_PERMISOS'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPane1', @value=N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
+Begin DesignProperties = 
+   Begin PaneConfigurations = 
+      Begin PaneConfiguration = 0
+         NumPanes = 4
+         Configuration = "(H (1[40] 4[20] 2[20] 3) )"
+      End
+      Begin PaneConfiguration = 1
+         NumPanes = 3
+         Configuration = "(H (1 [50] 4 [25] 3))"
+      End
+      Begin PaneConfiguration = 2
+         NumPanes = 3
+         Configuration = "(H (1 [50] 2 [25] 3))"
+      End
+      Begin PaneConfiguration = 3
+         NumPanes = 3
+         Configuration = "(H (4 [30] 2 [40] 3))"
+      End
+      Begin PaneConfiguration = 4
+         NumPanes = 2
+         Configuration = "(H (1 [56] 3))"
+      End
+      Begin PaneConfiguration = 5
+         NumPanes = 2
+         Configuration = "(H (2 [66] 3))"
+      End
+      Begin PaneConfiguration = 6
+         NumPanes = 2
+         Configuration = "(H (4 [50] 3))"
+      End
+      Begin PaneConfiguration = 7
+         NumPanes = 1
+         Configuration = "(V (3))"
+      End
+      Begin PaneConfiguration = 8
+         NumPanes = 3
+         Configuration = "(H (1[56] 4[18] 2) )"
+      End
+      Begin PaneConfiguration = 9
+         NumPanes = 2
+         Configuration = "(H (1 [75] 4))"
+      End
+      Begin PaneConfiguration = 10
+         NumPanes = 2
+         Configuration = "(H (1[66] 2) )"
+      End
+      Begin PaneConfiguration = 11
+         NumPanes = 2
+         Configuration = "(H (4 [60] 2))"
+      End
+      Begin PaneConfiguration = 12
+         NumPanes = 1
+         Configuration = "(H (1) )"
+      End
+      Begin PaneConfiguration = 13
+         NumPanes = 1
+         Configuration = "(V (4))"
+      End
+      Begin PaneConfiguration = 14
+         NumPanes = 1
+         Configuration = "(V (2))"
+      End
+      ActivePaneConfig = 0
+   End
+   Begin DiagramPane = 
+      Begin Origin = 
+         Top = 0
+         Left = 0
+      End
+      Begin Tables = 
+         Begin Table = "PERSONAS"
+            Begin Extent = 
+               Top = 6
+               Left = 38
+               Bottom = 136
+               Right = 229
+            End
+            DisplayFlags = 280
+            TopColumn = 4
+         End
+      End
+   End
+   Begin SQLPane = 
+   End
+   Begin DataPane = 
+      Begin ParameterDefaults = ""
+      End
+   End
+   Begin CriteriaPane = 
+      Begin ColumnWidths = 11
+         Column = 1440
+         Alias = 900
+         Table = 1170
+         Output = 720
+         Append = 1400
+         NewValue = 1170
+         SortType = 1350
+         SortOrder = 1410
+         GroupBy = 1350
+         Filter = 1350
+         Or = 1350
+         Or = 1350
+         Or = 1350
+      End
+   End
+End
+' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'GET_USERNAMES'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPaneCount', @value=1 , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'GET_USERNAMES'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPane1', @value=N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
+Begin DesignProperties = 
+   Begin PaneConfigurations = 
+      Begin PaneConfiguration = 0
+         NumPanes = 4
+         Configuration = "(H (1[40] 4[20] 2[20] 3) )"
+      End
+      Begin PaneConfiguration = 1
+         NumPanes = 3
+         Configuration = "(H (1 [50] 4 [25] 3))"
+      End
+      Begin PaneConfiguration = 2
+         NumPanes = 3
+         Configuration = "(H (1 [50] 2 [25] 3))"
+      End
+      Begin PaneConfiguration = 3
+         NumPanes = 3
+         Configuration = "(H (4 [30] 2 [40] 3))"
+      End
+      Begin PaneConfiguration = 4
+         NumPanes = 2
+         Configuration = "(H (1 [56] 3))"
+      End
+      Begin PaneConfiguration = 5
+         NumPanes = 2
+         Configuration = "(H (2 [66] 3))"
+      End
+      Begin PaneConfiguration = 6
+         NumPanes = 2
+         Configuration = "(H (4 [50] 3))"
+      End
+      Begin PaneConfiguration = 7
+         NumPanes = 1
+         Configuration = "(V (3))"
+      End
+      Begin PaneConfiguration = 8
+         NumPanes = 3
+         Configuration = "(H (1[56] 4[18] 2) )"
+      End
+      Begin PaneConfiguration = 9
+         NumPanes = 2
+         Configuration = "(H (1 [75] 4))"
+      End
+      Begin PaneConfiguration = 10
+         NumPanes = 2
+         Configuration = "(H (1[66] 2) )"
+      End
+      Begin PaneConfiguration = 11
+         NumPanes = 2
+         Configuration = "(H (4 [60] 2))"
+      End
+      Begin PaneConfiguration = 12
+         NumPanes = 1
+         Configuration = "(H (1) )"
+      End
+      Begin PaneConfiguration = 13
+         NumPanes = 1
+         Configuration = "(V (4))"
+      End
+      Begin PaneConfiguration = 14
+         NumPanes = 1
+         Configuration = "(V (2))"
+      End
+      ActivePaneConfig = 0
+   End
+   Begin DiagramPane = 
+      Begin Origin = 
+         Top = 0
+         Left = 0
+      End
+      Begin Tables = 
+         Begin Table = "am"
+            Begin Extent = 
+               Top = 6
+               Left = 38
+               Bottom = 119
+               Right = 224
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "menuID"
+            Begin Extent = 
+               Top = 6
+               Left = 262
+               Bottom = 85
+               Right = 448
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+      End
+   End
+   Begin SQLPane = 
+   End
+   Begin DataPane = 
+      Begin ParameterDefaults = ""
+      End
+   End
+   Begin CriteriaPane = 
+      Begin ColumnWidths = 12
+         Column = 1440
+         Alias = 900
+         Table = 1170
+         Output = 720
+         Append = 1400
+         NewValue = 1170
+         SortType = 1350
+         SortOrder = 1410
+         GroupBy = 1350
+         Filter = 1350
+         Or = 1350
+         Or = 1350
+         Or = 1350
+      End
+   End
+End
+' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'MENU_APROBADOS'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPaneCount', @value=1 , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'MENU_APROBADOS'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPane1', @value=N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
+Begin DesignProperties = 
+   Begin PaneConfigurations = 
+      Begin PaneConfiguration = 0
+         NumPanes = 4
+         Configuration = "(H (1[40] 4[20] 2[20] 3) )"
+      End
+      Begin PaneConfiguration = 1
+         NumPanes = 3
+         Configuration = "(H (1 [50] 4 [25] 3))"
+      End
+      Begin PaneConfiguration = 2
+         NumPanes = 3
+         Configuration = "(H (1 [50] 2 [25] 3))"
+      End
+      Begin PaneConfiguration = 3
+         NumPanes = 3
+         Configuration = "(H (4 [30] 2 [40] 3))"
+      End
+      Begin PaneConfiguration = 4
+         NumPanes = 2
+         Configuration = "(H (1 [56] 3))"
+      End
+      Begin PaneConfiguration = 5
+         NumPanes = 2
+         Configuration = "(H (2 [66] 3))"
+      End
+      Begin PaneConfiguration = 6
+         NumPanes = 2
+         Configuration = "(H (4 [50] 3))"
+      End
+      Begin PaneConfiguration = 7
+         NumPanes = 1
+         Configuration = "(V (3))"
+      End
+      Begin PaneConfiguration = 8
+         NumPanes = 3
+         Configuration = "(H (1[56] 4[18] 2) )"
+      End
+      Begin PaneConfiguration = 9
+         NumPanes = 2
+         Configuration = "(H (1 [75] 4))"
+      End
+      Begin PaneConfiguration = 10
+         NumPanes = 2
+         Configuration = "(H (1[66] 2) )"
+      End
+      Begin PaneConfiguration = 11
+         NumPanes = 2
+         Configuration = "(H (4 [60] 2))"
+      End
+      Begin PaneConfiguration = 12
+         NumPanes = 1
+         Configuration = "(H (1) )"
+      End
+      Begin PaneConfiguration = 13
+         NumPanes = 1
+         Configuration = "(V (4))"
+      End
+      Begin PaneConfiguration = 14
+         NumPanes = 1
+         Configuration = "(V (2))"
+      End
+      ActivePaneConfig = 0
+   End
+   Begin DiagramPane = 
+      Begin Origin = 
+         Top = 0
+         Left = 0
+      End
+      Begin Tables = 
+         Begin Table = "PERSONAS"
+            Begin Extent = 
+               Top = 6
+               Left = 38
+               Bottom = 136
+               Right = 208
+            End
+            DisplayFlags = 280
+            TopColumn = 3
+         End
+         Begin Table = "PERMISO_NEGOCIO"
+            Begin Extent = 
+               Top = 6
+               Left = 246
+               Bottom = 136
+               Right = 440
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+      End
+   End
+   Begin SQLPane = 
+   End
+   Begin DataPane = 
+      Begin ParameterDefaults = ""
+      End
+   End
+   Begin CriteriaPane = 
+      Begin ColumnWidths = 11
+         Column = 1440
+         Alias = 900
+         Table = 1170
+         Output = 720
+         Append = 1400
+         NewValue = 1170
+         SortType = 1350
+         SortOrder = 1410
+         GroupBy = 1350
+         Filter = 1350
+         Or = 1350
+         Or = 1350
+         Or = 1350
+      End
+   End
+End
+' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'PERMISOS_AUTOREGISTRO'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPaneCount', @value=1 , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'PERMISOS_AUTOREGISTRO'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPane1', @value=N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
+Begin DesignProperties = 
+   Begin PaneConfigurations = 
+      Begin PaneConfiguration = 0
+         NumPanes = 4
+         Configuration = "(H (1[40] 4[20] 2[20] 3) )"
+      End
+      Begin PaneConfiguration = 1
+         NumPanes = 3
+         Configuration = "(H (1 [50] 4 [25] 3))"
+      End
+      Begin PaneConfiguration = 2
+         NumPanes = 3
+         Configuration = "(H (1 [50] 2 [25] 3))"
+      End
+      Begin PaneConfiguration = 3
+         NumPanes = 3
+         Configuration = "(H (4 [30] 2 [40] 3))"
+      End
+      Begin PaneConfiguration = 4
+         NumPanes = 2
+         Configuration = "(H (1 [56] 3))"
+      End
+      Begin PaneConfiguration = 5
+         NumPanes = 2
+         Configuration = "(H (2 [66] 3))"
+      End
+      Begin PaneConfiguration = 6
+         NumPanes = 2
+         Configuration = "(H (4 [50] 3))"
+      End
+      Begin PaneConfiguration = 7
+         NumPanes = 1
+         Configuration = "(V (3))"
+      End
+      Begin PaneConfiguration = 8
+         NumPanes = 3
+         Configuration = "(H (1[56] 4[18] 2) )"
+      End
+      Begin PaneConfiguration = 9
+         NumPanes = 2
+         Configuration = "(H (1 [75] 4))"
+      End
+      Begin PaneConfiguration = 10
+         NumPanes = 2
+         Configuration = "(H (1[66] 2) )"
+      End
+      Begin PaneConfiguration = 11
+         NumPanes = 2
+         Configuration = "(H (4 [60] 2))"
+      End
+      Begin PaneConfiguration = 12
+         NumPanes = 1
+         Configuration = "(H (1) )"
+      End
+      Begin PaneConfiguration = 13
+         NumPanes = 1
+         Configuration = "(V (4))"
+      End
+      Begin PaneConfiguration = 14
+         NumPanes = 1
+         Configuration = "(V (2))"
+      End
+      ActivePaneConfig = 0
+   End
+   Begin DiagramPane = 
+      Begin Origin = 
+         Top = 0
+         Left = 0
+      End
+      Begin Tables = 
+         Begin Table = "PERSONAS"
+            Begin Extent = 
+               Top = 6
+               Left = 38
+               Bottom = 136
+               Right = 213
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "PERMISO_NEGOCIO"
+            Begin Extent = 
+               Top = 6
+               Left = 251
+               Bottom = 136
+               Right = 445
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+      End
+   End
+   Begin SQLPane = 
+   End
+   Begin DataPane = 
+      Begin ParameterDefaults = ""
+      End
+   End
+   Begin CriteriaPane = 
+      Begin ColumnWidths = 11
+         Column = 1440
+         Alias = 900
+         Table = 1170
+         Output = 720
+         Append = 1400
+         NewValue = 1170
+         SortType = 1350
+         SortOrder = 1410
+         GroupBy = 1350
+         Filter = 1350
+         Or = 1350
+         Or = 1350
+         Or = 1350
+      End
+   End
+End
+' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'PERMISOS_DUMMY'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPaneCount', @value=1 , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'PERMISOS_DUMMY'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPane1', @value=N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
+Begin DesignProperties = 
+   Begin PaneConfigurations = 
+      Begin PaneConfiguration = 0
+         NumPanes = 4
+         Configuration = "(H (1[40] 4[20] 2[20] 3) )"
+      End
+      Begin PaneConfiguration = 1
+         NumPanes = 3
+         Configuration = "(H (1 [50] 4 [25] 3))"
+      End
+      Begin PaneConfiguration = 2
+         NumPanes = 3
+         Configuration = "(H (1 [50] 2 [25] 3))"
+      End
+      Begin PaneConfiguration = 3
+         NumPanes = 3
+         Configuration = "(H (4 [30] 2 [40] 3))"
+      End
+      Begin PaneConfiguration = 4
+         NumPanes = 2
+         Configuration = "(H (1 [56] 3))"
+      End
+      Begin PaneConfiguration = 5
+         NumPanes = 2
+         Configuration = "(H (2 [66] 3))"
+      End
+      Begin PaneConfiguration = 6
+         NumPanes = 2
+         Configuration = "(H (4 [50] 3))"
+      End
+      Begin PaneConfiguration = 7
+         NumPanes = 1
+         Configuration = "(V (3))"
+      End
+      Begin PaneConfiguration = 8
+         NumPanes = 3
+         Configuration = "(H (1[56] 4[18] 2) )"
+      End
+      Begin PaneConfiguration = 9
+         NumPanes = 2
+         Configuration = "(H (1 [75] 4))"
+      End
+      Begin PaneConfiguration = 10
+         NumPanes = 2
+         Configuration = "(H (1[66] 2) )"
+      End
+      Begin PaneConfiguration = 11
+         NumPanes = 2
+         Configuration = "(H (4 [60] 2))"
+      End
+      Begin PaneConfiguration = 12
+         NumPanes = 1
+         Configuration = "(H (1) )"
+      End
+      Begin PaneConfiguration = 13
+         NumPanes = 1
+         Configuration = "(V (4))"
+      End
+      Begin PaneConfiguration = 14
+         NumPanes = 1
+         Configuration = "(V (2))"
+      End
+      ActivePaneConfig = 0
+   End
+   Begin DiagramPane = 
+      Begin Origin = 
+         Top = 0
+         Left = 0
+      End
+      Begin Tables = 
+         Begin Table = "PERSONAS"
+            Begin Extent = 
+               Top = 6
+               Left = 38
+               Bottom = 136
+               Right = 213
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "PERMISO_NEGOCIO"
+            Begin Extent = 
+               Top = 6
+               Left = 251
+               Bottom = 136
+               Right = 445
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+      End
+   End
+   Begin SQLPane = 
+   End
+   Begin DataPane = 
+      Begin ParameterDefaults = ""
+      End
+   End
+   Begin CriteriaPane = 
+      Begin ColumnWidths = 11
+         Column = 1440
+         Alias = 900
+         Table = 1170
+         Output = 720
+         Append = 1400
+         NewValue = 1170
+         SortType = 1350
+         SortOrder = 1410
+         GroupBy = 1350
+         Filter = 1350
+         Or = 1350
+         Or = 1350
+         Or = 1350
+      End
+   End
+End
+' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'PERMISOS_GESTION_PERMISOS'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPaneCount', @value=1 , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'PERMISOS_GESTION_PERMISOS'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPane1', @value=N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
+Begin DesignProperties = 
+   Begin PaneConfigurations = 
+      Begin PaneConfiguration = 0
+         NumPanes = 4
+         Configuration = "(H (1[40] 4[20] 2[20] 3) )"
+      End
+      Begin PaneConfiguration = 1
+         NumPanes = 3
+         Configuration = "(H (1 [50] 4 [25] 3))"
+      End
+      Begin PaneConfiguration = 2
+         NumPanes = 3
+         Configuration = "(H (1 [50] 2 [25] 3))"
+      End
+      Begin PaneConfiguration = 3
+         NumPanes = 3
+         Configuration = "(H (4 [30] 2 [40] 3))"
+      End
+      Begin PaneConfiguration = 4
+         NumPanes = 2
+         Configuration = "(H (1 [56] 3))"
+      End
+      Begin PaneConfiguration = 5
+         NumPanes = 2
+         Configuration = "(H (2 [66] 3))"
+      End
+      Begin PaneConfiguration = 6
+         NumPanes = 2
+         Configuration = "(H (4 [50] 3))"
+      End
+      Begin PaneConfiguration = 7
+         NumPanes = 1
+         Configuration = "(V (3))"
+      End
+      Begin PaneConfiguration = 8
+         NumPanes = 3
+         Configuration = "(H (1[56] 4[18] 2) )"
+      End
+      Begin PaneConfiguration = 9
+         NumPanes = 2
+         Configuration = "(H (1 [75] 4))"
+      End
+      Begin PaneConfiguration = 10
+         NumPanes = 2
+         Configuration = "(H (1[66] 2) )"
+      End
+      Begin PaneConfiguration = 11
+         NumPanes = 2
+         Configuration = "(H (4 [60] 2))"
+      End
+      Begin PaneConfiguration = 12
+         NumPanes = 1
+         Configuration = "(H (1) )"
+      End
+      Begin PaneConfiguration = 13
+         NumPanes = 1
+         Configuration = "(V (4))"
+      End
+      Begin PaneConfiguration = 14
+         NumPanes = 1
+         Configuration = "(V (2))"
+      End
+      ActivePaneConfig = 0
+   End
+   Begin DiagramPane = 
+      Begin Origin = 
+         Top = 0
+         Left = 0
+      End
+      Begin Tables = 
+         Begin Table = "p"
+            Begin Extent = 
+               Top = 6
+               Left = 38
+               Bottom = 136
+               Right = 208
+            End
+            DisplayFlags = 280
+            TopColumn = 4
+         End
+      End
+   End
+   Begin SQLPane = 
+   End
+   Begin DataPane = 
+      Begin ParameterDefaults = ""
+      End
+   End
+   Begin CriteriaPane = 
+      Begin ColumnWidths = 11
+         Column = 1440
+         Alias = 900
+         Table = 1170
+         Output = 720
+         Append = 1400
+         NewValue = 1170
+         SortType = 1350
+         SortOrder = 1410
+         GroupBy = 1350
+         Filter = 1350
+         Or = 1350
+         Or = 1350
+         Or = 1350
+      End
+   End
+End
+' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'PERSONAS_LOGIN'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPaneCount', @value=1 , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'PERSONAS_LOGIN'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPane1', @value=N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
+Begin DesignProperties = 
+   Begin PaneConfigurations = 
+      Begin PaneConfiguration = 0
+         NumPanes = 4
+         Configuration = "(H (1[40] 4[20] 2[20] 3) )"
+      End
+      Begin PaneConfiguration = 1
+         NumPanes = 3
+         Configuration = "(H (1 [50] 4 [25] 3))"
+      End
+      Begin PaneConfiguration = 2
+         NumPanes = 3
+         Configuration = "(H (1 [50] 2 [25] 3))"
+      End
+      Begin PaneConfiguration = 3
+         NumPanes = 3
+         Configuration = "(H (4 [30] 2 [40] 3))"
+      End
+      Begin PaneConfiguration = 4
+         NumPanes = 2
+         Configuration = "(H (1 [56] 3))"
+      End
+      Begin PaneConfiguration = 5
+         NumPanes = 2
+         Configuration = "(H (2 [66] 3))"
+      End
+      Begin PaneConfiguration = 6
+         NumPanes = 2
+         Configuration = "(H (4 [50] 3))"
+      End
+      Begin PaneConfiguration = 7
+         NumPanes = 1
+         Configuration = "(V (3))"
+      End
+      Begin PaneConfiguration = 8
+         NumPanes = 3
+         Configuration = "(H (1[56] 4[18] 2) )"
+      End
+      Begin PaneConfiguration = 9
+         NumPanes = 2
+         Configuration = "(H (1 [75] 4))"
+      End
+      Begin PaneConfiguration = 10
+         NumPanes = 2
+         Configuration = "(H (1[66] 2) )"
+      End
+      Begin PaneConfiguration = 11
+         NumPanes = 2
+         Configuration = "(H (4 [60] 2))"
+      End
+      Begin PaneConfiguration = 12
+         NumPanes = 1
+         Configuration = "(H (1) )"
+      End
+      Begin PaneConfiguration = 13
+         NumPanes = 1
+         Configuration = "(V (4))"
+      End
+      Begin PaneConfiguration = 14
+         NumPanes = 1
+         Configuration = "(V (2))"
+      End
+      ActivePaneConfig = 0
+   End
+   Begin DiagramPane = 
+      Begin Origin = 
+         Top = 0
+         Left = 0
+      End
+      Begin Tables = 
+         Begin Table = "PERMISOS"
+            Begin Extent = 
+               Top = 6
+               Left = 38
+               Bottom = 136
+               Right = 226
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "PERSONAS"
+            Begin Extent = 
+               Top = 6
+               Left = 264
+               Bottom = 136
+               Right = 434
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+      End
+   End
+   Begin SQLPane = 
+   End
+   Begin DataPane = 
+      Begin ParameterDefaults = ""
+      End
+   End
+   Begin CriteriaPane = 
+      Begin ColumnWidths = 11
+         Column = 1440
+         Alias = 900
+         Table = 1170
+         Output = 720
+         Append = 1400
+         NewValue = 1170
+         SortType = 1350
+         SortOrder = 1410
+         GroupBy = 1350
+         Filter = 1350
+         Or = 1350
+         Or = 1350
+         Or = 1350
+      End
+   End
+End
+' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'PERSONAS_LOGIN_PERMISO'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPaneCount', @value=1 , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'PERSONAS_LOGIN_PERMISO'
+GO
+USE [master]
+GO
+ALTER DATABASE [ObligatorioDB] SET  READ_WRITE 
+GO

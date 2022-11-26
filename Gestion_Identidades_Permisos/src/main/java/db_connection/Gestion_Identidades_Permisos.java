@@ -3,7 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Project/Maven2/JavaApp/src/main/java/${packagePath}/${mainClassName}.java to edit this template
  */
 
-package com.mycompany.gestion_identidades_permisos;
+package db_connection;
+
+import Interfaz_gráfica.Login;
 
 /**
  *
@@ -12,6 +14,7 @@ package com.mycompany.gestion_identidades_permisos;
 public class Gestion_Identidades_Permisos {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        DBConnection.getInstance().establecerConexion();
+        Login.getInstance().setVisible(true);
     }
 }
