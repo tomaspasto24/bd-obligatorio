@@ -59,6 +59,45 @@ public class Home extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Error al obtener aplicaciones, error: " + e.toString());
             }
         }
+        
+        jListAplicativos.addListSelectionListener(new ListSelectionListener() {
+
+            @Override
+            public void valueChanged(ListSelectionEvent arg0) {
+                if (!arg0.getValueIsAdjusting()) {
+                    Connection connection = DBConnection.getInstance().dbConnection;
+                    Statement statement = null;
+
+                    String nombreApp = jListAplicativos.getSelectedValue().toString();
+
+                    try {
+                        statement = connection.createStatement();
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, "Error al crear statement, error: " + e.toString());
+                    }
+
+                    DefaultListModel menus = new DefaultListModel();
+
+                    if (statement != null) {
+                        try {
+                            String sqlString
+                                    = "EXEC sp_set_session_context 'app_id', " + nombreAppID.get(nombreApp) + "; "
+                                    + "EXEC sp_set_session_context 'rol_id', " + nombreAppRol.get(nombreApp) + "; "
+                                    + "SELECT * FROM [MENU_APROBADOS];";
+                            var res = statement.executeQuery(sqlString);
+                            System.out.println(sqlString);
+                            while (res.next()) {
+                                String nombre_menu = res.getString("descripcion_menu");
+                                menus.addElement(nombre_menu);
+                            }
+                            jListMenus.setModel(menus);
+                        } catch (Exception e) {
+                            JOptionPane.showMessageDialog(null, "Error al obtener user, error: " + e.toString());
+                        }
+                    }
+                }
+            }
+        });
     }
     
     
@@ -70,6 +109,10 @@ public class Home extends javax.swing.JFrame {
             instance = new Home();
         }
         return instance;
+    }
+    
+    public static void closeInstance() {
+        instance = null;
     }
 
     /**
@@ -265,6 +308,7 @@ public class Home extends javax.swing.JFrame {
     private void logOutBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logOutBtnMouseClicked
         UserAccount.getInstance().setUserId(0);
         this.setVisible(false);
+        closeInstance();
         Login.getInstance().setVisible(true);
     }//GEN-LAST:event_logOutBtnMouseClicked
 
