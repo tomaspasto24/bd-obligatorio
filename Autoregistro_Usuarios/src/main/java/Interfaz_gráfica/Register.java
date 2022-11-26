@@ -18,6 +18,7 @@ import javax.swing.JOptionPane;
 
 import UserAccount.UserAccount;
 import java.awt.Color;
+import java.util.ArrayList;
 
 /**
  *
@@ -57,7 +58,7 @@ public class Register extends javax.swing.JFrame {
         title1 = new javax.swing.JLabel();
         title2 = new javax.swing.JLabel();
         bgImage = new javax.swing.JLabel();
-        nombresText = new javax.swing.JLabel();
+        nombreUsuarioText = new javax.swing.JLabel();
         apellidosText = new javax.swing.JLabel();
         direccionText = new javax.swing.JLabel();
         ciudadText = new javax.swing.JLabel();
@@ -82,6 +83,9 @@ public class Register extends javax.swing.JFrame {
         header = new javax.swing.JPanel();
         continueBtn = new javax.swing.JPanel();
         continueTxt = new javax.swing.JLabel();
+        nombresText = new javax.swing.JLabel();
+        userNameInput = new javax.swing.JTextField();
+        jSeparator8 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
@@ -126,7 +130,7 @@ public class Register extends javax.swing.JFrame {
         confirmPasswordText.setForeground(new java.awt.Color(0, 0, 0));
         confirmPasswordText.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         confirmPasswordText.setText("Confirmar contraseña");
-        jPanel1.add(confirmPasswordText, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 330, -1, -1));
+        jPanel1.add(confirmPasswordText, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 360, -1, -1));
 
         title1.setFont(new java.awt.Font("Calisto MT", 3, 40)); // NOI18N
         title1.setForeground(new java.awt.Color(0, 0, 0));
@@ -144,41 +148,41 @@ public class Register extends javax.swing.JFrame {
         bgImage.setIcon(new javax.swing.ImageIcon("C:\\Users\\juan-\\OneDrive - Universidad Católica del Uruguay\\UCU\\2do\\2do semestre\\BD I\\bd-obligatorio\\Images\\Auto-Registro\\fondoRegister.jpg")); // NOI18N
         jPanel1.add(bgImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 570));
 
-        nombresText.setFont(new java.awt.Font("Calisto MT", 1, 14)); // NOI18N
-        nombresText.setForeground(new java.awt.Color(0, 0, 0));
-        nombresText.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        nombresText.setText("Nombres");
-        jPanel1.add(nombresText, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 90, 60, -1));
+        nombreUsuarioText.setFont(new java.awt.Font("Calisto MT", 1, 14)); // NOI18N
+        nombreUsuarioText.setForeground(new java.awt.Color(0, 0, 0));
+        nombreUsuarioText.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        nombreUsuarioText.setText("Nombre de usuario");
+        jPanel1.add(nombreUsuarioText, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 80, 130, -1));
 
         apellidosText.setFont(new java.awt.Font("Calisto MT", 1, 14)); // NOI18N
         apellidosText.setForeground(new java.awt.Color(0, 0, 0));
         apellidosText.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         apellidosText.setText("Apellidos");
-        jPanel1.add(apellidosText, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 130, -1, -1));
+        jPanel1.add(apellidosText, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 160, -1, -1));
 
         direccionText.setFont(new java.awt.Font("Calisto MT", 1, 14)); // NOI18N
         direccionText.setForeground(new java.awt.Color(0, 0, 0));
         direccionText.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         direccionText.setText("Dirección");
-        jPanel1.add(direccionText, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 170, -1, -1));
+        jPanel1.add(direccionText, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 200, -1, -1));
 
         ciudadText.setFont(new java.awt.Font("Calisto MT", 1, 14)); // NOI18N
         ciudadText.setForeground(new java.awt.Color(0, 0, 0));
         ciudadText.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         ciudadText.setText("Ciudad");
-        jPanel1.add(ciudadText, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 210, 50, -1));
+        jPanel1.add(ciudadText, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 240, 50, -1));
 
         departamentoText.setFont(new java.awt.Font("Calisto MT", 1, 14)); // NOI18N
         departamentoText.setForeground(new java.awt.Color(0, 0, 0));
         departamentoText.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         departamentoText.setText("Departamento");
-        jPanel1.add(departamentoText, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 250, -1, -1));
+        jPanel1.add(departamentoText, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 280, -1, -1));
 
         contraseñaText.setFont(new java.awt.Font("Calisto MT", 1, 14)); // NOI18N
         contraseñaText.setForeground(new java.awt.Color(0, 0, 0));
         contraseñaText.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         contraseñaText.setText("Contraseña");
-        jPanel1.add(contraseñaText, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 290, 80, -1));
+        jPanel1.add(contraseñaText, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 320, 80, -1));
 
         nameInput.setBackground(new java.awt.Color(255, 255, 255));
         nameInput.setFont(new java.awt.Font("Calisto MT", 0, 14)); // NOI18N
@@ -195,8 +199,8 @@ public class Register extends javax.swing.JFrame {
                 nameInputActionPerformed(evt);
             }
         });
-        jPanel1.add(nameInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 90, 290, 20));
-        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 110, 260, 10));
+        jPanel1.add(nameInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 120, 290, 20));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 140, 260, 10));
 
         lastNameInput.setBackground(new java.awt.Color(255, 255, 255));
         lastNameInput.setFont(new java.awt.Font("Calisto MT", 0, 14)); // NOI18N
@@ -213,8 +217,8 @@ public class Register extends javax.swing.JFrame {
                 lastNameInputActionPerformed(evt);
             }
         });
-        jPanel1.add(lastNameInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 130, 290, 20));
-        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 150, 260, 10));
+        jPanel1.add(lastNameInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 160, 290, 20));
+        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 180, 260, 10));
 
         addressInput.setBackground(new java.awt.Color(255, 255, 255));
         addressInput.setFont(new java.awt.Font("Calisto MT", 0, 14)); // NOI18N
@@ -231,8 +235,8 @@ public class Register extends javax.swing.JFrame {
                 addressInputActionPerformed(evt);
             }
         });
-        jPanel1.add(addressInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 170, 290, 20));
-        jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 190, 260, 10));
+        jPanel1.add(addressInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 200, 290, 20));
+        jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 220, 260, 10));
 
         cityInput.setBackground(new java.awt.Color(255, 255, 255));
         cityInput.setFont(new java.awt.Font("Calisto MT", 0, 14)); // NOI18N
@@ -249,8 +253,8 @@ public class Register extends javax.swing.JFrame {
                 cityInputActionPerformed(evt);
             }
         });
-        jPanel1.add(cityInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 210, 290, 20));
-        jPanel1.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 230, 260, 10));
+        jPanel1.add(cityInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 240, 290, 20));
+        jPanel1.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 260, 260, 10));
 
         departamentoInput.setBackground(new java.awt.Color(255, 255, 255));
         departamentoInput.setFont(new java.awt.Font("Calisto MT", 0, 14)); // NOI18N
@@ -267,10 +271,10 @@ public class Register extends javax.swing.JFrame {
                 departamentoInputActionPerformed(evt);
             }
         });
-        jPanel1.add(departamentoInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 250, 290, 20));
-        jPanel1.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 270, 260, 10));
-        jPanel1.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 310, 260, 10));
-        jPanel1.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 350, 260, 10));
+        jPanel1.add(departamentoInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 280, 290, 20));
+        jPanel1.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 300, 260, 10));
+        jPanel1.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 340, 260, 10));
+        jPanel1.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 380, 260, 10));
 
         confirmPasswordInput.setBackground(new java.awt.Color(255, 255, 255));
         confirmPasswordInput.setForeground(new java.awt.Color(153, 153, 153));
@@ -281,7 +285,7 @@ public class Register extends javax.swing.JFrame {
                 confirmPasswordInputMousePressed(evt);
             }
         });
-        jPanel1.add(confirmPasswordInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 330, 260, 20));
+        jPanel1.add(confirmPasswordInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 360, 260, 20));
 
         passwordInput.setBackground(new java.awt.Color(255, 255, 255));
         passwordInput.setForeground(new java.awt.Color(153, 153, 153));
@@ -292,7 +296,7 @@ public class Register extends javax.swing.JFrame {
                 passwordInputMousePressed(evt);
             }
         });
-        jPanel1.add(passwordInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 290, 260, 20));
+        jPanel1.add(passwordInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 320, 260, 20));
 
         exitBtn.setBackground(new java.awt.Color(255, 255, 255));
         exitBtn.setForeground(new java.awt.Color(255, 255, 255));
@@ -381,6 +385,30 @@ public class Register extends javax.swing.JFrame {
 
         jPanel1.add(continueBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 450, 170, 60));
 
+        nombresText.setFont(new java.awt.Font("Calisto MT", 1, 14)); // NOI18N
+        nombresText.setForeground(new java.awt.Color(0, 0, 0));
+        nombresText.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        nombresText.setText("Nombres");
+        jPanel1.add(nombresText, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 120, 60, -1));
+
+        userNameInput.setBackground(new java.awt.Color(255, 255, 255));
+        userNameInput.setFont(new java.awt.Font("Calisto MT", 0, 14)); // NOI18N
+        userNameInput.setForeground(new java.awt.Color(153, 153, 153));
+        userNameInput.setText("Ingrese su nombre de usuario");
+        userNameInput.setBorder(null);
+        userNameInput.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                userNameInputMousePressed(evt);
+            }
+        });
+        userNameInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                userNameInputActionPerformed(evt);
+            }
+        });
+        jPanel1.add(userNameInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 80, 290, 20));
+        jPanel1.add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 100, 260, 10));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -442,6 +470,7 @@ public class Register extends javax.swing.JFrame {
 
     private void goBackBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goBackBtnMouseClicked
         this.setVisible(false);
+        setInputToPredetermined();
         Login.getInstance().setVisible(true);
     }//GEN-LAST:event_goBackBtnMouseClicked
 
@@ -482,6 +511,10 @@ public class Register extends javax.swing.JFrame {
             confirmPasswordInput.setText("**********");
             confirmPasswordInput.setForeground(Color.gray);
         }
+        if (String.valueOf(userNameInput.getText()).isEmpty()) {
+            userNameInput.setText("Ingrese su nombre de usuario");
+            userNameInput.setForeground(Color.gray);
+        }
     }//GEN-LAST:event_nameInputMousePressed
 
     private void lastNameInputMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lastNameInputMousePressed
@@ -512,6 +545,10 @@ public class Register extends javax.swing.JFrame {
         if (String.valueOf(confirmPasswordInput.getText()).isEmpty()) {
             confirmPasswordInput.setText("**********");
             confirmPasswordInput.setForeground(Color.gray);
+        }
+        if (String.valueOf(userNameInput.getText()).isEmpty()) {
+            userNameInput.setText("Ingrese su nombre de usuario");
+            userNameInput.setForeground(Color.gray);
         }
     }//GEN-LAST:event_lastNameInputMousePressed
 
@@ -544,6 +581,10 @@ public class Register extends javax.swing.JFrame {
             confirmPasswordInput.setText("**********");
             confirmPasswordInput.setForeground(Color.gray);
         }
+        if (String.valueOf(userNameInput.getText()).isEmpty()) {
+            userNameInput.setText("Ingrese su nombre de usuario");
+            userNameInput.setForeground(Color.gray);
+        }
     }//GEN-LAST:event_addressInputMouseClicked
 
     private void cityInputMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cityInputMousePressed
@@ -574,6 +615,10 @@ public class Register extends javax.swing.JFrame {
         if (String.valueOf(confirmPasswordInput.getText()).isEmpty()) {
             confirmPasswordInput.setText("**********");
             confirmPasswordInput.setForeground(Color.gray);
+        }
+        if (String.valueOf(userNameInput.getText()).isEmpty()) {
+            userNameInput.setText("Ingrese su nombre de usuario");
+            userNameInput.setForeground(Color.gray);
         }
     }//GEN-LAST:event_cityInputMousePressed
 
@@ -606,6 +651,10 @@ public class Register extends javax.swing.JFrame {
             confirmPasswordInput.setText("**********");
             confirmPasswordInput.setForeground(Color.gray);
         }
+        if (String.valueOf(userNameInput.getText()).isEmpty()) {
+            userNameInput.setText("Ingrese su nombre de usuario");
+            userNameInput.setForeground(Color.gray);
+        }
     }//GEN-LAST:event_departamentoInputMousePressed
 
     private void passwordInputMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passwordInputMousePressed
@@ -636,6 +685,10 @@ public class Register extends javax.swing.JFrame {
         if (String.valueOf(confirmPasswordInput.getText()).isEmpty()) {
             confirmPasswordInput.setText("**********");
             confirmPasswordInput.setForeground(Color.gray);
+        }
+        if (String.valueOf(userNameInput.getText()).isEmpty()) {
+            userNameInput.setText("Ingrese su nombre de usuario");
+            userNameInput.setForeground(Color.gray);
         }
     }//GEN-LAST:event_passwordInputMousePressed
 
@@ -668,6 +721,10 @@ public class Register extends javax.swing.JFrame {
             passwordInput.setText("**********");
             passwordInput.setForeground(Color.gray);
         }
+        if (String.valueOf(userNameInput.getText()).isEmpty()) {
+            userNameInput.setText("Ingrese su nombre de usuario");
+            userNameInput.setForeground(Color.gray);
+        }
     }//GEN-LAST:event_confirmPasswordInputMousePressed
 
     private void continueBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_continueBtnMouseClicked
@@ -678,11 +735,13 @@ public class Register extends javax.swing.JFrame {
         String inputDepartamento = departamentoInput.getText();
         String inputContrasena = passwordInput.getText();
         String inputConfirmContrasena = confirmPasswordInput.getText();
-        
+        String inputUserName = userNameInput.getText();
+
         if (inputNombres.equals("Ingrese su nombre/s") || inputApellidos.equals("Ingrese sus apellidos")
                 || inputDireccion.equals("Ingrese su dirección") || inputDepartamento.equals("Ingrese su departamento")
-                || inputCiudad.equals("Ingrese su ciudad") || inputContrasena.equals("**********") || inputConfirmContrasena.equals("**********")) {
+                || inputCiudad.equals("Ingrese su ciudad") || inputContrasena.equals("**********") || inputConfirmContrasena.equals("**********") || inputUserName.equals("Ingrese su nombre de usuario")) {
             inputNombres = "";
+            inputUserName = "";
             inputApellidos = "";
             inputDireccion = "";
             inputCiudad = "";
@@ -705,33 +764,119 @@ public class Register extends javax.swing.JFrame {
             Connection connection = DBConnection.getInstance().dbConnection;
 
             Statement statement = null;
-            try {
-                if (inputContrasena.equals(inputConfirmContrasena)) {
-                    var hashPass = argon2.hash(2, 15 * 1024, 1, inputContrasena.toCharArray());
+            boolean usernameAvailable = false;
 
-                    statement = connection.createStatement();
-                    if (statement != null) {
-                        String sqlString = "INSERT INTO PERSONAS (user_id, nombres, apellidos, direccion, ciudad, departamento, hashpwd) "
-                                + "VALUES (" + userID + ", '" + inputNombres.toString() + "', '" + inputApellidos.toString() + "', '"
-                                + inputDireccion.toString() + "', '" + inputCiudad.toString() + "', '" + inputDepartamento.toString() + "', '"
-                                + hashPass.toString() + "')";
-                        int rs = statement.executeUpdate(sqlString);
-                        if (rs == 1) {
-                            UserAccount.getInstance().setUserId(userID);
-                            this.setVisible(false);
-                            RegisterQuestions.getInstance().setVisible(true);
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Problema al agregar el usuario. Prueba otra vez.");
-                        }
+            ArrayList<String> usernames = new ArrayList<>();
+
+            try {
+                statement = connection.createStatement();
+                if (statement != null) {
+                    String sqlString ="SELECT * FROM [GET_USERNAMES]";
+                    var res = statement.executeQuery(sqlString);
+                    while (res.next()) {
+                        String username = res.getString("nombre_usuario");
+                        usernames.add(username);
                     }
-                } else {
-                    JOptionPane.showMessageDialog(null, "Contraseñas ingresadas no coinciden");
+                    if (!usernames.contains(inputUserName)) {
+                        usernameAvailable = true;
+                    } else {
+                        JOptionPane.showMessageDialog(null, "El nombre de usuario ya esta siendo utilizado, eliga otro.");
+                    }
+
                 }
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Error al agregar usuario, error: " + e.toString());
             }
+            
+            if (usernameAvailable) {
+                try {
+                    if (inputContrasena.equals(inputConfirmContrasena)) {
+                        var hashPass = argon2.hash(2, 15 * 1024, 1, inputContrasena.toCharArray());
+
+                        statement = connection.createStatement();
+                        if (statement != null) {
+                            String sqlString = "INSERT INTO PERSONAS (user_id, nombres, apellidos, direccion, ciudad, departamento, hashpwd, nombre_usuario) "
+                                    + "VALUES (" + userID + ", '" + inputNombres.toString() + "', '" + inputApellidos.toString() + "', '"
+                                    + inputDireccion.toString() + "', '" + inputCiudad.toString() + "', '" + inputDepartamento.toString() + "', '"
+                                    + hashPass.toString() + "', '" + inputUserName.toString() + "')";
+                            int rs = statement.executeUpdate(sqlString);
+                            if (rs == 1) {
+                                UserAccount.getInstance().setUserId(userID);
+                                this.setVisible(false);
+                                setInputToPredetermined();
+                                RegisterQuestions.getInstance().setVisible(true);
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Problema al agregar el usuario. Prueba otra vez.");
+                            }
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Contraseñas ingresadas no coinciden");
+                    }
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Error al agregar usuario, error: " + e.toString());
+                }
+            }
         }
     }//GEN-LAST:event_continueBtnMouseClicked
+
+    private void setInputToPredetermined(){
+        userNameInput.setText("Ingrese su nombre de usuario");
+        nameInput.setText("Ingrese su nombre/s");
+        lastNameInput.setText("Ingrese sus apellidos");
+        addressInput.setText("Ingrese su dirección");
+        cityInput.setText("Ingrese su ciudad");
+        departamentoInput.setText("Ingrese su departamento");
+        passwordInput.setText("**********");
+        confirmPasswordInput.setText("**********");
+        
+        userNameInput.setForeground(Color.gray);
+        nameInput.setForeground(Color.gray);
+        lastNameInput.setForeground(Color.gray);
+        addressInput.setForeground(Color.gray);
+        cityInput.setForeground(Color.gray);
+        departamentoInput.setForeground(Color.gray);
+        passwordInput.setForeground(Color.gray);
+        confirmPasswordInput.setForeground(Color.gray);
+    }
+    
+    private void userNameInputMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userNameInputMousePressed
+        if (userNameInput.getText().equals("Ingrese su nombre de usuario")) {
+            userNameInput.setText("");
+            userNameInput.setForeground(Color.black);
+        }
+        if (String.valueOf(nameInput.getText()).isEmpty()) {
+            nameInput.setText("Ingrese su nombre/s");
+            nameInput.setForeground(Color.gray);
+        }
+        if (String.valueOf(lastNameInput.getText()).isEmpty()) {
+            lastNameInput.setText("Ingrese sus apellidos");
+            lastNameInput.setForeground(Color.gray);
+        }
+        if (String.valueOf(addressInput.getText()).isEmpty()) {
+            addressInput.setText("Ingrese su dirección");
+            addressInput.setForeground(Color.gray);
+        }
+        if (String.valueOf(cityInput.getText()).isEmpty()) {
+            cityInput.setText("Ingrese su ciudad");
+            cityInput.setForeground(Color.gray);
+        }
+        if (String.valueOf(departamentoInput.getText()).isEmpty()) {
+            departamentoInput.setText("Ingrese su departamento");
+            departamentoInput.setForeground(Color.gray);
+        }
+        if (String.valueOf(passwordInput.getText()).isEmpty()) {
+            passwordInput.setText("**********");
+            passwordInput.setForeground(Color.gray);
+        }
+        if (String.valueOf(confirmPasswordInput.getText()).isEmpty()) {
+            confirmPasswordInput.setText("**********");
+            confirmPasswordInput.setForeground(Color.gray);
+        }
+    }//GEN-LAST:event_userNameInputMousePressed
+
+    private void userNameInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userNameInputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_userNameInputActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField addressInput;
@@ -760,11 +905,14 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
+    private javax.swing.JSeparator jSeparator8;
     private javax.swing.JTextField lastNameInput;
     private javax.swing.JTextField nameInput;
+    private javax.swing.JLabel nombreUsuarioText;
     private javax.swing.JLabel nombresText;
     private javax.swing.JPasswordField passwordInput;
     private javax.swing.JLabel title1;
     private javax.swing.JLabel title2;
+    private javax.swing.JTextField userNameInput;
     // End of variables declaration//GEN-END:variables
 }

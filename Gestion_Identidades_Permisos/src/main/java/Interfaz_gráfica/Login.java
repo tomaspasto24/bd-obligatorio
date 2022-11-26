@@ -56,8 +56,6 @@ public class Login extends javax.swing.JFrame {
         passwordInput = new javax.swing.JPasswordField();
         loginBtn = new javax.swing.JPanel();
         loginText = new javax.swing.JLabel();
-        registerText = new javax.swing.JLabel();
-        recoverPasswordTxt = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
@@ -68,8 +66,8 @@ public class Login extends javax.swing.JFrame {
 
         title.setFont(new java.awt.Font("Calisto MT", 0, 36)); // NOI18N
         title.setForeground(new java.awt.Color(255, 255, 255));
-        title.setText("Bienvenido a Autoregistro de Usuario");
-        jPanel1.add(title, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, -1, 60));
+        title.setText("Bienvenido a Gestión de Permisos");
+        jPanel1.add(title, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, -1, 60));
 
         image.setIcon(new javax.swing.ImageIcon("C:\\Users\\juan-\\OneDrive - Universidad Católica del Uruguay\\UCU\\2do\\2do semestre\\BD I\\bd-obligatorio\\Gestion_Identidades_Permisos\\src\\main\\java\\com\\images\\fondoHome.jpg")); // NOI18N
         jPanel1.add(image, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 180));
@@ -150,30 +148,6 @@ public class Login extends javax.swing.JFrame {
 
         jPanel1.add(loginBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 430, 210, 50));
 
-        registerText.setFont(new java.awt.Font("Calisto MT", 0, 14)); // NOI18N
-        registerText.setForeground(new java.awt.Color(0, 0, 0));
-        registerText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        registerText.setText("Registrarse");
-        registerText.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        registerText.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                registerTextMouseClicked(evt);
-            }
-        });
-        jPanel1.add(registerText, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 500, 90, 30));
-
-        recoverPasswordTxt.setFont(new java.awt.Font("Calisto MT", 0, 14)); // NOI18N
-        recoverPasswordTxt.setForeground(new java.awt.Color(0, 0, 0));
-        recoverPasswordTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        recoverPasswordTxt.setText("Recuperar contraseña");
-        recoverPasswordTxt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        recoverPasswordTxt.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                recoverPasswordTxtMouseClicked(evt);
-            }
-        });
-        jPanel1.add(recoverPasswordTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 500, 150, 30));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -189,7 +163,7 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginBtnMouseClicked
-        String inputNombre = nameInput.getText();
+        String inputNombreUsuario = nameInput.getText();
         String inputPassword = passwordInput.getText();
 
         Connection connection = DBConnection.getInstance().dbConnection;
@@ -206,37 +180,40 @@ public class Login extends javax.swing.JFrame {
 
         if (statement != null) {
             try {
-                String sqlString = "SELECT * FROM [PERSONAS LOGIN] WHERE NOMBRES='" + inputNombre + "';";
+                String sqlString = "EXEC sp_set_session_context 'nombreUser', " + inputNombreUsuario + "; "
+                        + "SELECT * FROM [PERSONAS_LOGIN_PERMISO]";
                 var res = statement.executeQuery(sqlString);
-                boolean logged = false;
+                boolean correctPsw = false;
+                boolean permiso = false;
                 while (res.next()) {
                     boolean validPassword = argon2.verify(res.getString("hashpwd"), inputPassword.toCharArray());
                     if (validPassword) {
-                        logged = true;
-                        nameInput.setText("");
-                        passwordInput.setText("");
-                        //UserAccount.UserAccount.getInstance().setUserId(res.getInt("user_id"));
-                        this.setVisible(false);
-                        Home.getInstance().setVisible(true);
+                        correctPsw = true;
+                        boolean tienePermiso = res.getInt("rol_neg_id") == 1
+                                && res.getInt("app_id") == 1
+                                && res.getString("estado").equals("ACTIVO");
+                        if (tienePermiso) {
+                            permiso = true;
+                            nameInput.setText("");
+                            passwordInput.setText("");
+                            UserAccount.UserAccount.getInstance().setUserId(res.getInt("user_id"));
+                            this.setVisible(false);
+                            Home.getInstance().setVisible(true);
+                        }
                     }
                 }
-                if (!logged) {
+                if (!correctPsw) {
                     JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos.");
-
+                }
+                if (!permiso && correctPsw) {
+                    JOptionPane.showMessageDialog(null, "Usuario no cuenta con los permisos requeridos");
                 }
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Erro al obtener user, error: " + e.toString());
+                JOptionPane.showMessageDialog(null, "Error al obtener user, error: " + e.toString());
             }
         }
 
     }//GEN-LAST:event_loginBtnMouseClicked
-
-    private void registerTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerTextMouseClicked
-        nameInput.setText("");
-        passwordInput.setText("");
-        this.setVisible(false);
-        //Register.getInstance().setVisible(true);
-    }//GEN-LAST:event_registerTextMouseClicked
 
     private void nameInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameInputActionPerformed
         // TODO add your handling code here:
@@ -268,13 +245,6 @@ public class Login extends javax.swing.JFrame {
             nameInput.setForeground(Color.gray);
         }
     }//GEN-LAST:event_passwordInputMousePressed
-
-    private void recoverPasswordTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_recoverPasswordTxtMouseClicked
-        nameInput.setText("");
-        passwordInput.setText("");
-        this.setVisible(false);
-        //GetUserIdToRecoverPassword.getInstance().setVisible(true);
-    }//GEN-LAST:event_recoverPasswordTxtMouseClicked
 
     /**
      * @param args the command line arguments
@@ -326,8 +296,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel nameText;
     private javax.swing.JLabel nameText1;
     private javax.swing.JPasswordField passwordInput;
-    private javax.swing.JLabel recoverPasswordTxt;
-    private javax.swing.JLabel registerText;
     private javax.swing.JLabel title;
     // End of variables declaration//GEN-END:variables
 }

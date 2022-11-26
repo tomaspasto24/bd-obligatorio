@@ -19,22 +19,22 @@ import javax.swing.JOptionPane;
  *
  * @author juan-
  */
-public class Permisos_AU extends javax.swing.JFrame {
+public class Permisos_GestionPermisos extends javax.swing.JFrame {
 
     /**
      * Creates new form Permisos_AU
      */
     private HashMap<Integer, String> indexPermiso;
 
-    public Permisos_AU() {
+    public Permisos_GestionPermisos() {
         initComponents();
         this.completeList();
     }
-
-    private void completeList() {
+    
+    private void completeList(){
         Connection connection = DBConnection.getInstance().dbConnection;
         Statement statement = null;
-
+        
         indexPermiso = new HashMap<Integer, String>();
 
         try {
@@ -49,7 +49,7 @@ public class Permisos_AU extends javax.swing.JFrame {
             try {
                 int index = 0;
                 String sqlString = "EXEC sp_set_session_context 'userID', " + UserAccount.getInstance().getUserId() + "; "
-                        + "SELECT * FROM [PERMISOS_AUTOREGISTRO];";
+                        + "SELECT * FROM [PERMISOS_GESTION_PERMISOS];";
                 var res = statement.executeQuery(sqlString);
                 while (res.next()) {
                     Integer rol_neg_id = res.getInt("rol_neg_id");
@@ -67,11 +67,11 @@ public class Permisos_AU extends javax.swing.JFrame {
         }
     }
 
-    public static Permisos_AU instance;
+    public static Permisos_GestionPermisos instance;
 
-    public static Permisos_AU getInstance() {
+    public static Permisos_GestionPermisos getInstance() {
         if (instance == null) {
-            instance = new Permisos_AU();
+            instance = new Permisos_GestionPermisos();
         }
         return instance;
     }
@@ -103,7 +103,6 @@ public class Permisos_AU extends javax.swing.JFrame {
         setLocationByPlatform(true);
         setMinimumSize(new java.awt.Dimension(800, 570));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(800, 570));
         setResizable(false);
 
         bg.setBackground(new java.awt.Color(255, 255, 255));
@@ -164,7 +163,7 @@ public class Permisos_AU extends javax.swing.JFrame {
         title.setFont(new java.awt.Font("Calisto MT", 0, 36)); // NOI18N
         title.setForeground(new java.awt.Color(0, 0, 0));
         title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        title.setText("Permisos Autoregistro Usuarios");
+        title.setText("Permisos Gestión de Permisos");
         bg.add(title, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 620, 70));
 
         goBackBtn.setBackground(new java.awt.Color(255, 255, 255));
@@ -329,9 +328,9 @@ public class Permisos_AU extends javax.swing.JFrame {
         if (statement != null) {
             try {
                 String sqlString = "UPDATE PERMISOS "
-                        + "SET estado='ACTIVO' "
-                        + ",fecha_autorizacion='" + strDate + "' "
-                        + "WHERE user_id=" + user_id + " AND " + "app_id=" + 2 + " AND " + "rol_neg_id=" + rol_neg_id;
+                        + "SET estado='ACTIVO' " 
+                        + ",fecha_autorizacion='" + strDate +"' "
+                        + "WHERE user_id=" + user_id + " AND " + "app_id=" + 1 + " AND " + "rol_neg_id=" + rol_neg_id;
                 System.out.println(sqlString);
                 int rs = statement.executeUpdate(sqlString);
                 System.out.println(rs);
@@ -365,20 +364,21 @@ public class Permisos_AU extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Permisos_AU.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Permisos_GestionPermisos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Permisos_AU.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Permisos_GestionPermisos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Permisos_AU.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Permisos_GestionPermisos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Permisos_AU.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Permisos_GestionPermisos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Permisos_AU().setVisible(true);
+                new Permisos_GestionPermisos().setVisible(true);
             }
         });
     }

@@ -49,7 +49,7 @@ public class Login extends javax.swing.JFrame {
         image = new javax.swing.JLabel();
         iniciarSesionText = new javax.swing.JLabel();
         nameText = new javax.swing.JLabel();
-        nameInput = new javax.swing.JTextField();
+        userNameInput = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         nameText1 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
@@ -71,7 +71,7 @@ public class Login extends javax.swing.JFrame {
         title.setText("Bienvenido a Autoregistro de Usuario");
         jPanel1.add(title, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, -1, 60));
 
-        image.setIcon(new javax.swing.ImageIcon("C:\\Users\\juan-\\OneDrive - Universidad Católica del Uruguay\\UCU\\2do\\2do semestre\\BD I\\bd-obligatorio\\Images\\Auto-Registro\\fondoHome.jpg")); // NOI18N
+        image.setIcon(new javax.swing.ImageIcon("C:\\Users\\juan-\\OneDrive - Universidad Católica del Uruguay\\UCU\\2do\\2do semestre\\BD I\\bd-obligatorio\\Autoregistro_Usuarios\\src\\main\\java\\com\\images\\fondoHome.jpg")); // NOI18N
         jPanel1.add(image, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 180));
 
         iniciarSesionText.setFont(new java.awt.Font("Calisto MT", 0, 24)); // NOI18N
@@ -81,25 +81,25 @@ public class Login extends javax.swing.JFrame {
 
         nameText.setFont(new java.awt.Font("Calisto MT", 0, 18)); // NOI18N
         nameText.setForeground(new java.awt.Color(0, 0, 0));
-        nameText.setText("Nombre");
+        nameText.setText("Nombre de usuario");
         jPanel1.add(nameText, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 250, -1, -1));
 
-        nameInput.setBackground(new java.awt.Color(255, 255, 255));
-        nameInput.setFont(new java.awt.Font("Calisto MT", 0, 14)); // NOI18N
-        nameInput.setForeground(new java.awt.Color(153, 153, 153));
-        nameInput.setText("Ingrese su nombre/s");
-        nameInput.setBorder(null);
-        nameInput.addMouseListener(new java.awt.event.MouseAdapter() {
+        userNameInput.setBackground(new java.awt.Color(255, 255, 255));
+        userNameInput.setFont(new java.awt.Font("Calisto MT", 0, 14)); // NOI18N
+        userNameInput.setForeground(new java.awt.Color(153, 153, 153));
+        userNameInput.setText("Ingrese su nombre de usuario");
+        userNameInput.setBorder(null);
+        userNameInput.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                nameInputMousePressed(evt);
+                userNameInputMousePressed(evt);
             }
         });
-        nameInput.addActionListener(new java.awt.event.ActionListener() {
+        userNameInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nameInputActionPerformed(evt);
+                userNameInputActionPerformed(evt);
             }
         });
-        jPanel1.add(nameInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 290, 290, -1));
+        jPanel1.add(userNameInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 290, 290, -1));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 310, 290, -1));
 
         nameText1.setFont(new java.awt.Font("Calisto MT", 0, 18)); // NOI18N
@@ -189,7 +189,7 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginBtnMouseClicked
-        String inputNombre = nameInput.getText();
+        String inputNombreUsuario = userNameInput.getText();
         String inputPassword = passwordInput.getText();
 
         Connection connection = DBConnection.getInstance().dbConnection;
@@ -206,14 +206,15 @@ public class Login extends javax.swing.JFrame {
 
         if (statement != null) {
             try {
-                String sqlString = "SELECT * FROM [PERSONAS LOGIN] WHERE NOMBRES='" + inputNombre + "';";
+                String sqlString = "EXEC sp_set_session_context 'nombreUser', " + inputNombreUsuario + "; "
+                        + "SELECT * FROM [PERSONAS_LOGIN]";
                 var res = statement.executeQuery(sqlString);
                 boolean logged = false;
                 while (res.next()) {
                     boolean validPassword = argon2.verify(res.getString("hashpwd"), inputPassword.toCharArray());
                     if (validPassword) {
                         logged = true;
-                        nameInput.setText("");
+                        userNameInput.setText("");
                         passwordInput.setText("");
                         UserAccount.UserAccount.getInstance().setUserId(res.getInt("user_id"));
                         this.setVisible(false);
@@ -232,45 +233,45 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_loginBtnMouseClicked
 
     private void registerTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerTextMouseClicked
-        nameInput.setText("");
+        userNameInput.setText("");
         passwordInput.setText("");
         this.setVisible(false);
         Register.getInstance().setVisible(true);
     }//GEN-LAST:event_registerTextMouseClicked
 
-    private void nameInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameInputActionPerformed
+    private void userNameInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userNameInputActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_nameInputActionPerformed
+    }//GEN-LAST:event_userNameInputActionPerformed
 
     private void passwordInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordInputActionPerformed
         // TODO add your handling code here:
 
     }//GEN-LAST:event_passwordInputActionPerformed
 
-    private void nameInputMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nameInputMousePressed
-        if (nameInput.getText().equals("Ingrese su nombre/s")) {
-            nameInput.setText("");
-            nameInput.setForeground(Color.black);
+    private void userNameInputMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userNameInputMousePressed
+        if (userNameInput.getText().equals("Ingrese su nombre de usuario")) {
+            userNameInput.setText("");
+            userNameInput.setForeground(Color.black);
         }
         if (String.valueOf(passwordInput.getText()).isEmpty()) {
             passwordInput.setText("**********");
             passwordInput.setForeground(Color.gray);
         }
-    }//GEN-LAST:event_nameInputMousePressed
+    }//GEN-LAST:event_userNameInputMousePressed
 
     private void passwordInputMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passwordInputMousePressed
         if (passwordInput.getText().equals("**********")) {
             passwordInput.setText("");
             passwordInput.setForeground(Color.black);
         }
-        if (String.valueOf(nameInput.getText()).isEmpty()) {
-            nameInput.setText("Ingrese su nombre/s");
-            nameInput.setForeground(Color.gray);
+        if (String.valueOf(userNameInput.getText()).isEmpty()) {
+            userNameInput.setText("Ingrese su nombre de usuario");
+            userNameInput.setForeground(Color.gray);
         }
     }//GEN-LAST:event_passwordInputMousePressed
 
     private void recoverPasswordTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_recoverPasswordTxtMouseClicked
-        nameInput.setText("");
+        userNameInput.setText("");
         passwordInput.setText("");
         this.setVisible(false);
         GetUserIdToRecoverPassword.getInstance().setVisible(true);
@@ -322,12 +323,12 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JPanel loginBtn;
     private javax.swing.JLabel loginText;
-    private javax.swing.JTextField nameInput;
     private javax.swing.JLabel nameText;
     private javax.swing.JLabel nameText1;
     private javax.swing.JPasswordField passwordInput;
     private javax.swing.JLabel recoverPasswordTxt;
     private javax.swing.JLabel registerText;
     private javax.swing.JLabel title;
+    private javax.swing.JTextField userNameInput;
     // End of variables declaration//GEN-END:variables
 }

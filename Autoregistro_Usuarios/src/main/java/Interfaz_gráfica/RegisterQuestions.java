@@ -49,7 +49,7 @@ public class RegisterQuestions extends javax.swing.JFrame {
 
         if (statement != null) {
             try {
-                String sqlString = "SELECT * FROM [GETPREGUNTAS];";
+                String sqlString = "SELECT * FROM [GET_PREGUNTAS];";
                 var res = statement.executeQuery(sqlString);
                 while (res.next()) {
                     String pregunta = res.getString("pregunta");
@@ -193,7 +193,7 @@ public class RegisterQuestions extends javax.swing.JFrame {
         bg.add(exitBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 0, 30, 30));
 
         bgImage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        bgImage.setIcon(new javax.swing.ImageIcon("C:\\Users\\juan-\\OneDrive - Universidad Católica del Uruguay\\UCU\\2do\\2do semestre\\BD I\\bd-obligatorio\\Images\\Auto-Registro\\fondoQuestions.jpg")); // NOI18N
+        bgImage.setIcon(new javax.swing.ImageIcon("C:\\Users\\juan-\\OneDrive - Universidad Católica del Uruguay\\UCU\\2do\\2do semestre\\BD I\\bd-obligatorio\\Autoregistro_Usuarios\\src\\main\\java\\com\\images\\fondoQuestions.jpg")); // NOI18N
         bg.add(bgImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 370, 570));
 
         jSeparator1.setBackground(new java.awt.Color(0, 0, 0));

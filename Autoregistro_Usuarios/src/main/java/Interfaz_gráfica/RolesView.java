@@ -51,7 +51,7 @@ public class RolesView extends javax.swing.JFrame {
 
         if (statement != null) {
             try {
-                String sqlString = "SELECT * FROM [GETAPLICATIVOS]";
+                String sqlString = "SELECT * FROM [GET_APLICATIVOS]";
                 var res = statement.executeQuery(sqlString);
                 while (res.next()) {
                     String nombre_app = res.getString("nombre_app");
@@ -319,12 +319,9 @@ public class RolesView extends javax.swing.JFrame {
 
         if (statement != null) {
             try {
-                String sqlString = "SELECT * "
-                        + "FROM (SELECT * "
-                        + "FROM ROLES_NEGOCIO_APLICATIVOS "
-                        + "WHERE app_id=" + app_Id + ") p "
-                        + "JOIN ROLES_NEGOCIO "
-                        + "ON p.rol_neg_id = ROLES_NEGOCIO.rol_neg_id ";
+                String sqlString
+                        = "EXEC sp_set_session_context 'app_id', " + app_Id + "; "
+                        + "SELECT * FROM [GET_APLICATIVOS_ROLES]";
                 var res = statement.executeQuery(sqlString);
                 while (res.next()) {
                     Integer rol_neg_id = res.getInt("rol_neg_id");
@@ -349,23 +346,55 @@ public class RolesView extends javax.swing.JFrame {
         Connection connection = DBConnection.getInstance().dbConnection;
 
         Statement statement = null;
+
+        HashMap<Integer, String> permisosActuales = new HashMap<>();
+        boolean permisoRepetido = false;
+
         try {
             statement = connection.createStatement();
             if (statement != null) {
-                String sqlString = "INSERT INTO PERMISOS (user_id, app_id, rol_neg_id, fecha_solicitud, fecha_autorizacion, estado) "
-                        + "VALUES (" + user_id + ", '" + app_id + "', '" + rol_neg_id + "', '"
-                        + strDate + "', '" + null + "', '" + "PENDIENTE" + "')";
-                int rs = statement.executeUpdate(sqlString);
-                if (rs == 1) {
-                    JOptionPane.showMessageDialog(null, "Solicitud realizada correctamente.");
-                    this.setVisible(false);
-                    Home.getInstance().setVisible(true);
-                } else {
-                    JOptionPane.showMessageDialog(null, "Problema al solicitar permiso. Prueba otra vez.");
+                int index = 0;
+                String sqlString = "SELECT * FROM [GET_PERMISOS]";
+                var res = statement.executeQuery(sqlString);
+                while (res.next()) {
+                    String rolID = res.getString("rol_neg_id");
+                    String userID = res.getString("user_id");
+                    String appID = res.getString("app_id");
+                    permisosActuales.put(index, rolID + "," + userID + "," + appID);
+                    index++;
                 }
+                for (String str : permisosActuales.values()) {
+                    String[] values = str.split(",");
+                    if (Integer.valueOf(values[0]) == rol_neg_id && Integer.valueOf(values[1]) == user_id && Integer.valueOf(values[2]) == app_id) {
+                        permisoRepetido = true;
+                        JOptionPane.showMessageDialog(null, "El permiso que se solicitó ya ha sido solicitado, eliga otro.");
+                    }
+                }
+
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error solicitar permiso, error: " + e.toString());
+            JOptionPane.showMessageDialog(null, "Error al solicitar permiso, error: " + e.toString());
+        }
+
+        if (!permisoRepetido) {
+            try {
+                statement = connection.createStatement();
+                if (statement != null) {
+                    String sqlString = "INSERT INTO PERMISOS (user_id, app_id, rol_neg_id, fecha_solicitud, fecha_autorizacion, estado) "
+                            + "VALUES (" + user_id + ", '" + app_id + "', '" + rol_neg_id + "', '"
+                            + strDate + "', '" + null + "', '" + "PENDIENTE" + "')";
+                    int rs = statement.executeUpdate(sqlString);
+                    if (rs == 1) {
+                        JOptionPane.showMessageDialog(null, "Solicitud realizada correctamente.");
+                        this.setVisible(false);
+                        Home.getInstance().setVisible(true);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Problema al solicitar permiso. Prueba otra vez.");
+                    }
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error solicitar permiso, error: " + e.toString());
+            }
         }
     }//GEN-LAST:event_solicitarBtnMouseClicked
 

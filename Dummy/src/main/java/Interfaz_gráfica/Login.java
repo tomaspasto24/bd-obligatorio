@@ -65,8 +65,8 @@ public class Login extends javax.swing.JFrame {
 
         title.setFont(new java.awt.Font("Calisto MT", 0, 36)); // NOI18N
         title.setForeground(new java.awt.Color(255, 255, 255));
-        title.setText("Bienvenido a Autoregistro de Usuario");
-        jPanel1.add(title, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, -1, 60));
+        title.setText("Bienvenido a Dummy");
+        jPanel1.add(title, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 50, -1, 60));
 
         image.setIcon(new javax.swing.ImageIcon("C:\\Users\\juan-\\OneDrive - Universidad Católica del Uruguay\\UCU\\2do\\2do semestre\\BD I\\bd-obligatorio\\Dummy\\src\\main\\java\\com\\images\\fondoHome.jpg")); // NOI18N
         jPanel1.add(image, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 180));
@@ -84,7 +84,7 @@ public class Login extends javax.swing.JFrame {
         nameInput.setBackground(new java.awt.Color(255, 255, 255));
         nameInput.setFont(new java.awt.Font("Calisto MT", 0, 14)); // NOI18N
         nameInput.setForeground(new java.awt.Color(153, 153, 153));
-        nameInput.setText("Ingrese su nombre/s");
+        nameInput.setText("Ingrese su nombre de usuario");
         nameInput.setBorder(null);
         nameInput.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -162,7 +162,7 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginBtnMouseClicked
-        String inputNombre = nameInput.getText();
+        String inputNombreUsuario = nameInput.getText();
         String inputPassword = passwordInput.getText();
 
         Connection connection = DBConnection.getInstance().dbConnection;
@@ -179,26 +179,35 @@ public class Login extends javax.swing.JFrame {
 
         if (statement != null) {
             try {
-                String sqlString = "SELECT * FROM [PERSONAS LOGIN] WHERE NOMBRES='" + inputNombre + "';";
+                String sqlString = "EXEC sp_set_session_context 'nombreUser', " + inputNombreUsuario + "; "
+                        + "SELECT * FROM [PERSONAS_LOGIN_PERMISO]";
                 var res = statement.executeQuery(sqlString);
-                boolean logged = false;
+                boolean correctPsw = false;
+                boolean permiso = false;
                 while (res.next()) {
                     boolean validPassword = argon2.verify(res.getString("hashpwd"), inputPassword.toCharArray());
                     if (validPassword) {
-                        logged = true;
-                        nameInput.setText("");
-                        passwordInput.setText("");
-                        UserAccount.UserAccount.getInstance().setUserId(res.getInt("user_id"));
-                        this.setVisible(false);
-                        Home.getInstance().setVisible(true);
+                        correctPsw = true;
+                        boolean tienePermiso = res.getInt("app_id") == 3
+                                && res.getString("estado").equals("ACTIVO");
+                        if (tienePermiso) {
+                            permiso = true;
+                            nameInput.setText("");
+                            passwordInput.setText("");
+                            UserAccount.UserAccount.getInstance().setUserId(res.getInt("user_id"));
+                            this.setVisible(false);
+                            Home.getInstance().setVisible(true);
+                        }
                     }
                 }
-                if (!logged) {
+                if (!correctPsw) {
                     JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos.");
-
+                }
+                if (!permiso && correctPsw) {
+                    JOptionPane.showMessageDialog(null, "Usuario no cuenta con los permisos requeridos");
                 }
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Erro al obtener user, error: " + e.toString());
+                JOptionPane.showMessageDialog(null, "Error al obtener user, error: " + e.toString());
             }
         }
 
@@ -214,7 +223,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_passwordInputActionPerformed
 
     private void nameInputMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nameInputMousePressed
-        if (nameInput.getText().equals("Ingrese su nombre/s")) {
+        if (nameInput.getText().equals("Ingrese su nombre de usuario")) {
             nameInput.setText("");
             nameInput.setForeground(Color.black);
         }
@@ -230,7 +239,7 @@ public class Login extends javax.swing.JFrame {
             passwordInput.setForeground(Color.black);
         }
         if (String.valueOf(nameInput.getText()).isEmpty()) {
-            nameInput.setText("Ingrese su nombre/s");
+            nameInput.setText("Ingrese su nombre de usuario");
             nameInput.setForeground(Color.gray);
         }
     }//GEN-LAST:event_passwordInputMousePressed

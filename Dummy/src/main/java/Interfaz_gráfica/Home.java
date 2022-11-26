@@ -42,62 +42,26 @@ public class Home extends javax.swing.JFrame {
 
         if (statement != null) {
             try {
-                String sqlString = "EXEC sp_set_session_context 'user_id', 2024312677; "
-                        + "SELECT * FROM [APLICATIVOSAROBADOS];";
+                String sqlString = "EXEC sp_set_session_context 'user_id'," + UserAccount.getInstance().getUserId() + "; "
+                        + "SELECT * FROM [APLICATIVOS_APROBADOS];";
                 var res = statement.executeQuery(sqlString);
                 while (res.next()) {
                     String nombre_app = res.getString("nombre_app");
                     Integer app_id = res.getInt("app_id");
-                    Integer rol_neg_id = res.getInt("rol_neg_id");
+                    Integer rol_id = res.getInt("rol_id");
 
-                    nombreAppRol.put(nombre_app, rol_neg_id);
+                    nombreAppRol.put(nombre_app, rol_id);
                     nombreAppID.put(nombre_app, app_id);
                     aplicativos.addElement(nombre_app);
                 }
                 jListAplicativos.setModel(aplicativos);
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Error al obtener user, error: " + e.toString());
+                JOptionPane.showMessageDialog(null, "Error al obtener aplicaciones, error: " + e.toString());
             }
         }
-
-        jListAplicativos.addListSelectionListener(new ListSelectionListener() {
-
-            @Override
-            public void valueChanged(ListSelectionEvent arg0) {
-                if (!arg0.getValueIsAdjusting()) {
-                    Connection connection = DBConnection.getInstance().dbConnection;
-                    Statement statement = null;
-
-                    String nombreApp = jListAplicativos.getSelectedValue().toString();
-
-                    try {
-                        statement = connection.createStatement();
-                    } catch (Exception e) {
-                        JOptionPane.showMessageDialog(null, "Error al crear statement, error: " + e.toString());
-                    }
-
-                    DefaultListModel menus = new DefaultListModel();
-
-                    if (statement != null) {
-                        try {
-                            String sqlString
-                                    = "EXEC sp_set_session_context 'app_id', " + nombreAppID.get(nombreApp) + "; "
-                                    + "EXEC sp_set_session_context 'rol_id', "+ nombreAppRol.get(nombreApp) + "; "
-                                    + "SELECT * FROM [MENUAPROBADOS];";
-                            var res = statement.executeQuery(sqlString);
-                            while (res.next()) {
-                                String nombre_menu = res.getString("descripcion_menu");
-                                menus.addElement(nombre_menu);
-                            }
-                            jListMenus.setModel(menus);
-                        } catch (Exception e) {
-                            JOptionPane.showMessageDialog(null, "Error al obtener user, error: " + e.toString());
-                        }
-                    }
-                }
-            }
-        });
     }
+    
+    
 
     public static Home instance;
 
@@ -123,14 +87,14 @@ public class Home extends javax.swing.JFrame {
         exitTxt12 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         header = new javax.swing.JPanel();
-        goBackBtn = new javax.swing.JPanel();
-        goBackTxt = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         title12 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jListMenus = new javax.swing.JList<>();
         jScrollPane3 = new javax.swing.JScrollPane();
         jListAplicativos = new javax.swing.JList<>();
+        logOutBtn = new javax.swing.JPanel();
+        logOutTxt = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
@@ -199,46 +163,14 @@ public class Home extends javax.swing.JFrame {
         header.setLayout(headerLayout);
         headerLayout.setHorizontalGroup(
             headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 740, Short.MAX_VALUE)
+            .addGap(0, 670, Short.MAX_VALUE)
         );
         headerLayout.setVerticalGroup(
             headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 30, Short.MAX_VALUE)
         );
 
-        bg15.add(header, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 740, 30));
-
-        goBackBtn.setBackground(new java.awt.Color(255, 255, 255));
-        goBackBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        goBackBtn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                goBackBtnMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                goBackBtnMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                goBackBtnMouseExited(evt);
-            }
-        });
-
-        goBackTxt.setFont(new java.awt.Font("Calisto MT", 0, 18)); // NOI18N
-        goBackTxt.setForeground(new java.awt.Color(0, 0, 0));
-        goBackTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        goBackTxt.setText("<");
-
-        javax.swing.GroupLayout goBackBtnLayout = new javax.swing.GroupLayout(goBackBtn);
-        goBackBtn.setLayout(goBackBtnLayout);
-        goBackBtnLayout.setHorizontalGroup(
-            goBackBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(goBackTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-        );
-        goBackBtnLayout.setVerticalGroup(
-            goBackBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(goBackTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-        );
-
-        bg15.add(goBackBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 30, 30));
+        bg15.add(header, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 0, 670, 30));
         bg15.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 110, 320, -1));
 
         title12.setFont(new java.awt.Font("Calisto MT", 1, 36)); // NOI18N
@@ -258,6 +190,38 @@ public class Home extends javax.swing.JFrame {
         jScrollPane3.setViewportView(jListAplicativos);
 
         bg15.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 370, 430));
+
+        logOutBtn.setBackground(new java.awt.Color(255, 255, 255));
+        logOutBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        logOutBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                logOutBtnMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                logOutBtnMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                logOutBtnMouseExited(evt);
+            }
+        });
+
+        logOutTxt.setFont(new java.awt.Font("Calisto MT", 0, 14)); // NOI18N
+        logOutTxt.setForeground(new java.awt.Color(0, 0, 0));
+        logOutTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        logOutTxt.setText("Cerrar sesión");
+
+        javax.swing.GroupLayout logOutBtnLayout = new javax.swing.GroupLayout(logOutBtn);
+        logOutBtn.setLayout(logOutBtnLayout);
+        logOutBtnLayout.setHorizontalGroup(
+            logOutBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(logOutTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+        );
+        logOutBtnLayout.setVerticalGroup(
+            logOutBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(logOutTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+        );
+
+        bg15.add(logOutBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 100, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -298,18 +262,19 @@ public class Home extends javax.swing.JFrame {
         yMouse = evt.getY();
     }//GEN-LAST:event_headerMousePressed
 
-    private void goBackBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goBackBtnMouseClicked
+    private void logOutBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logOutBtnMouseClicked
+        UserAccount.getInstance().setUserId(0);
         this.setVisible(false);
-        Home.getInstance().setVisible(true);
-    }//GEN-LAST:event_goBackBtnMouseClicked
+        Login.getInstance().setVisible(true);
+    }//GEN-LAST:event_logOutBtnMouseClicked
 
-    private void goBackBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goBackBtnMouseEntered
-        goBackBtn.setBackground(Color.red);
-    }//GEN-LAST:event_goBackBtnMouseEntered
+    private void logOutBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logOutBtnMouseEntered
+        logOutBtn.setBackground(Color.red);
+    }//GEN-LAST:event_logOutBtnMouseEntered
 
-    private void goBackBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goBackBtnMouseExited
-        goBackBtn.setBackground(Color.white);
-    }//GEN-LAST:event_goBackBtnMouseExited
+    private void logOutBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logOutBtnMouseExited
+        logOutBtn.setBackground(Color.white);
+    }//GEN-LAST:event_logOutBtnMouseExited
 
     /**
      * @param args the command line arguments
@@ -350,8 +315,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel bg15;
     private javax.swing.JPanel exitBtn12;
     private javax.swing.JLabel exitTxt12;
-    private javax.swing.JPanel goBackBtn;
-    private javax.swing.JLabel goBackTxt;
     private javax.swing.JPanel header;
     private javax.swing.JList<String> jListAplicativos;
     private javax.swing.JList<String> jListMenus;
@@ -359,6 +322,8 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JPanel logOutBtn;
+    private javax.swing.JLabel logOutTxt;
     private javax.swing.JLabel title11;
     private javax.swing.JLabel title12;
     // End of variables declaration//GEN-END:variables

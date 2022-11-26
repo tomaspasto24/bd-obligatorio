@@ -49,16 +49,16 @@ public class Home extends javax.swing.JFrame {
         topBg = new javax.swing.JPanel();
         title = new javax.swing.JLabel();
         title2 = new javax.swing.JLabel();
-        changePasswordBtn = new javax.swing.JPanel();
+        AU_Btn = new javax.swing.JPanel();
         changePasswordTxt = new javax.swing.JLabel();
-        viewRolesBtn = new javax.swing.JPanel();
+        GIP_Btn = new javax.swing.JPanel();
         viewRolesTxt = new javax.swing.JLabel();
         header = new javax.swing.JPanel();
         exitBtn = new javax.swing.JPanel();
         exitTxt = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        logOutBtn = new javax.swing.JPanel();
+        subTitle1 = new javax.swing.JLabel();
+        subTitle2 = new javax.swing.JLabel();
+        D_Btn = new javax.swing.JPanel();
         logOutTxt = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -71,74 +71,55 @@ public class Home extends javax.swing.JFrame {
         bg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         topBg.setBackground(new java.awt.Color(51, 153, 255));
+        topBg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         title.setFont(new java.awt.Font("Calisto MT", 0, 36)); // NOI18N
         title.setForeground(new java.awt.Color(255, 255, 255));
         title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         title.setText("Bienvenido a");
+        topBg.add(title, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 152, 261, 71));
 
         title2.setFont(new java.awt.Font("Calisto MT", 0, 36)); // NOI18N
         title2.setForeground(new java.awt.Color(255, 255, 255));
         title2.setText("gestión de permisos");
-
-        javax.swing.GroupLayout topBgLayout = new javax.swing.GroupLayout(topBg);
-        topBg.setLayout(topBgLayout);
-        topBgLayout.setHorizontalGroup(
-            topBgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(topBgLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(topBgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(title2)
-                    .addGroup(topBgLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(15, Short.MAX_VALUE))
-        );
-        topBgLayout.setVerticalGroup(
-            topBgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(topBgLayout.createSequentialGroup()
-                .addGap(152, 152, 152)
-                .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
-                .addComponent(title2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(226, Short.MAX_VALUE))
-        );
+        topBg.add(title2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 256, -1, 88));
 
         bg.add(topBg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 320, 570));
 
-        changePasswordBtn.setBackground(new java.awt.Color(0, 153, 153));
-        changePasswordBtn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        changePasswordBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        changePasswordBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+        AU_Btn.setBackground(new java.awt.Color(51, 153, 255));
+        AU_Btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        AU_Btn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        AU_Btn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                changePasswordBtnMouseClicked(evt);
+                AU_BtnMouseClicked(evt);
             }
         });
 
+        changePasswordTxt.setBackground(new java.awt.Color(51, 153, 255));
         changePasswordTxt.setFont(new java.awt.Font("Calisto MT", 0, 24)); // NOI18N
         changePasswordTxt.setForeground(new java.awt.Color(255, 255, 255));
         changePasswordTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         changePasswordTxt.setText("Autoregistro de Usuarios");
 
-        javax.swing.GroupLayout changePasswordBtnLayout = new javax.swing.GroupLayout(changePasswordBtn);
-        changePasswordBtn.setLayout(changePasswordBtnLayout);
-        changePasswordBtnLayout.setHorizontalGroup(
-            changePasswordBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout AU_BtnLayout = new javax.swing.GroupLayout(AU_Btn);
+        AU_Btn.setLayout(AU_BtnLayout);
+        AU_BtnLayout.setHorizontalGroup(
+            AU_BtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(changePasswordTxt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        changePasswordBtnLayout.setVerticalGroup(
-            changePasswordBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        AU_BtnLayout.setVerticalGroup(
+            AU_BtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(changePasswordTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
         );
 
-        bg.add(changePasswordBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 190, 300, 80));
+        bg.add(AU_Btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 190, 300, 80));
 
-        viewRolesBtn.setBackground(new java.awt.Color(0, 153, 153));
-        viewRolesBtn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        viewRolesBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        viewRolesBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+        GIP_Btn.setBackground(new java.awt.Color(51, 153, 255));
+        GIP_Btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        GIP_Btn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        GIP_Btn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                viewRolesBtnMouseClicked(evt);
+                GIP_BtnMouseClicked(evt);
             }
         });
 
@@ -147,18 +128,18 @@ public class Home extends javax.swing.JFrame {
         viewRolesTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         viewRolesTxt.setText("Gestion de Identidades y Permisos");
 
-        javax.swing.GroupLayout viewRolesBtnLayout = new javax.swing.GroupLayout(viewRolesBtn);
-        viewRolesBtn.setLayout(viewRolesBtnLayout);
-        viewRolesBtnLayout.setHorizontalGroup(
-            viewRolesBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout GIP_BtnLayout = new javax.swing.GroupLayout(GIP_Btn);
+        GIP_Btn.setLayout(GIP_BtnLayout);
+        GIP_BtnLayout.setHorizontalGroup(
+            GIP_BtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(viewRolesTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
         );
-        viewRolesBtnLayout.setVerticalGroup(
-            viewRolesBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        GIP_BtnLayout.setVerticalGroup(
+            GIP_BtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(viewRolesTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
         );
 
-        bg.add(viewRolesBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 330, 300, 80));
+        bg.add(GIP_Btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 330, 300, 80));
 
         header.setBackground(new java.awt.Color(255, 255, 255));
         header.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -218,24 +199,24 @@ public class Home extends javax.swing.JFrame {
 
         bg.add(exitBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 0, 40, -1));
 
-        jLabel1.setFont(new java.awt.Font("Calisto MT", 0, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Seleccione la aplicación sobre ");
-        bg.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 70, 330, 40));
+        subTitle1.setFont(new java.awt.Font("Calisto MT", 0, 24)); // NOI18N
+        subTitle1.setForeground(new java.awt.Color(0, 0, 0));
+        subTitle1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        subTitle1.setText("Seleccione la aplicación sobre ");
+        bg.add(subTitle1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 70, 330, 40));
 
-        jLabel2.setFont(new java.awt.Font("Calisto MT", 0, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("la cual quiere gestionar");
-        bg.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 110, -1, -1));
+        subTitle2.setFont(new java.awt.Font("Calisto MT", 0, 24)); // NOI18N
+        subTitle2.setForeground(new java.awt.Color(0, 0, 0));
+        subTitle2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        subTitle2.setText("la cual quiere gestionar");
+        bg.add(subTitle2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 110, -1, -1));
 
-        logOutBtn.setBackground(new java.awt.Color(0, 153, 153));
-        logOutBtn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        logOutBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        logOutBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+        D_Btn.setBackground(new java.awt.Color(51, 153, 255));
+        D_Btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        D_Btn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        D_Btn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                logOutBtnMouseClicked(evt);
+                D_BtnMouseClicked(evt);
             }
         });
 
@@ -244,18 +225,18 @@ public class Home extends javax.swing.JFrame {
         logOutTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         logOutTxt.setText("Dummy");
 
-        javax.swing.GroupLayout logOutBtnLayout = new javax.swing.GroupLayout(logOutBtn);
-        logOutBtn.setLayout(logOutBtnLayout);
-        logOutBtnLayout.setHorizontalGroup(
-            logOutBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout D_BtnLayout = new javax.swing.GroupLayout(D_Btn);
+        D_Btn.setLayout(D_BtnLayout);
+        D_BtnLayout.setHorizontalGroup(
+            D_BtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(logOutTxt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        logOutBtnLayout.setVerticalGroup(
-            logOutBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        D_BtnLayout.setVerticalGroup(
+            D_BtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(logOutTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
         );
 
-        bg.add(logOutBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 460, 300, 80));
+        bg.add(D_Btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 460, 300, 80));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -283,15 +264,15 @@ public class Home extends javax.swing.JFrame {
         exitBtn.setBackground(Color.white);
     }//GEN-LAST:event_exitBtnMouseExited
 
-    private void changePasswordBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_changePasswordBtnMouseClicked
+    private void AU_BtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AU_BtnMouseClicked
         this.setVisible(false);
         Permisos_AU.getInstance().setVisible(true);
-    }//GEN-LAST:event_changePasswordBtnMouseClicked
+    }//GEN-LAST:event_AU_BtnMouseClicked
 
-    private void logOutBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logOutBtnMouseClicked
+    private void D_BtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D_BtnMouseClicked
         this.setVisible(false);
-        Login.getInstance().setVisible(true);
-    }//GEN-LAST:event_logOutBtnMouseClicked
+        Permisos_Dummy.getInstance().setVisible(true);
+    }//GEN-LAST:event_D_BtnMouseClicked
 
     int xMouse, yMouse; 
     private void headerMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_headerMousePressed
@@ -305,9 +286,10 @@ public class Home extends javax.swing.JFrame {
         this.setLocation(x - xMouse, y - yMouse);
     }//GEN-LAST:event_headerMouseDragged
 
-    private void viewRolesBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewRolesBtnMouseClicked
+    private void GIP_BtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_GIP_BtnMouseClicked
         this.setVisible(false);
-    }//GEN-LAST:event_viewRolesBtnMouseClicked
+        Permisos_GestionPermisos.getInstance().setVisible(true);
+    }//GEN-LAST:event_GIP_BtnMouseClicked
 
     /**
      * @param args the command line arguments
@@ -346,20 +328,20 @@ public class Home extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel AU_Btn;
+    private javax.swing.JPanel D_Btn;
+    private javax.swing.JPanel GIP_Btn;
     private javax.swing.JPanel bg;
-    private javax.swing.JPanel changePasswordBtn;
     private javax.swing.JLabel changePasswordTxt;
     private javax.swing.JPanel exitBtn;
     private javax.swing.JLabel exitTxt;
     private javax.swing.JPanel header;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel logOutBtn;
     private javax.swing.JLabel logOutTxt;
+    private javax.swing.JLabel subTitle1;
+    private javax.swing.JLabel subTitle2;
     private javax.swing.JLabel title;
     private javax.swing.JLabel title2;
     private javax.swing.JPanel topBg;
-    private javax.swing.JPanel viewRolesBtn;
     private javax.swing.JLabel viewRolesTxt;
     // End of variables declaration//GEN-END:variables
 }
