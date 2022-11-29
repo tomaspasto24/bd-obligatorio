@@ -367,7 +367,7 @@ public class RolesView extends javax.swing.JFrame {
                     String[] values = str.split(",");
                     if (Integer.valueOf(values[0]) == rol_neg_id && Integer.valueOf(values[1]) == user_id && Integer.valueOf(values[2]) == app_id) {
                         permisoRepetido = true;
-                        JOptionPane.showMessageDialog(null, "El permiso que se solicitó ya ha sido solicitado, eliga otro.");
+                        JOptionPane.showMessageDialog(null, "El permiso que se eligió ya ha sido solicitado, eliga otro.");
                     }
                 }
 

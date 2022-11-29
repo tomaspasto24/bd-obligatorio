@@ -37,6 +37,10 @@ public class Home extends javax.swing.JFrame {
         return instance;
     }
 
+    public static void closeInstance() {
+        instance = null;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -275,12 +279,13 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_changePasswordBtnMouseClicked
 
     private void logOutBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logOutBtnMouseClicked
-        this.setVisible(false);
         UserAccount.getInstance().setUserId(0);
+        closeInstance();
+        this.setVisible(false);
         Login.getInstance().setVisible(true);
     }//GEN-LAST:event_logOutBtnMouseClicked
 
-    int xMouse, yMouse; 
+    int xMouse, yMouse;
     private void headerMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_headerMousePressed
         xMouse = evt.getX();
         yMouse = evt.getY();

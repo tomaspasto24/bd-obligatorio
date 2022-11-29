@@ -4,6 +4,7 @@
  */
 package Interfaz_gráfica;
 
+import UserAccount.UserAccount;
 import db_connection.DBConnection;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -35,6 +36,10 @@ public class Home extends javax.swing.JFrame {
         }
         return instance;
     }
+    
+    public static void closeInstance() {
+        instance = null;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -49,6 +54,8 @@ public class Home extends javax.swing.JFrame {
         topBg = new javax.swing.JPanel();
         title = new javax.swing.JLabel();
         title2 = new javax.swing.JLabel();
+        logOutBtn = new javax.swing.JPanel();
+        logOutTxt1 = new javax.swing.JLabel();
         AU_Btn = new javax.swing.JPanel();
         changePasswordTxt = new javax.swing.JLabel();
         GIP_Btn = new javax.swing.JPanel();
@@ -68,6 +75,7 @@ public class Home extends javax.swing.JFrame {
         setSize(getPreferredSize());
 
         bg.setBackground(new java.awt.Color(255, 255, 255));
+        bg.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         bg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         topBg.setBackground(new java.awt.Color(51, 153, 255));
@@ -83,6 +91,38 @@ public class Home extends javax.swing.JFrame {
         title2.setForeground(new java.awt.Color(255, 255, 255));
         title2.setText("gestión de permisos");
         topBg.add(title2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 256, -1, 88));
+
+        logOutBtn.setBackground(new java.awt.Color(51, 153, 255));
+        logOutBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        logOutBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                logOutBtnMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                logOutBtnMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                logOutBtnMouseExited(evt);
+            }
+        });
+
+        logOutTxt1.setFont(new java.awt.Font("Calisto MT", 0, 14)); // NOI18N
+        logOutTxt1.setForeground(new java.awt.Color(0, 0, 0));
+        logOutTxt1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        logOutTxt1.setText("Cerrar sesión");
+
+        javax.swing.GroupLayout logOutBtnLayout = new javax.swing.GroupLayout(logOutBtn);
+        logOutBtn.setLayout(logOutBtnLayout);
+        logOutBtnLayout.setHorizontalGroup(
+            logOutBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(logOutTxt1, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+        );
+        logOutBtnLayout.setVerticalGroup(
+            logOutBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(logOutTxt1, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+        );
+
+        topBg.add(logOutBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 100, 30));
 
         bg.add(topBg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 320, 570));
 
@@ -291,6 +331,21 @@ public class Home extends javax.swing.JFrame {
         Permisos_GestionPermisos.getInstance().setVisible(true);
     }//GEN-LAST:event_GIP_BtnMouseClicked
 
+    private void logOutBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logOutBtnMouseClicked
+        UserAccount.getInstance().setUserId(0);
+        this.setVisible(false);
+        closeInstance();
+        Login.getInstance().setVisible(true);
+    }//GEN-LAST:event_logOutBtnMouseClicked
+
+    private void logOutBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logOutBtnMouseEntered
+        logOutBtn.setBackground(Color.red);
+    }//GEN-LAST:event_logOutBtnMouseEntered
+
+    private void logOutBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logOutBtnMouseExited
+        logOutBtn.setBackground(new Color(51,153,255));
+    }//GEN-LAST:event_logOutBtnMouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -336,7 +391,9 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel exitBtn;
     private javax.swing.JLabel exitTxt;
     private javax.swing.JPanel header;
+    private javax.swing.JPanel logOutBtn;
     private javax.swing.JLabel logOutTxt;
+    private javax.swing.JLabel logOutTxt1;
     private javax.swing.JLabel subTitle1;
     private javax.swing.JLabel subTitle2;
     private javax.swing.JLabel title;

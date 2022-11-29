@@ -29,8 +29,12 @@ public class Home extends javax.swing.JFrame {
         initComponents();
         Connection connection = DBConnection.getInstance().dbConnection;
         Statement statement = null;
-        HashMap<String, Integer> nombreAppRol = new HashMap<String, Integer>();
+        HashMap<String, Integer[]> nombreAppRol = new HashMap<String, Integer[]>();
         HashMap<String, Integer> nombreAppID = new HashMap<String, Integer>();
+
+        Integer[] roles1 = new Integer[10];
+        Integer[] roles2 = new Integer[10];
+        Integer[] roles3 = new Integer[10];
 
         try {
             statement = connection.createStatement();
@@ -45,21 +49,39 @@ public class Home extends javax.swing.JFrame {
                 String sqlString = "EXEC sp_set_session_context 'user_id'," + UserAccount.getInstance().getUserId() + "; "
                         + "SELECT * FROM [APLICATIVOS_APROBADOS];";
                 var res = statement.executeQuery(sqlString);
+                int index1 = 0;
+                int index2 = 0;
+                int index3 = 0;
                 while (res.next()) {
                     String nombre_app = res.getString("nombre_app");
                     Integer app_id = res.getInt("app_id");
                     Integer rol_id = res.getInt("rol_id");
 
-                    nombreAppRol.put(nombre_app, rol_id);
+                    if (nombre_app.equals("Gestión de Identidades y Permisos")) {
+                        roles1[index1] = rol_id;
+                        index1++;
+                        nombreAppRol.put(nombre_app, roles1);
+                    } else if (nombre_app.equals("Autoregistro de Usuarios")) {
+                        roles2[index2] = rol_id;
+                        index2++;
+                        nombreAppRol.put(nombre_app, roles2);
+                    } else if (nombre_app.equals("Dummy")) {
+                        roles3[index3] = rol_id;
+                        index3++;
+                        nombreAppRol.put(nombre_app, roles3);
+                    }
                     nombreAppID.put(nombre_app, app_id);
-                    aplicativos.addElement(nombre_app);
+                    if (!aplicativos.contains(nombre_app)) {
+                        aplicativos.addElement(nombre_app);
+                    }
+
                 }
                 jListAplicativos.setModel(aplicativos);
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Error al obtener aplicaciones, error: " + e.toString());
             }
         }
-        
+
         jListAplicativos.addListSelectionListener(new ListSelectionListener() {
 
             @Override
@@ -78,29 +100,32 @@ public class Home extends javax.swing.JFrame {
 
                     DefaultListModel menus = new DefaultListModel();
 
-                    if (statement != null) {
-                        try {
-                            String sqlString
-                                    = "EXEC sp_set_session_context 'app_id', " + nombreAppID.get(nombreApp) + "; "
-                                    + "EXEC sp_set_session_context 'rol_id', " + nombreAppRol.get(nombreApp) + "; "
-                                    + "SELECT * FROM [MENU_APROBADOS];";
-                            var res = statement.executeQuery(sqlString);
-                            System.out.println(sqlString);
-                            while (res.next()) {
-                                String nombre_menu = res.getString("descripcion_menu");
-                                menus.addElement(nombre_menu);
+                    for (Integer integer : nombreAppRol.get(nombreApp)) {
+                        if (integer != null) {
+                            if (statement != null) {
+                                try {
+                                    String sqlString
+                                            = "EXEC sp_set_session_context 'app_id', " + nombreAppID.get(nombreApp) + "; "
+                                            + "EXEC sp_set_session_context 'rol_id', " + integer + "; "
+                                            + "SELECT * FROM [MENU_APROBADOS];";
+                                    var res = statement.executeQuery(sqlString);
+                                    System.out.println(sqlString);
+                                    while (res.next()) {
+                                        String nombre_menu = res.getString("descripcion_menu");
+                                        menus.addElement(nombre_menu);
+                                    }
+                                    jListMenus.setModel(menus);
+                                } catch (Exception e) {
+                                    JOptionPane.showMessageDialog(null, "Error al obtener user, error: " + e.toString());
+                                }
                             }
-                            jListMenus.setModel(menus);
-                        } catch (Exception e) {
-                            JOptionPane.showMessageDialog(null, "Error al obtener user, error: " + e.toString());
                         }
                     }
+
                 }
             }
         });
     }
-    
-    
 
     public static Home instance;
 
@@ -110,7 +135,7 @@ public class Home extends javax.swing.JFrame {
         }
         return instance;
     }
-    
+
     public static void closeInstance() {
         instance = null;
     }

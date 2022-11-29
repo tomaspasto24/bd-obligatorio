@@ -79,13 +79,13 @@ public class Login extends javax.swing.JFrame {
 
         nameText.setFont(new java.awt.Font("Calisto MT", 0, 18)); // NOI18N
         nameText.setForeground(new java.awt.Color(0, 0, 0));
-        nameText.setText("Nombre");
+        nameText.setText("Nombre de usuario");
         jPanel1.add(nameText, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 250, -1, -1));
 
         nameInput.setBackground(new java.awt.Color(255, 255, 255));
         nameInput.setFont(new java.awt.Font("Calisto MT", 0, 14)); // NOI18N
         nameInput.setForeground(new java.awt.Color(153, 153, 153));
-        nameInput.setText("Ingrese su nombre/s");
+        nameInput.setText("Ingrese su nombre de usuario");
         nameInput.setBorder(null);
         nameInput.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -225,7 +225,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_passwordInputActionPerformed
 
     private void nameInputMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nameInputMousePressed
-        if (nameInput.getText().equals("Ingrese su nombre/s")) {
+        if (nameInput.getText().equals("Ingrese su nombre de usuario")) {
             nameInput.setText("");
             nameInput.setForeground(Color.black);
         }
@@ -241,7 +241,7 @@ public class Login extends javax.swing.JFrame {
             passwordInput.setForeground(Color.black);
         }
         if (String.valueOf(nameInput.getText()).isEmpty()) {
-            nameInput.setText("Ingrese su nombre/s");
+            nameInput.setText("Ingrese su nombre de usuario");
             nameInput.setForeground(Color.gray);
         }
     }//GEN-LAST:event_passwordInputMousePressed
